@@ -64,7 +64,8 @@
     "c2sTunnelPresets": "Client Tunnel Presets",
     "c2sTunnelPresetsUnavailable": "Client tunnel presets are only available in the desktop client.",
     "c2sPresetRenameError": "Failed to rename the preset",
-    "c2sPresetDeleteError": "Failed to delete the preset"
+    "c2sPresetDeleteError": "Failed to delete the preset",
+    "c2sPresetDeleteConfirm": "Delete the preset {{name}}?"
   },
   "tunnels": {
     "attempt": "Attempt {{current}} of {{max}}",
@@ -152,7 +153,9 @@
     "authTitle": "Tunnel authentication",
     "authRetry": "The previous code was not accepted. Enter a new code.",
     "authAnswer": "Authentication response",
-    "authContinue": "Continue"
+    "authContinue": "Continue",
+    "search": "Search tunnels",
+    "noMatches": "No tunnels match your search"
   },
   "permissions": {
     "use": {
@@ -171,5 +174,8 @@
   "onboarding": {
     "feature_tunnels": "Tunnels",
     "feature_tunnels_desc": "Forward ports through a server to reach services that are not exposed."
+  },
+  "common": {
+    "delete": "Delete"
   }
 }

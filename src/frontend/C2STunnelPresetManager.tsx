@@ -13,7 +13,13 @@ import {
 } from "lucide-react";
 import { toast } from "sonner";
 import { useHosts, useTranslation } from "@termix/plugin-sdk/frontend";
-import { Button, FakeSwitch, Input, Select2 } from "@termix/plugin-sdk/ui";
+import {
+  Button,
+  FakeSwitch,
+  Input,
+  Select2,
+  useConfirm,
+} from "@termix/plugin-sdk/ui";
 import type {
   C2STunnelPreset,
   TunnelConnection,
@@ -145,6 +151,7 @@ function getStatusTitle(
 
 export function C2STunnelPresetManager(): React.ReactElement {
   const { t } = useTranslation();
+  const confirm = useConfirm();
   const [localConfig, setLocalConfig] = React.useState<ClientTunnel[]>([]);
   const [savedLocalConfig, setSavedLocalConfig] = React.useState<
     ClientTunnel[]
@@ -703,6 +710,11 @@ export function C2STunnelPresetManager(): React.ReactElement {
 
   const handleDeletePreset = async () => {
     if (!selectedPreset) return;
+    const ok = await confirm({
+      title: t("profile.c2sPresetDeleteConfirm", { name: selectedPreset.name }),
+      confirmLabel: t("common.delete"),
+    });
+    if (!ok) return;
     try {
       await deleteC2STunnelPreset(selectedPreset.id);
       setSelectedPresetId("");

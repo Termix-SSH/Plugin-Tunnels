@@ -18,7 +18,13 @@ import {
   useTranslation,
   type PluginHostRecord,
 } from "@termix/plugin-sdk/frontend";
-import { Button, Card } from "@termix/plugin-sdk/ui";
+import {
+  Button,
+  Card,
+  EmptyState,
+  PanelSearch,
+  PanelShell,
+} from "@termix/plugin-sdk/ui";
 import type { TunnelConnection, TunnelStatus } from "../shared/types";
 import { serverTunnelName, tunnelHostLabel } from "../shared/tunnel-naming";
 import {
@@ -82,8 +88,7 @@ function TunnelCard({
     statusColor = "text-blue-400 border-blue-400/40 bg-blue-400/10";
   if (isError)
     statusColor = "text-destructive border-destructive/40 bg-destructive/10";
-  if (isWaiting)
-    statusColor = "text-yellow-500 border-yellow-500/40 bg-yellow-500/10";
+  if (isWaiting) statusColor = "text-warning border-warning/40 bg-warning/10";
 
   const mode = tunnelMode(tunnel);
   const destination =
@@ -206,7 +211,7 @@ function TunnelCard({
             <Button
               variant="outline"
               size="sm"
-              className="flex-1 h-8 text-yellow-500 border-yellow-500/40 hover:bg-yellow-500/10 hover:text-yellow-500 gap-1.5"
+              className="flex-1 h-8 text-warning border-warning/40 hover:bg-warning/10 hover:text-warning gap-1.5"
               disabled={isActing}
               onClick={() => onAction("cancel")}
             >
@@ -251,6 +256,7 @@ export function TunnelTab({ host: given }: { host?: PluginHostRecord }) {
   const host = live ?? given ?? null;
   const [statuses, setStatuses] = useState<TunnelStatusMap>({});
   const [acting, setActing] = useState<Record<string, boolean>>({});
+  const [query, setQuery] = useState("");
 
   useEffect(() => subscribeTunnelStatuses(setStatuses), []);
 
@@ -309,65 +315,71 @@ export function TunnelTab({ host: given }: { host?: PluginHostRecord }) {
     }
   };
 
-  return (
-    <div className="flex flex-col flex-1 min-h-0 overflow-hidden">
-      <div className="flex-1 overflow-y-auto px-3 py-3 flex flex-col gap-3">
-        <Card className="flex-row items-center justify-between px-3 py-3 shrink-0 gap-0">
-          <div className="flex items-center gap-3">
-            <div className="size-10 border border-border bg-muted flex items-center justify-center shrink-0">
-              <Network className="size-5 text-accent-brand" />
-            </div>
-            <div>
-              <h1 className="text-2xl font-bold">{host.name}</h1>
-              <div className="flex items-center gap-2">
-                <span className="size-2 rounded-full bg-accent-brand" />
-                <span className="text-xs text-muted-foreground uppercase tracking-widest font-semibold">
-                  {t("tunnels.activeCount", {
-                    connected: connectedCount,
-                    total: tunnels.length,
-                  })}
-                </span>
-              </div>
-            </div>
-          </div>
-          <a
-            href="https://docs.termix.site/features/networking/tunnels"
-            target="_blank"
-            rel="noreferrer"
-            className="flex items-center justify-center size-9 text-muted-foreground hover:text-foreground transition-colors"
-            title={t("hosts.docsLink")}
-          >
-            <ExternalLink className="size-4" />
-          </a>
-        </Card>
+  const q = query.trim().toLowerCase();
+  const visible = tunnels
+    .map((tunnel, index) => ({ tunnel, index }))
+    .filter(
+      ({ tunnel, index }) =>
+        !q ||
+        names[index].toLowerCase().includes(q) ||
+        String(tunnel.sourcePort).includes(q) ||
+        String(tunnel.endpointPort).includes(q) ||
+        (tunnel.endpointHost ?? "").toLowerCase().includes(q),
+    );
 
-        {tunnels.length > 0 ? (
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-3">
-            {tunnels.map((tunnel, index) => (
-              <TunnelCard
-                key={names[index]}
-                host={host}
-                tunnel={tunnel}
-                status={statuses[names[index]]}
-                isActing={acting[names[index]] ?? false}
-                onAction={(action) => handleAction(action, index)}
-              />
-            ))}
-          </div>
-        ) : (
-          <div className="flex flex-col items-center justify-center h-full gap-4 py-20">
-            <div className="opacity-10 flex flex-col items-center gap-4">
-              <Network className="size-16" />
-              <span className="text-xl font-bold uppercase tracking-widest">
-                {t("tunnels.noSshTunnels")}
-              </span>
-            </div>
-            <p className="text-sm text-muted-foreground text-center max-w-sm">
-              {t("tunnels.createFirstTunnelMessage")}
-            </p>
-          </div>
-        )}
-      </div>
-    </div>
+  return (
+    <PanelShell
+      icon={<Network className="size-4" />}
+      title={host.name}
+      status={t("tunnels.activeCount", {
+        connected: connectedCount,
+        total: tunnels.length,
+      })}
+      actions={
+        <a
+          href="https://docs.termix.site/features/networking/tunnels"
+          target="_blank"
+          rel="noreferrer"
+          className="flex size-8 items-center justify-center text-muted-foreground transition-colors hover:text-foreground"
+          title={t("hosts.docsLink")}
+        >
+          <ExternalLink className="size-4" />
+        </a>
+      }
+      toolbar={
+        tunnels.length > 0 ? (
+          <PanelSearch
+            value={query}
+            onChange={setQuery}
+            placeholder={t("tunnels.search")}
+          />
+        ) : undefined
+      }
+      className="p-2.5 gap-2"
+    >
+      {tunnels.length === 0 ? (
+        <EmptyState
+          icon={Network}
+          title={t("tunnels.noSshTunnels")}
+          hint={t("tunnels.createFirstTunnelMessage")}
+          className="flex-1"
+        />
+      ) : visible.length === 0 ? (
+        <EmptyState icon={Network} title={t("tunnels.noMatches")} />
+      ) : (
+        <div className="grid grid-cols-1 gap-2 md:grid-cols-2 lg:grid-cols-3">
+          {visible.map(({ tunnel, index }) => (
+            <TunnelCard
+              key={names[index]}
+              host={host}
+              tunnel={tunnel}
+              status={statuses[names[index]]}
+              isActing={acting[names[index]] ?? false}
+              onAction={(action) => handleAction(action, index)}
+            />
+          ))}
+        </div>
+      )}
+    </PanelShell>
   );
 }
