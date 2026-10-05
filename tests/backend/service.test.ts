@@ -4,7 +4,7 @@ import { afterEach, describe, expect, it, vi } from "vitest";
 import {
   createMockCtx,
   type MockPluginContext,
-} from "@termix/plugin-sdk/testing";
+} from "@termix-ssh/plugin-sdk/testing";
 import { createTunnelManager } from "../../src/backend/manager.js";
 import {
   createTunnelsService,

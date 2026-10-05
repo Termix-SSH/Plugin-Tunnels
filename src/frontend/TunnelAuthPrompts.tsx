@@ -1,6 +1,6 @@
 import { useEffect, useRef, useState } from "react";
-import type { PluginSshPromptRequest } from "@termix/plugin-sdk/backend";
-import { useTranslation } from "@termix/plugin-sdk/frontend";
+import type { PluginSshPromptRequest } from "@termix-ssh/plugin-sdk/backend";
+import { useTranslation } from "@termix-ssh/plugin-sdk/frontend";
 import {
   Button,
   Dialog,
@@ -8,7 +8,7 @@ import {
   DialogHeader,
   DialogTitle,
   Input,
-} from "@termix/plugin-sdk/ui";
+} from "@termix-ssh/plugin-sdk/ui";
 
 type Challenge = {
   id: string;

@@ -1,5 +1,5 @@
 import type { Duplex } from "node:stream";
-import type { PluginLogger } from "@termix/plugin-sdk/backend";
+import type { PluginLogger } from "@termix-ssh/plugin-sdk/backend";
 
 function parseSocksAddress(buffer: Buffer): {
   address: string;

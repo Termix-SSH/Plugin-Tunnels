@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import { Network } from "lucide-react";
-import { useTranslation } from "@termix/plugin-sdk/frontend";
+import { useTranslation } from "@termix-ssh/plugin-sdk/frontend";
 import { getTunnelStatuses } from "./api";
 
 /** The dashboard's "active tunnels" counter; a click opens the tunnels tab. */

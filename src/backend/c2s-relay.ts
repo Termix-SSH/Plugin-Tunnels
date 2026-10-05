@@ -1,7 +1,7 @@
 import type { Duplex } from "node:stream";
 import type { ClientChannel } from "ssh2";
 import type { WebSocket } from "ws";
-import type { PluginContext } from "@termix/plugin-sdk/backend";
+import type { PluginContext } from "@termix-ssh/plugin-sdk/backend";
 import { createC2SConnections } from "./c2s-connections.js";
 import type { TunnelMode } from "./types.js";
 import {

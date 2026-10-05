@@ -12,14 +12,14 @@ import {
   Trash2,
 } from "lucide-react";
 import { toast } from "sonner";
-import { useHosts, useTranslation } from "@termix/plugin-sdk/frontend";
+import { useHosts, useTranslation } from "@termix-ssh/plugin-sdk/frontend";
 import {
   Button,
   FakeSwitch,
   Input,
   Select2,
   useConfirm,
-} from "@termix/plugin-sdk/ui";
+} from "@termix-ssh/plugin-sdk/ui";
 import type {
   C2STunnelPreset,
   TunnelConnection,

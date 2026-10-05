@@ -1,7 +1,7 @@
 import type {
   PluginContext,
   PluginHostSummary,
-} from "@termix/plugin-sdk/backend";
+} from "@termix-ssh/plugin-sdk/backend";
 import type {
   TunnelConfig,
   TunnelConnectRequest,

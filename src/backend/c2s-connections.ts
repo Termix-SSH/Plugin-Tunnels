@@ -4,7 +4,7 @@ import type { WebSocket } from "ws";
 import type {
   PluginContext,
   PluginSshConnection,
-} from "@termix/plugin-sdk/backend";
+} from "@termix-ssh/plugin-sdk/backend";
 import { createC2SPrompt } from "./c2s-auth.js";
 
 /** A desktop runtime holds one authenticated SSH connection across SOCKS streams. */

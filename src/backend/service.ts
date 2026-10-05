@@ -1,5 +1,5 @@
 import type { Client } from "ssh2";
-import type { PluginContext } from "@termix/plugin-sdk/backend";
+import type { PluginContext } from "@termix-ssh/plugin-sdk/backend";
 import type { TunnelConfig, TunnelStatus } from "./types.js";
 import type { TunnelManager, TunnelRuntime } from "./manager.js";
 import { forwardOut } from "./ssh-primitives.js";

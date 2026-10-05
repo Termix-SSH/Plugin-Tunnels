@@ -3,7 +3,7 @@ import type { Client, ClientChannel } from "ssh2";
 import type {
   PluginContext,
   PluginSshConnection,
-} from "@termix/plugin-sdk/backend";
+} from "@termix-ssh/plugin-sdk/backend";
 import {
   CONNECTION_STATES,
   type TunnelConfig,

@@ -1,4 +1,4 @@
-import type { PluginHostRecord } from "@termix/plugin-sdk/frontend";
+import type { PluginHostRecord } from "@termix-ssh/plugin-sdk/frontend";
 import type { TunnelConnectRequest, TunnelConnection } from "../shared/types";
 import { serverTunnelName } from "../shared/tunnel-naming";
 

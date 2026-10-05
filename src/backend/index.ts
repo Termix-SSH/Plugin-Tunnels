@@ -1,6 +1,6 @@
 import type { Router } from "express";
 import type { WebSocket } from "ws";
-import type { PluginContext } from "@termix/plugin-sdk/backend";
+import type { PluginContext } from "@termix-ssh/plugin-sdk/backend";
 import { presets } from "./tables.js";
 import { createPresetRepository } from "./repository.js";
 import { createTunnelManager } from "./manager.js";

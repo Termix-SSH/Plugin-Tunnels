@@ -1,6 +1,6 @@
 import type { ComponentType } from "react";
 import { Network, Plug } from "lucide-react";
-import type { TabProps, TermixApp } from "@termix/plugin-sdk/frontend";
+import type { TabProps, TermixApp } from "@termix-ssh/plugin-sdk/frontend";
 import { TunnelAuthPrompts } from "./TunnelAuthPrompts";
 import { TunnelTab } from "./TunnelTab";
 import { HostTunnelsSection } from "./HostTunnelsSection";

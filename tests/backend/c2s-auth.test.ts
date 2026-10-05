@@ -4,7 +4,7 @@ import type { WebSocket } from "ws";
 import type {
   PluginContext,
   PluginSshConnectOptions,
-} from "@termix/plugin-sdk/backend";
+} from "@termix-ssh/plugin-sdk/backend";
 import { createC2SPrompt } from "../../src/backend/c2s-auth.js";
 import { createC2SConnections } from "../../src/backend/c2s-connections.js";
 

@@ -1,4 +1,4 @@
-import type { PluginContext } from "@termix/plugin-sdk/backend";
+import type { PluginContext } from "@termix-ssh/plugin-sdk/backend";
 import type { TunnelManager } from "./manager.js";
 import { errorMessage } from "./manager.js";
 import {

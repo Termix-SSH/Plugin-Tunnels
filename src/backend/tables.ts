@@ -5,7 +5,7 @@ import {
   refUser,
   text,
   timestamp,
-} from "@termix/plugin-sdk/db";
+} from "@termix-ssh/plugin-sdk/db";
 
 /**
  * Client tunnel presets the desktop app saves per user.

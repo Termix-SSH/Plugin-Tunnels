@@ -1,6 +1,6 @@
 import { randomUUID } from "node:crypto";
 import type { WebSocket } from "ws";
-import type { PluginSshPromptChannel } from "@termix/plugin-sdk/backend";
+import type { PluginSshPromptChannel } from "@termix-ssh/plugin-sdk/backend";
 
 /** Answers belong to this authenticated socket and one outstanding challenge. */
 export function createC2SPrompt(ws: WebSocket): PluginSshPromptChannel {

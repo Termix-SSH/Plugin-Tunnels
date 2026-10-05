@@ -1,6 +1,6 @@
 import type { Client, ClientChannel } from "ssh2";
 import type { Duplex } from "node:stream";
-import type { PluginLogger } from "@termix/plugin-sdk/backend";
+import type { PluginLogger } from "@termix-ssh/plugin-sdk/backend";
 
 // Plain ssh2 channel operations on a client that already came from ctx.ssh.
 

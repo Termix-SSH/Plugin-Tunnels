@@ -2,8 +2,8 @@ import { EventEmitter } from "node:events";
 import { PassThrough } from "node:stream";
 import { describe, expect, it, vi } from "vitest";
 import type { WebSocket } from "ws";
-import type { PluginSshConnectOptions } from "@termix/plugin-sdk/backend";
-import { createMockCtx } from "@termix/plugin-sdk/testing";
+import type { PluginSshConnectOptions } from "@termix-ssh/plugin-sdk/backend";
+import { createMockCtx } from "@termix-ssh/plugin-sdk/testing";
 import { createC2SRelay } from "../../src/backend/c2s-relay.js";
 import { host, manifest } from "./helpers.js";
 class Socket extends EventEmitter {

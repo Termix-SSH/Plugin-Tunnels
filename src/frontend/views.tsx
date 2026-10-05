@@ -4,12 +4,12 @@ import {
   useTranslation,
   type PluginHostRecord,
   type StandaloneViewProps,
-} from "@termix/plugin-sdk/frontend";
+} from "@termix-ssh/plugin-sdk/frontend";
 import {
   ConnectionScreen,
   FullScreenAppWrapper,
   Select2,
-} from "@termix/plugin-sdk/ui";
+} from "@termix-ssh/plugin-sdk/ui";
 import { TunnelTab } from "./TunnelTab";
 import { C2STunnelPresetManager } from "./C2STunnelPresetManager";
 import { hostTunnelSettings } from "./host-tunnels";

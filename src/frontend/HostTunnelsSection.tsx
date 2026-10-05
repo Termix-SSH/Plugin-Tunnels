@@ -5,14 +5,14 @@ import {
   useToast,
   useTranslation,
   type HostEditorSectionProps,
-} from "@termix/plugin-sdk/frontend";
+} from "@termix-ssh/plugin-sdk/frontend";
 import {
   Button,
   FakeSwitch,
   Input,
   SectionCard,
   SettingRow,
-} from "@termix/plugin-sdk/ui";
+} from "@termix-ssh/plugin-sdk/ui";
 import type { TunnelConnection } from "../shared/types";
 import { serverTunnelName } from "../shared/tunnel-naming";
 import {

@@ -1,7 +1,7 @@
 import { EventEmitter } from "node:events";
 import { PassThrough } from "node:stream";
 import { afterEach, describe, expect, it, vi } from "vitest";
-import { createMockCtx } from "@termix/plugin-sdk/testing";
+import { createMockCtx } from "@termix-ssh/plugin-sdk/testing";
 import { createTunnelManager } from "../../src/backend/manager.js";
 import { startAutoStartTunnels } from "../../src/backend/autostart.js";
 import { host, manifest, withHosts } from "./helpers";

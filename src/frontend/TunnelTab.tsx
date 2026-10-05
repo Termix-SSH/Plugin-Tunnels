@@ -17,14 +17,14 @@ import {
   useToast,
   useTranslation,
   type PluginHostRecord,
-} from "@termix/plugin-sdk/frontend";
+} from "@termix-ssh/plugin-sdk/frontend";
 import {
   Button,
   Card,
   EmptyState,
   PanelSearch,
   PanelShell,
-} from "@termix/plugin-sdk/ui";
+} from "@termix-ssh/plugin-sdk/ui";
 import type { TunnelConnection, TunnelStatus } from "../shared/types";
 import { serverTunnelName, tunnelHostLabel } from "../shared/tunnel-naming";
 import {
