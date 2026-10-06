@@ -174,10 +174,6 @@
       }
     }
   },
-  "onboarding": {
-    "feature_tunnels": "Tunnels",
-    "feature_tunnels_desc": "Forward ports through a server to reach services that are not exposed."
-  },
   "common": {
     "delete": "Delete"
   }

@@ -1,5 +1,5 @@
 import type { ComponentType } from "react";
-import { Network, Plug } from "lucide-react";
+import { Network } from "lucide-react";
 import type { TabProps, TermixApp } from "@termix-ssh/plugin-sdk/frontend";
 import { TunnelAuthPrompts } from "./TunnelAuthPrompts";
 import { TunnelTab } from "./TunnelTab";
@@ -84,13 +84,6 @@ export function activate(app: TermixApp): void {
     separatorAfter: true,
     after: "credentials",
     permission: "use",
-  });
-
-  app.registerSlotContribution("onboarding.features", {
-    actionId: "tunnels.feature",
-    titleKey: "onboarding.feature_tunnels",
-    descriptionKey: "onboarding.feature_tunnels_desc",
-    icon: Plug as ComponentType<{ className?: string }>,
   });
 
   app.registerExtension("homepage.widgets", {
