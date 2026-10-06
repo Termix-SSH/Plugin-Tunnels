@@ -34,8 +34,8 @@ export function TunnelStandalone({ hostId }: StandaloneViewProps) {
           return (
             <div className="relative h-full w-full">
               <ConnectionScreen
-                status="disconnected"
-                message={t("hosts.hostNotFound")}
+                status="error"
+                unavailable={{ title: t("hosts.hostNotFound") }}
               />
             </div>
           );
