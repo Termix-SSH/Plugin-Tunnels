@@ -49,7 +49,7 @@ export function classifyTunnelError(errorMessage: string): TunnelErrorType {
 }
 
 /** The name a host's saved tunnel runs under. See shared/tunnel-naming.ts. */
-export const normalizeTunnelName = buildTunnelName;
+const normalizeTunnelName = buildTunnelName;
 
 export function getTunnelMode(
   tunnelConfig: Pick<TunnelConfig, "mode" | "tunnelType">,

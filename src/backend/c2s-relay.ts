@@ -39,13 +39,13 @@ const WS_HIGH_WATERMARK = 1024 * 1024;
 const WS_LOW_WATERMARK = 256 * 1024;
 const STREAM_WRITE_LIMIT = 8 * 1024 * 1024;
 
-export function sendC2SError(ws: WebSocket, message: string): void {
+function sendC2SError(ws: WebSocket, message: string): void {
   if (ws.readyState === 1) {
     ws.send(JSON.stringify({ type: "error", error: message }));
   }
 }
 
-export function describeC2SRelayError(error: unknown): string {
+function describeC2SRelayError(error: unknown): string {
   const message = error instanceof Error ? error.message : String(error);
   const lower = message.toLowerCase();
 

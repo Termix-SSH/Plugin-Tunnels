@@ -24,7 +24,7 @@ export function hostLabel(host: {
 }
 
 /** The name a host's saved tunnel runs under. */
-export function savedTunnelName(
+function savedTunnelName(
   host: PluginHostSummary,
   index: number,
   connection: Pick<

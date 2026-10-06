@@ -1,13 +1,10 @@
 import type { TunnelMode, TunnelScope } from "../shared/types.js";
 
 export type {
-  C2STunnelPreset,
-  ConnectionState,
   TunnelConnectRequest,
   TunnelConnection,
   TunnelErrorType,
   TunnelMode,
-  TunnelScope,
   TunnelStatus,
 } from "../shared/types.js";
 export { CONNECTION_STATES } from "../shared/types.js";

@@ -13,7 +13,7 @@ export const CONNECTION_STATES = {
   DISCONNECTING: "disconnecting",
 } as const;
 
-export type ConnectionState =
+type ConnectionState =
   (typeof CONNECTION_STATES)[keyof typeof CONNECTION_STATES];
 
 export type TunnelErrorType =

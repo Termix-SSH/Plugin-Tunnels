@@ -36,9 +36,7 @@ function parsePreset(row: PresetRecord) {
 }
 
 /** Every item must be a client tunnel with a known mode and valid ports. */
-export function validatePresetConfig(
-  config: unknown,
-): config is TunnelConnection[] {
+function validatePresetConfig(config: unknown): config is TunnelConnection[] {
   if (!Array.isArray(config)) return false;
   return config.every((item) => {
     if (!item || typeof item !== "object") return false;

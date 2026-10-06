@@ -14,7 +14,7 @@ export interface HostOwner {
 }
 
 /** Every host and its owner, straight from ssh_data. */
-export async function listHostOwners(ctx: PluginContext): Promise<HostOwner[]> {
+async function listHostOwners(ctx: PluginContext): Promise<HostOwner[]> {
   /* eslint-disable @typescript-eslint/no-explicit-any */
   const { hosts } = await ctx.db.refs<{ hosts: any }>();
   const drizzle = await ctx.db.client<any>();
