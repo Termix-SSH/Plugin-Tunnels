@@ -14,6 +14,7 @@ import {
 import {
   logActivity,
   useHost,
+  useHosts,
   useToast,
   useTranslation,
   type PluginHostRecord,
@@ -22,8 +23,10 @@ import {
   Button,
   Card,
   EmptyState,
+  GroupHeading,
   PanelSearch,
   PanelShell,
+  Segmented,
 } from "@termix-ssh/plugin-sdk/ui";
 import type { TunnelConnection, TunnelStatus } from "../shared/types";
 import { serverTunnelName, tunnelHostLabel } from "../shared/tunnel-naming";
@@ -249,14 +252,38 @@ function TunnelCard({
 }
 
 /** A host's saved server tunnels, with live status and start/stop controls. */
+interface TunnelEntry {
+  host: PluginHostRecord;
+  tunnel: TunnelConnection;
+  index: number;
+  name: string;
+}
+
+function tunnelEntries(host: PluginHostRecord): TunnelEntry[] {
+  return hostTunnelSettings(host).connections.map((tunnel, index) => ({
+    host,
+    tunnel,
+    index,
+    name: serverTunnelName(host, index, tunnel),
+  }));
+}
+
+/**
+ * One host's tunnels, or with no host (the dashboard's counter) every host
+ * that has tunnels, grouped by host.
+ */
 export function TunnelTab({ host: given }: { host?: PluginHostRecord }) {
   const { t } = useTranslation();
   const toast = useToast();
   const live = useHost(given?.id);
   const host = live ?? given ?? null;
+  const { hosts } = useHosts();
   const [statuses, setStatuses] = useState<TunnelStatusMap>({});
   const [acting, setActing] = useState<Record<string, boolean>>({});
   const [query, setQuery] = useState("");
+  const [stateFilter, setStateFilter] = useState<
+    "all" | "connected" | "stopped"
+  >("all");
 
   useEffect(() => subscribeTunnelStatuses(setStatuses), []);
 
@@ -268,38 +295,24 @@ export function TunnelTab({ host: given }: { host?: PluginHostRecord }) {
     logActivity("tunnel", hostId, hostLabel).catch(() => {});
   }, [hostId]); // eslint-disable-line react-hooks/exhaustive-deps
 
-  if (!host) {
-    return (
-      <div className="flex flex-col items-center justify-center flex-1 gap-3 p-6 text-center">
-        <div className="size-10 bg-muted/40 flex items-center justify-center">
-          <Network className="size-5 text-muted-foreground/30" />
-        </div>
-        <span className="text-sm font-semibold text-muted-foreground/60">
-          {t("tunnels.noHostSelected")}
-        </span>
-      </div>
-    );
-  }
-
-  const tunnels = hostTunnelSettings(host).connections;
-  const names = tunnels.map((tunnel, index) =>
-    serverTunnelName(host, index, tunnel),
-  );
-  const connectedCount = names.filter(
-    (name) => statuses[name]?.status === "connected",
+  const entries: TunnelEntry[] = host
+    ? tunnelEntries(host)
+    : hosts.filter((h) => hostTunnelSettings(h).enabled).flatMap(tunnelEntries);
+  const connectedCount = entries.filter(
+    (entry) => statuses[entry.name]?.status === "connected",
   ).length;
 
   const handleAction = async (
     action: "connect" | "disconnect" | "cancel",
-    index: number,
+    entry: TunnelEntry,
   ) => {
-    const tunnel = tunnels[index];
-    if (!tunnel) return;
-    const name = names[index];
+    const { name } = entry;
     setActing((current) => ({ ...current, [name]: true }));
     try {
       if (action === "connect") {
-        await connectTunnel(connectRequestFor(host, index, tunnel));
+        await connectTunnel(
+          connectRequestFor(entry.host, entry.index, entry.tunnel),
+        );
         toast.success(t("tunnels.clientTunnelStarted"));
       } else if (action === "disconnect") {
         await disconnectTunnel(name);
@@ -316,24 +329,47 @@ export function TunnelTab({ host: given }: { host?: PluginHostRecord }) {
   };
 
   const q = query.trim().toLowerCase();
-  const visible = tunnels
-    .map((tunnel, index) => ({ tunnel, index }))
+  const visible = entries
     .filter(
-      ({ tunnel, index }) =>
+      ({ tunnel, name, host: owner }) =>
         !q ||
-        names[index].toLowerCase().includes(q) ||
+        name.toLowerCase().includes(q) ||
+        owner.name.toLowerCase().includes(q) ||
         String(tunnel.sourcePort).includes(q) ||
         String(tunnel.endpointPort).includes(q) ||
         (tunnel.endpointHost ?? "").toLowerCase().includes(q),
-    );
+    )
+    .filter(({ name }) => {
+      if (stateFilter === "all") return true;
+      const connected = statuses[name]?.status === "connected";
+      return stateFilter === "connected" ? connected : !connected;
+    });
+
+  const groups = new Map<string, TunnelEntry[]>();
+  for (const entry of visible) {
+    const list = groups.get(String(entry.host.id)) ?? [];
+    list.push(entry);
+    groups.set(String(entry.host.id), list);
+  }
+
+  const card = (entry: TunnelEntry) => (
+    <TunnelCard
+      key={entry.name}
+      host={entry.host}
+      tunnel={entry.tunnel}
+      status={statuses[entry.name]}
+      isActing={acting[entry.name] ?? false}
+      onAction={(action) => handleAction(action, entry)}
+    />
+  );
 
   return (
     <PanelShell
       icon={<Network className="size-4" />}
-      title={host.name}
+      title={host ? host.name : t("tunnels.activeTunnels")}
       status={t("tunnels.activeCount", {
         connected: connectedCount,
-        total: tunnels.length,
+        total: entries.length,
       })}
       actions={
         <a
@@ -347,17 +383,34 @@ export function TunnelTab({ host: given }: { host?: PluginHostRecord }) {
         </a>
       }
       toolbar={
-        tunnels.length > 0 ? (
-          <PanelSearch
-            value={query}
-            onChange={setQuery}
-            placeholder={t("tunnels.search")}
-          />
+        entries.length > 0 ? (
+          <>
+            <PanelSearch
+              value={query}
+              onChange={setQuery}
+              placeholder={t("tunnels.search")}
+            />
+            <Segmented<"all" | "connected" | "stopped">
+              value={stateFilter}
+              onChange={setStateFilter}
+              options={[
+                { value: "all", label: t("tunnels.filterAll") },
+                { value: "connected", label: t("tunnels.connected") },
+                { value: "stopped", label: t("tunnels.filterStopped") },
+              ]}
+            />
+            <span className="ml-auto text-[11px] tabular-nums text-muted-foreground">
+              {t("tunnels.shownCount", {
+                shown: visible.length,
+                total: entries.length,
+              })}
+            </span>
+          </>
         ) : undefined
       }
       className="p-2.5 gap-2"
     >
-      {tunnels.length === 0 ? (
+      {entries.length === 0 ? (
         <EmptyState
           icon={Network}
           title={t("tunnels.noSshTunnels")}
@@ -366,19 +419,23 @@ export function TunnelTab({ host: given }: { host?: PluginHostRecord }) {
         />
       ) : visible.length === 0 ? (
         <EmptyState icon={Network} title={t("tunnels.noMatches")} />
-      ) : (
+      ) : host ? (
         <div className="grid grid-cols-1 gap-2 md:grid-cols-2 lg:grid-cols-3">
-          {visible.map(({ tunnel, index }) => (
-            <TunnelCard
-              key={names[index]}
-              host={host}
-              tunnel={tunnel}
-              status={statuses[names[index]]}
-              isActing={acting[names[index]] ?? false}
-              onAction={(action) => handleAction(action, index)}
-            />
-          ))}
+          {visible.map(card)}
         </div>
+      ) : (
+        [...groups.values()].map((group) => (
+          <div key={group[0].host.id} className="flex flex-col gap-2">
+            <GroupHeading
+              title={group[0].host.name}
+              count={group.length}
+              className="pt-1"
+            />
+            <div className="grid grid-cols-1 gap-2 md:grid-cols-2 lg:grid-cols-3">
+              {group.map(card)}
+            </div>
+          </div>
+        ))
       )}
     </PanelShell>
   );

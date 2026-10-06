@@ -126,7 +126,13 @@ function AuthDialog({
             >
               {t("common.cancel")}
             </Button>
-            <Button type="submit">{t("tunnels.authContinue")}</Button>
+            <Button
+              variant="outline"
+              type="submit"
+              className="border-accent-brand/40 text-accent-brand hover:bg-accent-brand/10 hover:text-accent-brand dark:border-accent-brand/40 dark:bg-transparent dark:hover:bg-accent-brand/10"
+            >
+              {t("tunnels.authContinue")}
+            </Button>
           </div>
         </form>
       </DialogContent>

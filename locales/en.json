@@ -68,6 +68,9 @@
     "c2sPresetDeleteConfirm": "Delete the preset {{name}}?"
   },
   "tunnels": {
+    "filterAll": "All",
+    "filterStopped": "Stopped",
+    "shownCount": "{{shown}} of {{total}}",
     "attempt": "Attempt {{current}} of {{max}}",
     "autoNameClientDynamic": "SOCKS {{localPort}} via {{endpoint}}",
     "autoNameClientLocal": "Local {{localPort}} → {{endpoint}} {{remotePort}}",
