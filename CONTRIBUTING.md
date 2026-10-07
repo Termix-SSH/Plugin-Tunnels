@@ -20,3 +20,9 @@ npm run format     # format the code with Prettier
 ## Permissions
 
 - `tunnels.use`: start, stop and watch tunnels, and save client tunnel presets. Admins and users have it by default.
+
+## Services
+
+Provides to other plugins:
+
+- `tunnels.access`: open a tunnel on demand, or start, stop and check saved tunnels

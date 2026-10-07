@@ -26,14 +26,6 @@ Tunnels forwards ports through your servers so you can reach services that are n
 
 <br />
 
-## Services
-
-Provides to other plugins:
-
-- `tunnels.access`: open a tunnel on demand, or start, stop and check saved tunnels
-
-<br />
-
 ## Sponsors
 
 Interested in a paid placement to support development? Email [mail@termix.site](mailto:mail@termix.site).
