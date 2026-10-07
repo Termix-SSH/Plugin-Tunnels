@@ -1,5 +1,11 @@
 # Changelog
 
+## Unreleased
+
+### Fixed
+
+- Tunnels no longer show as disconnected when a reverse proxy holds back the live status stream
+
 ## 1.0.0
 
 ### Added

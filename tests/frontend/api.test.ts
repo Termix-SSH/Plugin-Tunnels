@@ -98,4 +98,29 @@ describe("subscribeTunnelStatuses", () => {
     expect(get).toHaveBeenCalledWith("/status");
     stop();
   });
+
+  it("polls the status route while a buffering proxy holds the stream back", async () => {
+    setTunnelsApi({
+      defaults: { baseURL: "http://localhost:30001" },
+    } as never);
+    const fetchImpl = vi.fn(
+      async () =>
+        ({
+          ok: true,
+          body: new ReadableStream<Uint8Array>({ start() {} }),
+        }) as unknown as Response,
+    );
+    const onStatuses = vi.fn();
+    const stop = subscribeTunnelStatuses(onStatuses, undefined, {
+      fetchImpl: fetchImpl as unknown as typeof fetch,
+      fetchLocal: async () => ({ t: { connected: true, status: "connected" } }),
+      pollIntervalMs: 10,
+    });
+    await vi.waitFor(() =>
+      expect(onStatuses).toHaveBeenCalledWith({
+        t: { connected: true, status: "connected" },
+      }),
+    );
+    stop();
+  });
 });

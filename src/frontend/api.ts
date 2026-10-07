@@ -105,6 +105,8 @@ export interface SubscribeOptions {
   fetchImpl?: typeof fetch;
   /** Statuses from a connected remote server, polled and merged in. */
   fetchRemote?: () => Promise<TunnelStatusMap>;
+  /** Replaces the local status route, for tests. */
+  fetchLocal?: () => Promise<TunnelStatusMap>;
   pollIntervalMs?: number;
 }
 
@@ -122,6 +124,10 @@ export function subscribeTunnelStatuses(
   const pollIntervalMs = options.pollIntervalMs ?? 5000;
   let latestLocal: TunnelStatusMap = {};
   let latestRemote: TunnelStatusMap = {};
+  // The server sends a snapshot as soon as the stream opens, so until one
+  // arrives the stream may be held back by a buffering proxy.
+  let streamLive = false;
+  const fetchLocal = options.fetchLocal ?? getTunnelStatuses;
   const timers = new Set<ReturnType<typeof setTimeout>>();
 
   const emit = () => onStatuses(mergeTunnelStatuses(latestLocal, latestRemote));
@@ -153,7 +159,7 @@ export function subscribeTunnelStatuses(
     while (!controller.signal.aborted) {
       if (!connect) {
         try {
-          latestLocal = await getTunnelStatuses();
+          latestLocal = await fetchLocal();
           emit();
         } catch {
           onError?.();
@@ -168,6 +174,7 @@ export function subscribeTunnelStatuses(
           signal: controller.signal,
         });
         if (!response.ok || !response.body) throw new Error("stream failed");
+        streamLive = false;
         const reader = response.body.getReader();
         const decoder = new TextDecoder();
         let buffer = "";
@@ -180,6 +187,7 @@ export function subscribeTunnelStatuses(
               if (event.event !== "statuses") return;
               try {
                 latestLocal = JSON.parse(event.data) as TunnelStatusMap;
+                streamLive = true;
                 emit();
               } catch {
                 onError?.();
@@ -194,6 +202,25 @@ export function subscribeTunnelStatuses(
       if (!controller.signal.aborted) await wait(1000);
     }
   })();
+
+  if (connect) {
+    void (async () => {
+      while (!controller.signal.aborted) {
+        if (!streamLive) {
+          try {
+            const statuses = await fetchLocal();
+            if (!streamLive && !controller.signal.aborted) {
+              latestLocal = statuses;
+              emit();
+            }
+          } catch {
+            // The stream reports its own failures.
+          }
+        }
+        await wait(pollIntervalMs);
+      }
+    })();
+  }
 
   if (fetchRemote) {
     void (async () => {
