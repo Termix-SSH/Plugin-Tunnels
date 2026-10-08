@@ -26,6 +26,7 @@ import {
   parseConnections,
   tunnelMode,
 } from "./host-tunnels";
+import { docsUrl } from "./docs";
 
 type PluginSettingsForm = Record<string, Record<string, unknown>>;
 
@@ -142,7 +143,7 @@ export function HostTunnelsSection({
               <>
                 {t("hosts.enableTunnelingDesc")}{" "}
                 <a
-                  href="https://docs.termix.site/features/networking/tunnels"
+                  href={docsUrl()}
                   target="_blank"
                   rel="noreferrer"
                   className="text-accent-brand hover:underline"

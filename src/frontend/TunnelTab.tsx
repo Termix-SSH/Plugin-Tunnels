@@ -42,6 +42,7 @@ import {
   hostTunnelSettings,
   tunnelMode,
 } from "./host-tunnels";
+import { docsUrl } from "./docs";
 
 type StatusLabel =
   "CONNECTED" | "CONNECTING" | "ERROR" | "WAITING" | "DISCONNECTED";
@@ -373,7 +374,7 @@ export function TunnelTab({ host: given }: { host?: PluginHostRecord }) {
       })}
       actions={
         <a
-          href="https://docs.termix.site/features/networking/tunnels"
+          href={docsUrl()}
           target="_blank"
           rel="noreferrer"
           className="flex size-8 items-center justify-center text-muted-foreground transition-colors hover:text-foreground"

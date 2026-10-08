@@ -14,6 +14,8 @@
 
 Tunnels forwards ports through your servers so you can reach services that are not exposed.
 
+Read the [docs](https://docs.termix.site/plugins/tunnels) to set it up and use it.
+
 <br />
 
 ## Features
