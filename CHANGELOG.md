@@ -4,6 +4,7 @@
 
 ### Added
 
+- First release
 - Local, remote and dynamic SOCKS5 forwarding
 - Reconnects on its own when a tunnel drops
 - Start tunnels on boot

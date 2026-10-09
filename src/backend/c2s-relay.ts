@@ -243,16 +243,18 @@ export function createC2SRelay(ctx: PluginContext) {
     const close = () => {
       if (closed) return;
       closed = true;
+      sourceClient.off("tcp connection", onTcp);
+      sourceClient.off("close", onSourceClose);
+      sourceClient.off("error", onSourceError);
       for (const streamId of [...streams.keys()]) closeStream(streamId);
       unbindForwardIn(sourceClient, bindHost, actualPort, ctx.log);
       source.dispose();
     };
 
-    sourceClient.on("tcp connection", (info, accept, reject) => {
-      if (info.destPort !== actualPort) {
-        reject();
-        return;
-      }
+    // The SSH connection is shared by every tunnel in the desktop session,
+    // so a forward for another tunnel's port is left to that tunnel.
+    const onTcp = (info: { destPort: number }, accept: () => ClientChannel) => {
+      if (info.destPort !== actualPort) return;
       const inbound = accept();
       const streamId = `${Date.now()}-${++streamCounter}`;
       streams.set(streamId, inbound);
@@ -273,7 +275,8 @@ export function createC2SRelay(ctx: PluginContext) {
         streams.delete(streamId);
         sendMessage(ws, { type: "close", streamId, error: error.message });
       });
-    });
+    };
+    sourceClient.on("tcp connection", onTcp);
 
     ws.on("message", (data, isBinary) => {
       if (isBinary) return;
@@ -309,13 +312,15 @@ export function createC2SRelay(ctx: PluginContext) {
 
     ws.on("close", close);
     ws.on("error", close);
-    sourceClient.on("close", () => {
+    function onSourceClose() {
       if (ws.readyState === 1) ws.close();
-    });
-    sourceClient.on("error", (error: Error) => {
+    }
+    function onSourceError(error: Error) {
       sendMessage(ws, { type: "error", error: error.message });
       if (ws.readyState === 1) ws.close();
-    });
+    }
+    sourceClient.on("close", onSourceClose);
+    sourceClient.on("error", onSourceError);
 
     ctx.log.info(
       `Client tunnel ${relay.name} bound ${bindHost}:${actualPort} on host ${relay.hostId}`,

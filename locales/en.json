@@ -125,7 +125,6 @@
     "mode": "Mode",
     "nextRetryIn": "Next retry in {{seconds}} seconds",
     "noClientTunnels": "No client tunnels configured on this desktop.",
-    "noHostSelected": "No host selected",
     "noSshTunnels": "No SSH Tunnels",
     "port": "Port",
     "remoteBindAddress": "Remote Bind Address",

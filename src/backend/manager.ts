@@ -652,6 +652,9 @@ export function createTunnelManager(ctx: PluginContext) {
       }
 
       runtimes.set(name, runtime);
+      // A later drop gets the full set of retries again.
+      retryCounters.delete(name);
+      retryExhausted.delete(name);
       watch(runtime, config);
       broadcast(name, { connected: true, status: CONNECTION_STATES.CONNECTED });
       return runtime;

@@ -255,4 +255,33 @@ describe("failures and stops", () => {
     ]);
     expect(await manager!.statusesFor("user-2")).toEqual({});
   });
+
+  it("gives a tunnel its full retries again after it reconnects", async () => {
+    const { mock, client } = setup();
+    const tunnel = config({ retryInterval: 20 });
+    manager!.configs.set(tunnel.name, tunnel);
+    await manager!.connect(tunnel, 0, { throwOnError: true });
+    const retryCounts = () =>
+      mock.emitted
+        .filter((event) => event.topic === "plugin.tunnels.status")
+        .map(
+          (event) =>
+            (
+              event.payload as {
+                status: { status: string; retryCount?: number };
+              }
+            ).status,
+        )
+        .filter((status) => status.status === "retrying")
+        .map((status) => status.retryCount);
+
+    client.emit("close");
+    await vi.waitFor(() => expect(retryCounts()).toEqual([1]));
+    await vi.waitFor(() =>
+      expect(manager!.statuses.get(tunnel.name)?.status).toBe("connected"),
+    );
+
+    client.emit("close");
+    await vi.waitFor(() => expect(retryCounts()).toEqual([1, 1]));
+  });
 });
