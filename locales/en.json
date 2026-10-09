@@ -24,7 +24,7 @@
     "tunnelModeDynamicDesc": "Create a SOCKS5 proxy on a local port for dynamic port forwarding.",
     "tunnelModeLocalDesc": "Forward a local port to a port on the remote server (or a host reachable from it).",
     "tunnelModeRemoteDesc": "Forward a port on the remote server back to a local port on your machine.",
-    "tunnelRequirementsText": "The SSH server must have GatewayPorts yes, AllowTcpForwarding yes, and PermitRootLogin yes set in /etc/ssh/sshd_config.",
+    "tunnelRequirementsText": "The SSH server needs AllowTcpForwarding yes in /etc/ssh/sshd_config. Remote tunnels that listen on an address other than localhost also need GatewayPorts yes.",
     "tunnelSettings": "Tunnel Settings",
     "tunnelType": "Tunnel Type",
     "bindHost": "Bind Host",

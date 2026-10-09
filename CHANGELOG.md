@@ -1,5 +1,11 @@
 # Changelog
 
+## 1.0.1
+
+### Fixed
+
+- The tunnel requirements hint no longer says PermitRootLogin yes is needed
+
 ## 1.0.0
 
 ### Added
