@@ -1,7 +1,7 @@
 {
   "id": "tunnels",
   "name": "Tunnels",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "SSH port forwarding that reconnects on its own, plus client tunnels from the desktop app.",
   "author": {
     "name": "Termix"
@@ -45,7 +45,9 @@
         "id": "tunnel",
         "titleKey": "nav.tunnels",
         "icon": "ArrowLeftRight",
-        "openFrom": ["host-context-menu"]
+        "openFrom": [
+          "host-context-menu"
+        ]
       }
     ],
     "panels": [
@@ -74,7 +76,10 @@
         "name": "use",
         "titleKey": "permissions.use.title",
         "descriptionKey": "permissions.use.description",
-        "defaultRoles": ["admin", "user"]
+        "defaultRoles": [
+          "admin",
+          "user"
+        ]
       }
     ],
     "settings": {
@@ -98,8 +103,14 @@
       "labelKey": "hosts.tabTunnels",
       "editorTab": "general"
     },
-    "uses": ["homepage.widgets"]
+    "uses": [
+      "homepage.widgets"
+    ]
   },
   "locales": "locales",
-  "platforms": ["linux", "win32", "darwin"]
+  "platforms": [
+    "linux",
+    "win32",
+    "darwin"
+  ]
 }
