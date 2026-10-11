@@ -48,7 +48,7 @@
     "socksListenerHost": "127.0.0.1（SOCKS リスナー）"
   },
   "profile": {
-    "c2sCurrentLocalConfig": "このデスクトップに {{count}} 個のローカルクライアントトンネルが設定されています。",
+    "c2sCurrentLocalConfig_other": "このデスクトップに {{count}} 個のローカルクライアントトンネルが設定されています。",
     "c2sLoadPreset": "読み込み",
     "c2sNoPresetSelected": "プリセットが選択されていません",
     "c2sNoPresets": "保存されたプリセットはありません",

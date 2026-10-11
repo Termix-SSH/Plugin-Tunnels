@@ -48,7 +48,7 @@
     "socksListenerHost": "127.0.0.1 (SOCKS 수신기)"
   },
   "profile": {
-    "c2sCurrentLocalConfig": "이 데스크톱에 로컬 클라이언트 터널 {{count}}개가 구성되어 있습니다.",
+    "c2sCurrentLocalConfig_other": "이 데스크톱에 {{count}}개의 로컬 클라이언트 터널이 구성되어 있습니다.",
     "c2sLoadPreset": "로드",
     "c2sNoPresetSelected": "선택된 프리셋이 없습니다",
     "c2sNoPresets": "저장된 프리셋이 없습니다",

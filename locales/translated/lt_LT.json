@@ -48,7 +48,10 @@
     "socksListenerHost": "127.0.0.1 (SOCKS klausytojas)"
   },
   "profile": {
-    "c2sCurrentLocalConfig": "Šiame darbalaukyje sukonfigūruota {{count}} vietinio kliento tunelis(-iai).",
+    "c2sCurrentLocalConfig_one": "{{count}} vietinis kliento tunelis sukonfigūruotas šiame darbalaukyje.",
+    "c2sCurrentLocalConfig_few": "{{count}} vietiniai kliento tuneliai sukonfigūruoti šiame darbalaukyje.",
+    "c2sCurrentLocalConfig_many": "{{count}} vietinių kliento tunelių sukonfigūruota šiame darbalaukyje.",
+    "c2sCurrentLocalConfig_other": "{{count}} vietinių kliento tunelių sukonfigūruota šiame darbalaukyje.",
     "c2sLoadPreset": "Įkelti",
     "c2sNoPresetSelected": "Nepasirinktas išankstinis nustatymas",
     "c2sNoPresets": "Išankstinių nustatymų neišsaugota",

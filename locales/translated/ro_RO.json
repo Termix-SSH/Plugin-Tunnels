@@ -48,7 +48,9 @@
     "socksListenerHost": "127.0.0.1 (ascultător SOCKS)"
   },
   "profile": {
-    "c2sCurrentLocalConfig": "Sunt configurate {{count}} tuneluri locale de client pe acest desktop.",
+    "c2sCurrentLocalConfig_one": "{{count}} tunel local de client configurat pe acest desktop.",
+    "c2sCurrentLocalConfig_few": "{{count}} tuneluri locale de client configurate pe acest desktop.",
+    "c2sCurrentLocalConfig_other": "{{count}} tuneluri locale de client configurate pe acest desktop.",
     "c2sLoadPreset": "Încarcă",
     "c2sNoPresetSelected": "Nicio presetare selectată",
     "c2sNoPresets": "Nicio presetare salvată",

@@ -48,7 +48,10 @@
     "socksListenerHost": "127.0.0.1 (nasłuchiwanie SOCKS)"
   },
   "profile": {
-    "c2sCurrentLocalConfig": "Zdefiniowano {{count}} lokalnych tuneli klienckich na tym komputerze.",
+    "c2sCurrentLocalConfig_one": "{{count}} lokalny tunel klienta skonfigurowany na tym komputerze.",
+    "c2sCurrentLocalConfig_few": "{{count}} lokalne tunele klienta skonfigurowane na tym komputerze.",
+    "c2sCurrentLocalConfig_many": "{{count}} lokalnych tuneli klienta skonfigurowanych na tym komputerze.",
+    "c2sCurrentLocalConfig_other": "{{count}} lokalnych tuneli klienta skonfigurowanych na tym komputerze.",
     "c2sLoadPreset": "Wczytaj",
     "c2sNoPresetSelected": "Nie wybrano żadnego ustawienia",
     "c2sNoPresets": "Nie zapisano żadnych ustawień",

@@ -48,7 +48,8 @@
     "socksListenerHost": "127.0.0.1 (SOCKS dinleyicisi)"
   },
   "profile": {
-    "c2sCurrentLocalConfig": "Bu masaüstünde {{count}} yerel istemci tüneli yapılandırıldı.",
+    "c2sCurrentLocalConfig_one": "Bu masaüstünde {{count}} yerel istemci tüneli yapılandırıldı.",
+    "c2sCurrentLocalConfig_other": "Bu masaüstünde {{count}} yerel istemci tüneli yapılandırıldı.",
     "c2sLoadPreset": "Yükle",
     "c2sNoPresetSelected": "Hiçbir ön ayar seçilmedi",
     "c2sNoPresets": "Kayıtlı ön ayar yok",

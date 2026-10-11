@@ -48,7 +48,10 @@
     "socksListenerHost": "127.0.0.1 (SOCKS-слушатель)"
   },
   "profile": {
-    "c2sCurrentLocalConfig": "На этом рабочем столе настроен {{count}} локальный туннель клиента.",
+    "c2sCurrentLocalConfig_one": "{{count}} настроенный локальный клиентский туннель на этом рабочем столе.",
+    "c2sCurrentLocalConfig_few": "{{count}} настроенных локальных клиентских туннеля на этом рабочем столе.",
+    "c2sCurrentLocalConfig_many": "{{count}} настроенных локальных клиентских туннелей на этом рабочем столе.",
+    "c2sCurrentLocalConfig_other": "{{count}} настроенных локальных клиентских туннелей на этом рабочем столе.",
     "c2sLoadPreset": "Загрузить",
     "c2sNoPresetSelected": "Пресет не выбран",
     "c2sNoPresets": "Пресеты не сохранены",

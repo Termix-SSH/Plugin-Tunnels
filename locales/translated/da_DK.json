@@ -48,7 +48,8 @@
     "socksListenerHost": "127.0.0.1 (SOCKS-lytter)"
   },
   "profile": {
-    "c2sCurrentLocalConfig": "Der er konfigureret {{count}} lokal(e) klienttunnel(er) på denne desktop.",
+    "c2sCurrentLocalConfig_one": "{{count}} lokal klient-tunnel konfigureret på dette skrivebord.",
+    "c2sCurrentLocalConfig_other": "{{count}} lokale klient-tunneler konfigureret på dette skrivebord.",
     "c2sLoadPreset": "Indlæs",
     "c2sNoPresetSelected": "Ingen forudindstilling valgt",
     "c2sNoPresets": "Ingen forudindstillinger gemt",

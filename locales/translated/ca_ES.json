@@ -48,7 +48,9 @@
     "socksListenerHost": "127.0.0.1 (escolta SOCKS)"
   },
   "profile": {
-    "c2sCurrentLocalConfig": "S'han configurat {{count}} túnel(s) de client local en aquest escriptori.",
+    "c2sCurrentLocalConfig_one": "{{count}} túnel de client local configurat en aquest escriptori.",
+    "c2sCurrentLocalConfig_many": "{{count}} túnels de client local configurats en aquest escriptori.",
+    "c2sCurrentLocalConfig_other": "{{count}} túnels de client local configurats en aquest escriptori.",
     "c2sLoadPreset": "Carrega",
     "c2sNoPresetSelected": "No s'ha seleccionat cap preset",
     "c2sNoPresets": "No hi ha presets desats",

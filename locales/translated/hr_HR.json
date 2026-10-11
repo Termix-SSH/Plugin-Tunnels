@@ -48,7 +48,9 @@
     "socksListenerHost": "127.0.0.1 (SOCKS slušatelj)"
   },
   "profile": {
-    "c2sCurrentLocalConfig": "Na ovom stolnom računalu konfigurirano je {{count}} lokalnih klijentskih tunela.",
+    "c2sCurrentLocalConfig_one": "{{count}} lokalni klijentski tunel konfiguriran na ovom desktopu.",
+    "c2sCurrentLocalConfig_few": "{{count}} lokalna klijentska tunela konfigurirana na ovom desktopu.",
+    "c2sCurrentLocalConfig_other": "{{count}} lokalnih klijentskih tunela konfigurirano na ovom desktopu.",
     "c2sLoadPreset": "Učitaj",
     "c2sNoPresetSelected": "Nema odabranog predloška",
     "c2sNoPresets": "Nema spremljenih predložaka",

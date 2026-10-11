@@ -48,7 +48,7 @@
     "socksListenerHost": "127.0.0.1 (ผู้ฟัง SOCKS)"
   },
   "profile": {
-    "c2sCurrentLocalConfig": "กำหนดค่าอุโมงค์ไคลเอนต์ท้องถิ่น {{count}} รายการบนเดสก์ท็อปนี้",
+    "c2sCurrentLocalConfig_other": "มีการกำหนดค่าอุโมงค์ไคลเอนต์ท้องถิ่น {{count}} รายการบนเดสก์ท็อปนี้",
     "c2sLoadPreset": "โหลด",
     "c2sNoPresetSelected": "ไม่ได้เลือกค่าเริ่มต้น",
     "c2sNoPresets": "ไม่ได้บันทึกค่าเริ่มต้นใดๆ",

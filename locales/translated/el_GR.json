@@ -48,7 +48,8 @@
     "socksListenerHost": "127.0.0.1 (ακροατής SOCKS)"
   },
   "profile": {
-    "c2sCurrentLocalConfig": "Είναι διαμορφωμένοι {{count}} τοπικοί σήραγγες πελάτη σε αυτόν τον υπολογιστή.",
+    "c2sCurrentLocalConfig_one": "{{count}} τοπικός σήραγγα πελάτη διαμορφωμένη σε αυτόν τον υπολογιστή.",
+    "c2sCurrentLocalConfig_other": "{{count}} τοπικές σήραγγες πελάτη διαμορφωμένες σε αυτόν τον υπολογιστή.",
     "c2sLoadPreset": "Φόρτωση",
     "c2sNoPresetSelected": "Δεν έχει επιλεγεί προκαθορισμένο",
     "c2sNoPresets": "Δεν έχουν αποθηκευτεί προκαθορισμένα",

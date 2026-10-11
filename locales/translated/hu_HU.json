@@ -48,7 +48,8 @@
     "socksListenerHost": "127.0.0.1 (SOCKS figyelő)"
   },
   "profile": {
-    "c2sCurrentLocalConfig": "Ezen az asztalon {{count}} helyi kliens-alagút van konfigurálva.",
+    "c2sCurrentLocalConfig_one": "{{count}} helyi kliens-alagút van konfigurálva ezen az asztalon.",
+    "c2sCurrentLocalConfig_other": "{{count}} helyi kliens-alagút van konfigurálva ezen az asztalon.",
     "c2sLoadPreset": "Betöltés",
     "c2sNoPresetSelected": "Nincs előbeállítás kiválasztva",
     "c2sNoPresets": "Nincs mentett előbeállítás",

@@ -48,7 +48,9 @@
     "socksListenerHost": "127.0.0.1 (escucha SOCKS)"
   },
   "profile": {
-    "c2sCurrentLocalConfig": "Hay {{count}} túnel(es) de cliente local configurado(s) en este escritorio.",
+    "c2sCurrentLocalConfig_one": "{{count}} túnel de cliente local configurado en este escritorio.",
+    "c2sCurrentLocalConfig_many": "{{count}} túneles de cliente local configurados en este escritorio.",
+    "c2sCurrentLocalConfig_other": "{{count}} túneles de cliente local configurados en este escritorio.",
     "c2sLoadPreset": "Cargar",
     "c2sNoPresetSelected": "Ninguna configuración predefinida seleccionada",
     "c2sNoPresets": "No hay configuraciones predefinidas guardadas",

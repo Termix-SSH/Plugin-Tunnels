@@ -48,7 +48,10 @@
     "socksListenerHost": "127.0.0.1 (SOCKS poslušalec)"
   },
   "profile": {
-    "c2sCurrentLocalConfig": "Na tej namizni napravi je konfiguriranih {{count}} lokalnih odjemniških tunelov.",
+    "c2sCurrentLocalConfig_one": "{{count}} lokalni odjemniški tunel je konfiguriran na tej namizni površini.",
+    "c2sCurrentLocalConfig_two": "{{count}} lokalna odjemniška tunela sta konfigurirana na tej namizni površini.",
+    "c2sCurrentLocalConfig_few": "{{count}} lokalna odjemniška tunela so konfigurirana na tej namizni površini.",
+    "c2sCurrentLocalConfig_other": "{{count}} lokalnih odjemniških tunlov je konfiguriranih na tej namizni površini.",
     "c2sLoadPreset": "Naloži",
     "c2sNoPresetSelected": "Prednastavitev ni izbrana",
     "c2sNoPresets": "Prednastavitve niso shranjene",

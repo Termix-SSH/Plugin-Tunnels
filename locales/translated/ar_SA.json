@@ -48,7 +48,12 @@
     "socksListenerHost": "127.0.0.1 (مستمع SOCKS)"
   },
   "profile": {
-    "c2sCurrentLocalConfig": "تم تكوين {{count}} نفق عميل محلي على سطح المكتب هذا.",
+    "c2sCurrentLocalConfig_zero": "لا توجد نفق عميل محلي مُعد على سطح المكتب هذا.",
+    "c2sCurrentLocalConfig_one": "نفق عميل محلي واحد مُعد على سطح المكتب هذا.",
+    "c2sCurrentLocalConfig_two": "نفقان عميل محليان مُعدان على سطح المكتب هذا.",
+    "c2sCurrentLocalConfig_few": "{{count}} أنفاق عميل محلي مُعدة على سطح المكتب هذا.",
+    "c2sCurrentLocalConfig_many": "{{count}} نفق عميل محلي مُعد على سطح المكتب هذا.",
+    "c2sCurrentLocalConfig_other": "{{count}} نفق عميل محلي مُعد على سطح المكتب هذا.",
     "c2sLoadPreset": "تحميل",
     "c2sNoPresetSelected": "لم يتم تحديد إعداد مسبق",
     "c2sNoPresets": "لم يتم حفظ أي إعدادات مسبقة",

@@ -48,7 +48,8 @@
     "socksListenerHost": "127.0.0.1 (SOCKS लिसनर)"
   },
   "profile": {
-    "c2sCurrentLocalConfig": "इस डेस्कटॉप पर {{count}} स्थानीय क्लाइंट टनल कॉन्फ़िगर की गई हैं।",
+    "c2sCurrentLocalConfig_one": "इस डेस्कटॉप पर {{count}} स्थानीय क्लाइंट टनल कॉन्फ़िगर की गई है।",
+    "c2sCurrentLocalConfig_other": "इस डेस्कटॉप पर {{count}} स्थानीय क्लाइंट टनल कॉन्फ़िगर की गई हैं।",
     "c2sLoadPreset": "लोड करें",
     "c2sNoPresetSelected": "कोई प्रीसेट चयनित नहीं",
     "c2sNoPresets": "कोई प्रीसेट सेव नहीं किया गया",

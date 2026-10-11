@@ -48,7 +48,8 @@
     "socksListenerHost": "127.0.0.1 (SOCKS-luisteraar)"
   },
   "profile": {
-    "c2sCurrentLocalConfig": "Er is {{count}} lokale clienttunnel geconfigureerd op dit bureaublad.",
+    "c2sCurrentLocalConfig_one": "{{count}} lokale client-tunnel geconfigureerd op dit bureaublad.",
+    "c2sCurrentLocalConfig_other": "{{count}} lokale client-tunnels geconfigureerd op dit bureaublad.",
     "c2sLoadPreset": "Laden",
     "c2sNoPresetSelected": "Geen voorinstelling geselecteerd",
     "c2sNoPresets": "Geen voorinstellingen opgeslagen",

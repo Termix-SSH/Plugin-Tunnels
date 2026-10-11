@@ -48,7 +48,8 @@
     "socksListenerHost": "127.0.0.1 (SOCKS-kuulaja)"
   },
   "profile": {
-    "c2sCurrentLocalConfig": "Selles töölauas on konfigureeritud {{count}} kohalikku kliendi tunnelit.",
+    "c2sCurrentLocalConfig_one": "{{count}} kohalik klient-tunnel on sellel töölaua seadmes konfigureeritud.",
+    "c2sCurrentLocalConfig_other": "{{count}} kohalikku klient-tunnelit on sellel töölaua seadmes konfigureeritud.",
     "c2sLoadPreset": "Laadi",
     "c2sNoPresetSelected": "Eelseadistust ei ole valitud",
     "c2sNoPresets": "Eelseadistusi pole salvestatud",

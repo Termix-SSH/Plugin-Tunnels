@@ -48,7 +48,8 @@
     "socksListenerHost": "127.0.0.1 (SOCKS listener)"
   },
   "profile": {
-    "c2sCurrentLocalConfig": "{{count}} local client tunnel(s) configured on this desktop.",
+    "c2sCurrentLocalConfig_one": "{{count}} local client tunnel configured on this desktop.",
+    "c2sCurrentLocalConfig_other": "{{count}} local client tunnels configured on this desktop.",
     "c2sLoadPreset": "Load",
     "c2sNoPresetSelected": "No preset selected",
     "c2sNoPresets": "No presets saved",

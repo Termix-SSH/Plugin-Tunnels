@@ -48,7 +48,7 @@
     "socksListenerHost": "127.0.0.1（SOCKS 监听器）"
   },
   "profile": {
-    "c2sCurrentLocalConfig": "在此桌面客户端上配置了 {{count}} 个本地客户端隧道。",
+    "c2sCurrentLocalConfig_other": "此桌面已配置 {{count}} 个本地客户端隧道。",
     "c2sLoadPreset": "加载",
     "c2sNoPresetSelected": "未选择预设",
     "c2sNoPresets": "未保存任何预设",

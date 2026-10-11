@@ -48,7 +48,8 @@
     "socksListenerHost": "127.0.0.1 (SOCKS-kuuntelija)"
   },
   "profile": {
-    "c2sCurrentLocalConfig": "Tällä työpöydällä on määritetty {{count}} paikallista asiakasväylää.",
+    "c2sCurrentLocalConfig_one": "{{count}} paikallinen asiakasreitti määritetty tässä työpisteessä.",
+    "c2sCurrentLocalConfig_other": "{{count}} paikallista asiakasreittiä määritetty tässä työpisteessä.",
     "c2sLoadPreset": "Lataa",
     "c2sNoPresetSelected": "Esiasetusta ei ole valittu",
     "c2sNoPresets": "Esiasetuksia ei ole tallennettu",

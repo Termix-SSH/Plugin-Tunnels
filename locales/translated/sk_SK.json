@@ -48,7 +48,10 @@
     "socksListenerHost": "127.0.0.1 (SOCKS počúvateľ)"
   },
   "profile": {
-    "c2sCurrentLocalConfig": "Na tomto počítači je nakonfigurovaných {{count}} lokálnych tunelov klienta.",
+    "c2sCurrentLocalConfig_one": "{{count}} lokálny tunel klienta nakonfigurovaný na tomto počítači.",
+    "c2sCurrentLocalConfig_few": "{{count}} lokálne tunely klienta nakonfigurované na tomto počítači.",
+    "c2sCurrentLocalConfig_many": "{{count}} lokálnych tunelov klienta nakonfigurovaných na tomto počítači.",
+    "c2sCurrentLocalConfig_other": "{{count}} lokálnych tunelov klienta nakonfigurovaných na tomto počítači.",
     "c2sLoadPreset": "Načítať",
     "c2sNoPresetSelected": "Nie je vybraný žiadny predvolený profil",
     "c2sNoPresets": "Nie sú uložené žiadne predvolené profily",

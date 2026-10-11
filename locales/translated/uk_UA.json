@@ -48,7 +48,10 @@
     "socksListenerHost": "127.0.0.1 (SOCKS-слухач)"
   },
   "profile": {
-    "c2sCurrentLocalConfig": "На цьому робочому столі налаштовано {{count}} локальних клієнтських тунелів.",
+    "c2sCurrentLocalConfig_one": "{{count}} локальний клієнтський тунель налаштовано на цьому робочому столі.",
+    "c2sCurrentLocalConfig_few": "{{count}} локальних клієнтських тунелів налаштовано на цьому робочому столі.",
+    "c2sCurrentLocalConfig_many": "{{count}} локальних клієнтських тунелів налаштовано на цьому робочому столі.",
+    "c2sCurrentLocalConfig_other": "{{count}} локальних клієнтських тунелів налаштовано на цьому робочому столі.",
     "c2sLoadPreset": "Завантажити",
     "c2sNoPresetSelected": "Пресет не обрано",
     "c2sNoPresets": "Пресети не збережено",
