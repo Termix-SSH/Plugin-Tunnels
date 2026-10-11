@@ -45,9 +45,7 @@
         "id": "tunnel",
         "titleKey": "nav.tunnels",
         "icon": "ArrowLeftRight",
-        "openFrom": [
-          "host-context-menu"
-        ]
+        "openFrom": ["host-context-menu"]
       }
     ],
     "panels": [
@@ -76,10 +74,7 @@
         "name": "use",
         "titleKey": "permissions.use.title",
         "descriptionKey": "permissions.use.description",
-        "defaultRoles": [
-          "admin",
-          "user"
-        ]
+        "defaultRoles": ["admin", "user"]
       }
     ],
     "settings": {
@@ -103,14 +98,8 @@
       "labelKey": "hosts.tabTunnels",
       "editorTab": "general"
     },
-    "uses": [
-      "homepage.widgets"
-    ]
+    "uses": ["homepage.widgets"]
   },
   "locales": "locales",
-  "platforms": [
-    "linux",
-    "win32",
-    "darwin"
-  ]
+  "platforms": ["linux", "win32", "darwin"]
 }
