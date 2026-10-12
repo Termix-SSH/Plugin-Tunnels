@@ -10,8 +10,8 @@ Tunnels sets up SSH port forwarding that stays up. If a tunnel drops, it reconne
 
 And two places a tunnel can run:
 
-- **On the Termix server** (server to server). Termix holds the tunnel open between a host and an endpoint. It keeps running when you close your browser.
-- **On your computer** (client to server). Only in the desktop app. The tunnel listens on your own machine, like running `ssh -L` yourself.
+- On the Termix server (server to server). Termix holds the tunnel open between a host and an endpoint. It keeps running when you close your browser.
+- On your computer (client to server). Only in the desktop app. The tunnel listens on your own machine, like running `ssh -L` yourself.
 
 ## Add a server tunnel
 
