@@ -1,5 +1,11 @@
 # Changelog
 
+## 1.0.2
+
+### Fixed
+
+- Client tunnels stopped with "Endpoint SSH connection closed" when a reverse proxy dropped their idle connection. The relay now pings to keep it open
+
 ## 1.0.1
 
 ### Changed

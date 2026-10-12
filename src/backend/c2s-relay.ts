@@ -38,6 +38,20 @@ export interface C2SOpenMessage {
 const WS_HIGH_WATERMARK = 1024 * 1024;
 const WS_LOW_WATERMARK = 256 * 1024;
 const STREAM_WRITE_LIMIT = 8 * 1024 * 1024;
+export const RELAY_PING_MS = 25_000;
+
+/**
+ * A tunnel's sockets can sit idle for a long time, and a reverse proxy in
+ * front of Termix may drop an idle WebSocket (often after 60 or 100s), which
+ * took the whole client tunnel down. A ping counts as traffic.
+ */
+export function keepRelayAlive(ws: WebSocket, intervalMs = RELAY_PING_MS) {
+  const timer = setInterval(() => {
+    if (ws.readyState === 1) ws.ping();
+  }, intervalMs);
+  timer.unref?.();
+  ws.once("close", () => clearInterval(timer));
+}
 
 function sendC2SError(ws: WebSocket, message: string): void {
   if (ws.readyState === 1) {
@@ -427,6 +441,7 @@ export function createC2SRelay(ctx: PluginContext) {
   /** The ctx.ws.route handler. Core has already authenticated the socket. */
   return function handleConnection(ws: WebSocket, userId: string): void {
     let opened = false;
+    keepRelayAlive(ws);
 
     ws.on("error", (error: Error) => {
       ctx.log.warn(`Client tunnel relay socket error: ${error.message}`);
