@@ -84,6 +84,8 @@
     "clientRemoteServerNote": "Remote forwarding may require AllowTcpForwarding and GatewayPorts on the endpoint SSH server. The remote port closes when this desktop disconnects.",
     "clientTunnelStarted": "Client tunnel started",
     "clientTunnelStopped": "Client tunnel stopped",
+    "tunnelStarted": "Tunnel started",
+    "tunnelStopped": "Tunnel stopped",
     "clientTunnels": "Client Tunnels",
     "connected": "Connected",
     "connecting": "Connecting...",

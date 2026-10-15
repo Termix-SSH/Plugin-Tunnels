@@ -1,5 +1,11 @@
 # Changelog
 
+## 1.0.3
+
+### Fixed
+
+- Starting or stopping a server tunnel from the Tunnels tab said "Client tunnel started" or "Client tunnel stopped"
+
 ## 1.0.2
 
 ### Fixed
