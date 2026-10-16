@@ -82,3 +82,45 @@ describe("remote client tunnels on one shared connection", () => {
     for (const cleanup of mock.disposals) await cleanup();
   });
 });
+
+describe("local client tunnel errors", () => {
+  it("says which target the endpoint host could not reach", async () => {
+    const mock = createMockCtx({
+      pluginId: "tunnels",
+      manifest,
+      capabilities: manifest.capabilities,
+      permissions: ["tunnels.use"],
+      hosts: [host()],
+    });
+    const client = Object.assign(new EventEmitter(), {
+      forwardOut: vi.fn(
+        (
+          _sh: string,
+          _sp: number,
+          _th: string,
+          _tp: number,
+          cb: (e?: Error) => void,
+        ) => cb(new Error("(SSH) Channel open failure: Connection refused")),
+      ),
+    });
+    mock.ctx.ssh.connect = (async () => ({
+      client,
+      dispose: vi.fn(),
+      host: host(),
+      jumpClient: null,
+    })) as unknown as typeof mock.ctx.ssh.connect;
+    const socket = new Socket();
+    createC2SRelay(mock.ctx)(socket.ws, "user-1");
+    socket.message({
+      type: "test",
+      tunnelConfig: { sourceHostId: 7, mode: "local", endpointPort: 8443 },
+    });
+
+    await vi.waitFor(() =>
+      expect(socket.messages().at(-1)?.type).toBe("error"),
+    );
+    const error = socket.messages().at(-1)?.error as string;
+    expect(error).toContain("not reachable from the endpoint host");
+    expect(error).toContain("127.0.0.1:8443");
+  });
+});
