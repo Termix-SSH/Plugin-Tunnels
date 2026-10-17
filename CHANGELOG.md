@@ -2,6 +2,10 @@
 
 ## 1.0.3
 
+### Changed
+
+- The plugin name and description show in your language
+
 ### Fixed
 
 - When the endpoint host could not reach a client tunnel's target, the error did not say which address it tried. It now names it, like 127.0.0.1:8443, which is what an empty remote address means
