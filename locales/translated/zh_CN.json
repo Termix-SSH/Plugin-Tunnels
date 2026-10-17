@@ -175,5 +175,9 @@
   },
   "common": {
     "delete": "删除"
+  },
+  "plugin": {
+    "name": "隧道",
+    "description": "自动重连的 SSH 端口转发，以及桌面应用中的客户端隧道。"
   }
 }
