@@ -84,6 +84,8 @@
     "clientRemoteServerNote": "Afstandse vorentoevoering kan AllowTcpForwarding en GatewayPorts op die eindpunt-SSH-bedienaar vereis. Die afstandse poort sluit wanneer hierdie desktop ontkoppel.",
     "clientTunnelStarted": "Kliënttunnel begin",
     "clientTunnelStopped": "Kliënttunnel gestop",
+    "tunnelStarted": "Tunnel gestart",
+    "tunnelStopped": "Tunnel gestop",
     "clientTunnels": "Kliënttunnels",
     "connected": "Gekoppel",
     "connecting": "Koppel...",
@@ -176,5 +178,9 @@
   },
   "common": {
     "delete": "Vee uit"
+  },
+  "plugin": {
+    "name": "Tunnels",
+    "description": "SSH-poortvoorrang wat outomaties herverbind, plus kliënttunnels vanaf die desktop-toepassing."
   }
 }

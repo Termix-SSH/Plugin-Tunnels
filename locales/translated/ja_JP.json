@@ -83,6 +83,8 @@
     "clientRemoteServerNote": "リモートフォワーディングには、エンドポイントの SSH サーバーで AllowTcpForwarding と GatewayPorts を有効にする必要がある場合があります。このデスクトップが切断されると、リモートポートは閉じられます。",
     "clientTunnelStarted": "クライアントトンネルが開始されました",
     "clientTunnelStopped": "クライアントトンネルが停止しました",
+    "tunnelStarted": "トンネルが開始されました",
+    "tunnelStopped": "トンネルが停止しました",
     "clientTunnels": "クライアントトンネル",
     "connected": "接続済み",
     "connecting": "接続中...",
@@ -175,5 +177,9 @@
   },
   "common": {
     "delete": "削除"
+  },
+  "plugin": {
+    "name": "Tunnels",
+    "description": "自動再接続機能付きの SSH ポートフォワーディングと、デスクトップアプリからのクライアントトンネルを提供します。"
   }
 }

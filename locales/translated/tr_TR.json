@@ -84,6 +84,8 @@
     "clientRemoteServerNote": "Uzak yönlendirme, uç nokta SSH sunucusunda AllowTcpForwarding ve GatewayPorts gerektirebilir. Uzak bağlantı kesildiğinde uzak port kapanır.",
     "clientTunnelStarted": "İstemci tüneli başlatıldı",
     "clientTunnelStopped": "İstemci tüneli durduruldu",
+    "tunnelStarted": "Tünel başlatıldı",
+    "tunnelStopped": "Tünel durduruldu",
     "clientTunnels": "İstemci Tünelleri",
     "connected": "Bağlı",
     "connecting": "Bağlanıyor...",
@@ -176,5 +178,9 @@
   },
   "common": {
     "delete": "Sil"
+  },
+  "plugin": {
+    "name": "Tüneller",
+    "description": "Kendi kendine yeniden bağlanan SSH bağlantı yönlendirmeleri ve masaüstü uygulamasından istemci tünelleri."
   }
 }

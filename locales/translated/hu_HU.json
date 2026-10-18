@@ -84,6 +84,8 @@
     "clientRemoteServerNote": "A távoli továbbítás engedélyezésehez az AllowTcpForwarding és a GatewayPorts opciók beállítása szükséges lehet a végpont SSH szerverén. A távoli port bezáródik, amikor ez az asztali kapcsolat megszakad.",
     "clientTunnelStarted": "Kliens alagút elindítva",
     "clientTunnelStopped": "Kliens alagút leállítva",
+    "tunnelStarted": "Alagút elindítva",
+    "tunnelStopped": "Alagút leállítva",
     "clientTunnels": "Kliens alagutak",
     "connected": "Csatlakoztatva",
     "connecting": "Csatlakozás...",
@@ -176,5 +178,9 @@
   },
   "common": {
     "delete": "Törlés"
+  },
+  "plugin": {
+    "name": "Alagutak",
+    "description": "SSH portátirányítás automatikus újracsatlakozással, valamint kliensalagutak az asztali alkalmazásból."
   }
 }

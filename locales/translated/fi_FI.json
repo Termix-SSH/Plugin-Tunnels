@@ -84,6 +84,8 @@
     "clientRemoteServerNote": "Etäportin uudelleenohjaus voi vaatia AllowTcpForwarding- ja GatewayPorts-asetukset päätepisteen SSH-palvelimelta. Etäportti sulkeutuu, kun tämä työpöytä katkaisee yhteyden.",
     "clientTunnelStarted": "Asiakkaan tunneli käynnistetty",
     "clientTunnelStopped": "Asiakkaan tunneli pysäytetty",
+    "tunnelStarted": "Reikä aloitettu",
+    "tunnelStopped": "Reitti pysäytetty",
     "clientTunnels": "Asiakkaan tunnelit",
     "connected": "Yhdistetty",
     "connecting": "Yhdistetään...",
@@ -176,5 +178,9 @@
   },
   "common": {
     "delete": "Poista"
+  },
+  "plugin": {
+    "name": "Tunnelit",
+    "description": "SSH-portin eteenpäin ohjaus, joka muodostaa yhteyden uudelleen automaattisesti, sekä asiakastunnelit työpöytäsovelluksesta."
   }
 }

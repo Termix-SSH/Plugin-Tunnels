@@ -314,10 +314,10 @@ export function TunnelTab({ host: given }: { host?: PluginHostRecord }) {
         await connectTunnel(
           connectRequestFor(entry.host, entry.index, entry.tunnel),
         );
-        toast.success(t("tunnels.clientTunnelStarted"));
+        toast.success(t("tunnels.tunnelStarted"));
       } else if (action === "disconnect") {
         await disconnectTunnel(name);
-        toast.info(t("tunnels.clientTunnelStopped"));
+        toast.info(t("tunnels.tunnelStopped"));
       } else {
         await cancelTunnel(name);
         toast.info(t("tunnels.canceling"));

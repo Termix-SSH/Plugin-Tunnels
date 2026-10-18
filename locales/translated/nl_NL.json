@@ -84,6 +84,8 @@
     "clientRemoteServerNote": "Voorwaartse doorsturing vereist mogelijk AllowTcpForwarding en GatewayPorts op de SSH-server van het eindpunt. De externe poort sluit wanneer deze desktop verbinding verliest.",
     "clientTunnelStarted": "Clienttunnel gestart",
     "clientTunnelStopped": "Clienttunnel gestopt",
+    "tunnelStarted": "Tunnel gestart",
+    "tunnelStopped": "Tunnel gestopt",
     "clientTunnels": "Clienttunnels",
     "connected": "Verbonden",
     "connecting": "Verbinden...",
@@ -176,5 +178,9 @@
   },
   "common": {
     "delete": "Verwijderen"
+  },
+  "plugin": {
+    "name": "Tunnels",
+    "description": "SSH-portforwarding die automatisch opnieuw verbinding maakt, plus clienttunnels vanuit de desktop-app."
   }
 }

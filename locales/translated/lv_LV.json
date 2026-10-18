@@ -85,6 +85,8 @@
     "clientRemoteServerNote": "Attālināta pārvirzīšana var prasīt AllowTcpForwarding un GatewayPorts iestatījumus galapunkta SSH serverī. Attālinātais ports tiek aizvērts, kad šī darbvirsa atvienojas.",
     "clientTunnelStarted": "Klienta tunelis uzsākts",
     "clientTunnelStopped": "Klienta tunelis apturēts",
+    "tunnelStarted": "Tunelis uzsākts",
+    "tunnelStopped": "Tunelis apturēts",
     "clientTunnels": "Klienta tuneļi",
     "connected": "Savienots",
     "connecting": "Savieno...",
@@ -177,5 +179,9 @@
   },
   "common": {
     "delete": "Dzēst"
+  },
+  "plugin": {
+    "name": "Tuneļi",
+    "description": "SSH porta pārvirzīšana, kas automātiski atkārtoti savienojas, kā arī klienta tuneļi no darbvirsmas lietotnes."
   }
 }

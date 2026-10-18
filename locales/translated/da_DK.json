@@ -84,6 +84,8 @@
     "clientRemoteServerNote": "Remote forwarding kan kræve AllowTcpForwarding og GatewayPorts på endpoint SSH-serveren. Den remote port lukkes, når denne desktop afbrydes.",
     "clientTunnelStarted": "Klient-tunnel startet",
     "clientTunnelStopped": "Klient-tunnel stoppet",
+    "tunnelStarted": "Tunnel startet",
+    "tunnelStopped": "Tunnel stoppet",
     "clientTunnels": "Klient-tunneler",
     "connected": "Forbundet",
     "connecting": "Forbinder...",
@@ -176,5 +178,9 @@
   },
   "common": {
     "delete": "Slet"
+  },
+  "plugin": {
+    "name": "Tunneler",
+    "description": "SSH-portvidereledning, der genopretter forbindelsen automatisk, samt klienttunneler fra desktop-appen."
   }
 }

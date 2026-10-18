@@ -85,6 +85,8 @@
     "clientRemoteServerNote": "Даљинско усмеравање може захтевати AllowTcpForwarding и GatewayPorts на SSH серверу крајње тачке. Даљински порт се затвара када се овај десктоп искључи.",
     "clientTunnelStarted": "Клијентски тунел покренут",
     "clientTunnelStopped": "Клијентски тунел заустављен",
+    "tunnelStarted": "Тунел покренут",
+    "tunnelStopped": "Тунел заустављен",
     "clientTunnels": "Клијентски тунели",
     "connected": "Повезан",
     "connecting": "Повезивање...",
@@ -177,5 +179,9 @@
   },
   "common": {
     "delete": "Обриши"
+  },
+  "plugin": {
+    "name": "Тунели",
+    "description": "SSH пренос портова који се аутоматски поново повезује, као и клијентски тунели из десктоп апликације."
   }
 }

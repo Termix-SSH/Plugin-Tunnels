@@ -84,6 +84,8 @@
     "clientRemoteServerNote": "Kaugsuunamine võib nõuda lubatud AllowTcpForwarding ja GatewayPorts lõpp-punkti SSH-serveris. Kaugport suletakse, kui see töölauaühendus katkestab.",
     "clientTunnelStarted": "Kliendi tunnel käivitatud",
     "clientTunnelStopped": "Kliendi tunnel peatatud",
+    "tunnelStarted": "Tunnel käivitatud",
+    "tunnelStopped": "Sild on peatatud",
     "clientTunnels": "Kliendi tunnelid",
     "connected": "Ühendatud",
     "connecting": "Ühendamine...",
@@ -176,5 +178,9 @@
   },
   "common": {
     "delete": "Kustuta"
+  },
+  "plugin": {
+    "name": "Sildid",
+    "description": "SSH-portide edasiandmine, mis ühenduse katkemisel automaatselt taastub, ning klienttunnelid töölauarakendusest."
   }
 }

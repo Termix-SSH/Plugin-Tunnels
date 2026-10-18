@@ -85,6 +85,8 @@
     "clientRemoteServerNote": "Redirecționarea remote poate necesita AllowTcpForwarding și GatewayPorts pe serverul SSH de destinație. Portul remote se închide când acest desktop se deconectează.",
     "clientTunnelStarted": "Tunelul clientului a pornit",
     "clientTunnelStopped": "Tunelul clientului s-a oprit",
+    "tunnelStarted": "Tunelul a fost pornit",
+    "tunnelStopped": "Tunelul a fost oprit",
     "clientTunnels": "Tuneluri client",
     "connected": "Conectat",
     "connecting": "Se conectează...",
@@ -177,5 +179,9 @@
   },
   "common": {
     "delete": "Șterge"
+  },
+  "plugin": {
+    "name": "Tuneluri",
+    "description": "Redirecționare SSH de porturi care se reconectează automat, plus tuneluri client din aplicația desktop."
   }
 }

@@ -86,6 +86,8 @@
     "clientRemoteServerNote": "Nuotoliniam perdavimui gali prireikti AllowTcpForwarding ir GatewayPorts nustatymų galinio taško SSH serveryje. Nuotolinis prievadas uždarys, kai šis darbalaukis atsijungs.",
     "clientTunnelStarted": "Kliento tunelis paleistas",
     "clientTunnelStopped": "Kliento tunelis sustabdytas",
+    "tunnelStarted": "Tunelis paleistas",
+    "tunnelStopped": "Tunelis sustabdytas",
     "clientTunnels": "Kliento tuneliai",
     "connected": "Prijungta",
     "connecting": "Jungiamasi...",
@@ -178,5 +180,9 @@
   },
   "common": {
     "delete": "Ištrinti"
+  },
+  "plugin": {
+    "name": "Tuneliai",
+    "description": "SSH prievado nukreipimas, kuris automatiškai persijungia, bei kliento tuneliai iš darbalaukio programos."
   }
 }

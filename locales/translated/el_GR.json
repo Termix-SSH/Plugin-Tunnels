@@ -84,6 +84,8 @@
     "clientRemoteServerNote": "Η απομακρυσμένη ανακατεύθυνση μπορεί να απαιτεί AllowTcpForwarding και GatewayPorts στον απομακρυσμένο SSH διακομιστή. Η απομακρυσμένη θύρα κλείνει όταν αποσυνδέεται αυτή η επιφάνεια εργασίας.",
     "clientTunnelStarted": "Ο σήραγγας πελάτη ξεκίνησε",
     "clientTunnelStopped": "Ο σήραγγας πελάτη σταμάτησε",
+    "tunnelStarted": "Ο σήραγγα ξεκίνησε",
+    "tunnelStopped": "Η σήραγγα σταμάτησε",
     "clientTunnels": "Σήραγγες Πελάτη",
     "connected": "Συνδεδεμένο",
     "connecting": "Σύνδεση...",
@@ -176,5 +178,9 @@
   },
   "common": {
     "delete": "Διαγραφή"
+  },
+  "plugin": {
+    "name": "Σήραγγες",
+    "description": "SSH port forwarding που επανασυνδέεται αυτόματα, καθώς και σήραγγες πελάτη από την εφαρμογή επιφάνειας εργασίας."
   }
 }

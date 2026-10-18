@@ -85,6 +85,8 @@
     "clientRemoteServerNote": "Le transfert distant peut nécessiter AllowTcpForwarding et GatewayPorts sur le serveur SSH de l'extrémité. Le port distant se ferme lorsque ce bureau se déconnecte.",
     "clientTunnelStarted": "Tunnel client démarré",
     "clientTunnelStopped": "Tunnel client arrêté",
+    "tunnelStarted": "Tunnel démarré",
+    "tunnelStopped": "Tunnel arrêté",
     "clientTunnels": "Tunnels clients",
     "connected": "Connecté",
     "connecting": "Connexion...",
@@ -177,5 +179,9 @@
   },
   "common": {
     "delete": "Supprimer"
+  },
+  "plugin": {
+    "name": "Tunnels",
+    "description": "Transfert de port SSH avec reconnexion automatique, ainsi que des tunnels clients depuis l'application de bureau."
   }
 }

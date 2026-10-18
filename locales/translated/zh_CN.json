@@ -83,6 +83,8 @@
     "clientRemoteServerNote": "远程转发可能需要在端点 SSH 服务器上启用 AllowTcpForwarding 和 GatewayPorts。当此桌面断开连接时，远程端口将关闭。",
     "clientTunnelStarted": "客户端隧道已启动",
     "clientTunnelStopped": "客户端隧道已停止",
+    "tunnelStarted": "隧道已启动",
+    "tunnelStopped": "隧道已停止",
     "clientTunnels": "客户端隧道",
     "connected": "已连接",
     "connecting": "正在连接...",
@@ -175,5 +177,9 @@
   },
   "common": {
     "delete": "删除"
+  },
+  "plugin": {
+    "name": "隧道",
+    "description": "自动重连的 SSH 端口转发，以及桌面应用中的客户端隧道。"
   }
 }

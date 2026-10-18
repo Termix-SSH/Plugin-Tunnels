@@ -86,6 +86,8 @@
     "clientRemoteServerNote": "Vzdálené přeposílání může vyžadovat povolení AllowTcpForwarding a GatewayPorts na koncovém SSH serveru. Vzdálený port se uzavře při odpojení tohoto desktopu.",
     "clientTunnelStarted": "Klientský tunel spuštěn",
     "clientTunnelStopped": "Klientský tunel zastaven",
+    "tunnelStarted": "Tunnel spuštěn",
+    "tunnelStopped": "Tunnel zastaven",
     "clientTunnels": "Klientské tunely",
     "connected": "Připojeno",
     "connecting": "Připojuje se...",
@@ -178,5 +180,9 @@
   },
   "common": {
     "delete": "Smazat"
+  },
+  "plugin": {
+    "name": "Tunely",
+    "description": "SSH port forwarding s automatickým připojením a tunely klienta z desktopové aplikace."
   }
 }

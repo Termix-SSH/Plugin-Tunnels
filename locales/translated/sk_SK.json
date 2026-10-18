@@ -86,6 +86,8 @@
     "clientRemoteServerNote": "Vzdialené presmerovanie môže vyžadovať povolenie AllowTcpForwarding a GatewayPorts na koncovom SSH serveri. Vzdialený port sa zatvorí po odpojení tohto klientskeho počítača.",
     "clientTunnelStarted": "Klientsky tunel spustený",
     "clientTunnelStopped": "Klientsky tunel zastavený",
+    "tunnelStarted": "Tunnel spustený",
+    "tunnelStopped": "Tunnel zastavený",
     "clientTunnels": "Klientske tunely",
     "connected": "Pripojené",
     "connecting": "Pripája sa...",
@@ -178,5 +180,9 @@
   },
   "common": {
     "delete": "Odstrániť"
+  },
+  "plugin": {
+    "name": "Tunely",
+    "description": "SSH presmerovanie portov s automatickým opätovným pripojením a tunely klienta z desktopovej aplikácie."
   }
 }

@@ -84,6 +84,8 @@
     "clientRemoteServerNote": "Remote forwarding kan kräva AllowTcpForwarding och GatewayPorts på endpointens SSH-server. Den remota porten stängs när detta skrivbord kopplas från.",
     "clientTunnelStarted": "Klienttunneln startad",
     "clientTunnelStopped": "Klienttunneln stoppad",
+    "tunnelStarted": "Tunneln startad",
+    "tunnelStopped": "Tunneln stoppad",
     "clientTunnels": "Klienttunnlar",
     "connected": "Ansluten",
     "connecting": "Ansluter...",
@@ -176,5 +178,9 @@
   },
   "common": {
     "delete": "Ta bort"
+  },
+  "plugin": {
+    "name": "Tunnlar",
+    "description": "SSH-portomdirigering som återansluter automatiskt, samt klienttunnlar från skrivbordsappen."
   }
 }

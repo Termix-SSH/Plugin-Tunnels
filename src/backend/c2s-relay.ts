@@ -53,6 +53,16 @@ export function keepRelayAlive(ws: WebSocket, intervalMs = RELAY_PING_MS) {
   ws.once("close", () => clearInterval(timer));
 }
 
+/**
+ * Names the address the endpoint host failed to reach. An empty remote
+ * address means 127.0.0.1 on the endpoint host, which only works for a
+ * service running on that host itself.
+ */
+export function withTarget(error: unknown, host: string, port: number): Error {
+  const message = error instanceof Error ? error.message : String(error);
+  return new Error(`${message} (target ${host}:${port})`);
+}
+
 function sendC2SError(ws: WebSocket, message: string): void {
   if (ws.readyState === 1) {
     ws.send(JSON.stringify({ type: "error", error: message }));
@@ -80,7 +90,10 @@ function describeC2SRelayError(error: unknown): string {
   if (
     lower.includes("name or service not known") ||
     lower.includes("enotfound") ||
-    lower.includes("econnrefused")
+    lower.includes("econnrefused") ||
+    lower.includes("connection refused") ||
+    lower.includes("no route to host") ||
+    lower.includes("network is unreachable")
   ) {
     return `Tunnel target is not reachable from the endpoint host: ${message}`;
   }
@@ -365,7 +378,7 @@ export function createC2SRelay(ctx: PluginContext) {
       outbound = await forwardOut(source.client, targetHost, targetPort);
     } catch (error) {
       source.dispose();
-      throw error;
+      throw withTarget(error, targetHost, targetPort);
     }
 
     if (ws.readyState !== 1) {
@@ -429,7 +442,9 @@ export function createC2SRelay(ctx: PluginContext) {
           source.client,
           relay.remoteAddress,
           relay.endpointPort,
-        );
+        ).catch((error: unknown) => {
+          throw withTarget(error, relay.remoteAddress, relay.endpointPort);
+        });
         outbound.destroy();
       }
       sendMessage(ws, { type: "ready" });

@@ -83,6 +83,8 @@
     "clientRemoteServerNote": "Pengehadan jauh mungkin memerlukan AllowTcpForwarding dan GatewayPorts pada pelayan SSH hujung. Port jauh akan ditutup apabila desktop ini terputus sambungan.",
     "clientTunnelStarted": "Terowong klien dimulakan",
     "clientTunnelStopped": "Terowong klien dihentikan",
+    "tunnelStarted": "Terowong dimulakan",
+    "tunnelStopped": "Terowong dihentikan",
     "clientTunnels": "Terowong Klien",
     "connected": "Disambungkan",
     "connecting": "Menyambung...",
@@ -175,5 +177,9 @@
   },
   "common": {
     "delete": "Padam"
+  },
+  "plugin": {
+    "name": "Terowong",
+    "description": "Pengehadan port SSH yang menyambung semula secara automatik, serta terowong klien dari aplikasi desktop."
   }
 }

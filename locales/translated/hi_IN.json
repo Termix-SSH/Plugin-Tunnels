@@ -84,6 +84,8 @@
     "clientRemoteServerNote": "रिमोट फॉरवर्डिंग के लिए एंडपॉइंट SSH सर्वर पर AllowTcpForwarding और GatewayPorts की आवश्यकता हो सकती है। जब यह डेस्कटॉप डिस्कनेक्ट होता है तो रिमोट पोर्ट बंद हो जाता है।",
     "clientTunnelStarted": "क्लाइंट टनल शुरू हो गई",
     "clientTunnelStopped": "क्लाइंट टनल रुक गई",
+    "tunnelStarted": "टनल शुरू हो गई",
+    "tunnelStopped": "टनल बंद हो गई",
     "clientTunnels": "क्लाइंट टनल",
     "connected": "जुड़ा हुआ",
     "connecting": "जुड़ रहा है...",
@@ -176,5 +178,9 @@
   },
   "common": {
     "delete": "हटाएं"
+  },
+  "plugin": {
+    "name": "टनल्स",
+    "description": "SSH पोर्ट फॉरवर्डिंग जो अपने आप पुनः कनेक्ट होती है, साथ ही डेस्कटॉप ऐप से क्लाइंट टनल्स।"
   }
 }

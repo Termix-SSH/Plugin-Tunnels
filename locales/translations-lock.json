@@ -74,6 +74,8 @@
   "tunnels.clientRemoteServerNote": "d8cb3065a6ea",
   "tunnels.clientTunnelStarted": "9539f33e2885",
   "tunnels.clientTunnelStopped": "d0cdfae47d45",
+  "tunnels.tunnelStarted": "6499c2d2bdb3",
+  "tunnels.tunnelStopped": "d1a8470eed8e",
   "tunnels.clientTunnels": "ce9e7f7e2168",
   "tunnels.connected": "c2f9b7b4897f",
   "tunnels.connecting": "b98e3f99c2ae",
@@ -153,5 +155,7 @@
   "permissions.use.description": "398bbadb029b",
   "settings.host.enable.label": "3252f955e2a7",
   "settings.host.enable.description": "7d9da6a8d369",
-  "common.delete": "f6fdbe48dc54"
+  "common.delete": "f6fdbe48dc54",
+  "plugin.name": "8dfa0439a63e",
+  "plugin.description": "410cee200b0e"
 }

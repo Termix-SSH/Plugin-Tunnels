@@ -83,6 +83,8 @@
     "clientRemoteServerNote": "遠端轉發可能需要端點 SSH 伺服器啟用 AllowTcpForwarding 和 GatewayPorts。當此桌面斷開連線時，遠端埠口將關閉。",
     "clientTunnelStarted": "客戶端隧道已啟動",
     "clientTunnelStopped": "客戶端隧道已停止",
+    "tunnelStarted": "隧道已啟動",
+    "tunnelStopped": "隧道已停止",
     "clientTunnels": "客戶端隧道",
     "connected": "已連線",
     "connecting": "正在連線...",
@@ -175,5 +177,9 @@
   },
   "common": {
     "delete": "刪除"
+  },
+  "plugin": {
+    "name": "通道",
+    "description": "自動重新連線的 SSH 連接埠轉發，以及桌面應用程式中的用戶端通道。"
   }
 }

@@ -86,6 +86,8 @@
     "clientRemoteServerNote": "Przekierowanie zdalne może wymagać opcji AllowTcpForwarding i GatewayPorts na serwerze SSH punktu końcowego. Port zdalny zamyka się po rozłączeniu tego klienta desktopowego.",
     "clientTunnelStarted": "Tunel klienta uruchomiony",
     "clientTunnelStopped": "Tunel klienta zatrzymany",
+    "tunnelStarted": "Tunel uruchomiony",
+    "tunnelStopped": "Tunel zatrzymany",
     "clientTunnels": "Tunele klienta",
     "connected": "Połączony",
     "connecting": "Łączenie...",
@@ -178,5 +180,9 @@
   },
   "common": {
     "delete": "Usuń"
+  },
+  "plugin": {
+    "name": "Tunele",
+    "description": "Przekierowanie portów SSH z automatycznym ponownym łączeniem oraz tunele klienckie z aplikacji desktopowej."
   }
 }

@@ -85,6 +85,8 @@
     "clientRemoteServerNote": "O encaminhamento remoto pode exigir AllowTcpForwarding e GatewayPorts no servidor SSH do endpoint. A porta remota é fechada quando este desktop se desconecta.",
     "clientTunnelStarted": "Túnel do cliente iniciado",
     "clientTunnelStopped": "Túnel do cliente parado",
+    "tunnelStarted": "Túnel iniciado",
+    "tunnelStopped": "Túnel encerrado",
     "clientTunnels": "Túneis do Cliente",
     "connected": "Conectado",
     "connecting": "Conectando...",
@@ -177,5 +179,9 @@
   },
   "common": {
     "delete": "Excluir"
+  },
+  "plugin": {
+    "name": "Túneis",
+    "description": "Encaminhamento de portas SSH que se reconecta automaticamente, além de túneis de cliente a partir do aplicativo desktop."
   }
 }

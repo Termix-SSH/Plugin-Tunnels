@@ -85,6 +85,8 @@
     "clientRemoteServerNote": "L'inoltro remoto potrebbe richiedere AllowTcpForwarding e GatewayPorts sul server SSH dell'endpoint. La porta remota si chiude quando questo desktop si disconnette.",
     "clientTunnelStarted": "Tunnel client avviato",
     "clientTunnelStopped": "Tunnel client fermato",
+    "tunnelStarted": "Tunnel avviato",
+    "tunnelStopped": "Tunnel fermato",
     "clientTunnels": "Tunnel client",
     "connected": "Connesso",
     "connecting": "Connessione in corso...",
@@ -177,5 +179,9 @@
   },
   "common": {
     "delete": "Elimina"
+  },
+  "plugin": {
+    "name": "Tunnel",
+    "description": "Inoltro porte SSH che si riconnette automaticamente, più tunnel client dall'app desktop."
   }
 }

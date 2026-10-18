@@ -83,6 +83,8 @@
     "clientRemoteServerNote": "Penerusan jarak jauh mungkin memerlukan AllowTcpForwarding dan GatewayPorts pada server SSH endpoint. Port jarak jauh akan ditutup saat desktop ini terputus.",
     "clientTunnelStarted": "Terowongan klien dimulai",
     "clientTunnelStopped": "Terowongan klien dihentikan",
+    "tunnelStarted": "Tunnel dimulai",
+    "tunnelStopped": "Tunnel dihentikan",
     "clientTunnels": "Terowongan Klien",
     "connected": "Terhubung",
     "connecting": "Menghubungkan...",
@@ -175,5 +177,9 @@
   },
   "common": {
     "delete": "Hapus"
+  },
+  "plugin": {
+    "name": "Tunnel",
+    "description": "Penerusan port SSH yang terhubung kembali secara otomatis, serta tunnel klien dari aplikasi desktop."
   }
 }

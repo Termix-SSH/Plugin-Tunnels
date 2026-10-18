@@ -83,6 +83,8 @@
     "clientRemoteServerNote": "การส่งต่อแบบรีโมทอาจต้องการเปิด AllowTcpForwarding และ GatewayPorts บนเซิร์ฟเวอร์ SSH ของปลายทาง พอร์ตรีโมทจะปิดเมื่อการเชื่อมต่อเดสก์ท็อปนี้ขาดหาย",
     "clientTunnelStarted": "เริ่มทันเนลไคลเอนต์แล้ว",
     "clientTunnelStopped": "หยุดทันเนลไคลเอนต์แล้ว",
+    "tunnelStarted": "Tunnel เริ่มทำงานแล้ว",
+    "tunnelStopped": "Tunnel หยุดทำงานแล้ว",
     "clientTunnels": "ทันเนลไคลเอนต์",
     "connected": "เชื่อมต่อแล้ว",
     "connecting": "กำลังเชื่อมต่อ...",
@@ -175,5 +177,9 @@
   },
   "common": {
     "delete": "ลบ"
+  },
+  "plugin": {
+    "name": "Tunnels",
+    "description": "SSH port forwarding ที่เชื่อมต่อใหม่ได้อัตโนมัติ รวมถึง client tunnels จากแอปเดสก์ท็อป"
   }
 }

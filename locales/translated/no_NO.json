@@ -84,6 +84,8 @@
     "clientRemoteServerNote": "Fjernvidereføring kan kreve AllowTcpForwarding og GatewayPorts på endepunktets SSH-tjener. Den fjerne porten lukkes når denne skrivebordsklienten kobles fra.",
     "clientTunnelStarted": "Klienttunnel startet",
     "clientTunnelStopped": "Klienttunnel stoppet",
+    "tunnelStarted": "Tunnelen startet",
+    "tunnelStopped": "Tunnelen stoppet",
     "clientTunnels": "Klienttunneler",
     "connected": "Tilkoblet",
     "connecting": "Kobler til...",
@@ -176,5 +178,9 @@
   },
   "common": {
     "delete": "Slett"
+  },
+  "plugin": {
+    "name": "Tunneler",
+    "description": "SSH-portviderekobling som kobler til på nytt automatisk, samt klienttunneler fra skrivebordsappen."
   }
 }

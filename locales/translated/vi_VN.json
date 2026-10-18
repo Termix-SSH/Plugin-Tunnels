@@ -83,6 +83,8 @@
     "clientRemoteServerNote": "Chuyển tiếp từ xa có thể yêu cầu AllowTcpForwarding và GatewayPorts trên máy chủ SSH điểm cuối. Cổng từ xa sẽ đóng khi máy tính để bàn này ngắt kết nối.",
     "clientTunnelStarted": "Đã khởi động đường hầm máy khách",
     "clientTunnelStopped": "Đã dừng đường hầm máy khách",
+    "tunnelStarted": "Đường hầm đã khởi động",
+    "tunnelStopped": "Đường hầm đã dừng",
     "clientTunnels": "Đường hầm máy khách",
     "connected": "Đã kết nối",
     "connecting": "Đang kết nối...",
@@ -175,5 +177,9 @@
   },
   "common": {
     "delete": "Xóa"
+  },
+  "plugin": {
+    "name": "Đường hầm",
+    "description": "Chuyển tiếp cổng SSH tự động kết nối lại, cùng với đường hầm máy khách từ ứng dụng máy tính để bàn."
   }
 }

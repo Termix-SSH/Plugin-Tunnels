@@ -85,6 +85,8 @@
     "clientRemoteServerNote": "Udaljeno preusmjeravanje može zahtijevati AllowTcpForwarding i GatewayPorts na SSH poslužitelju krajnje točke. Udaljeni port se zatvara kada se ova radna površina isključi.",
     "clientTunnelStarted": "Klijentski tunel pokrenut",
     "clientTunnelStopped": "Klijentski tunel zaustavljen",
+    "tunnelStarted": "Tunnel je pokrenut",
+    "tunnelStopped": "Tunnel je zaustavljen",
     "clientTunnels": "Klijentski tuneli",
     "connected": "Povezano",
     "connecting": "Povezivanje...",
@@ -177,5 +179,9 @@
   },
   "common": {
     "delete": "Obriši"
+  },
+  "plugin": {
+    "name": "Tuneli",
+    "description": "SSH preusmjeravanje portova koje se automatski ponovno povezuje, uz klijentske tunele iz desktop aplikacije."
   }
 }

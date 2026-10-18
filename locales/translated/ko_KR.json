@@ -83,6 +83,8 @@
     "clientRemoteServerNote": "원격 포워딩에는 엔드포인트 SSH 서버에서 AllowTcpForwarding 및 GatewayPorts 설정이 필요할 수 있습니다. 이 데스크톱이 연결 해제되면 원격 포트가 닫힙니다.",
     "clientTunnelStarted": "클라이언트 터널 시작됨",
     "clientTunnelStopped": "클라이언트 터널 중지됨",
+    "tunnelStarted": "터널 시작됨",
+    "tunnelStopped": "터널 중지됨",
     "clientTunnels": "클라이언트 터널",
     "connected": "연결됨",
     "connecting": "연결 중...",
@@ -175,5 +177,9 @@
   },
   "common": {
     "delete": "삭제"
+  },
+  "plugin": {
+    "name": "터널",
+    "description": "자동 재연결이 가능한 SSH 포트 포워딩과 데스크톱 앱의 클라이언트 터널을 제공합니다."
   }
 }

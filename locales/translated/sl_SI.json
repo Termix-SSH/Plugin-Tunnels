@@ -86,6 +86,8 @@
     "clientRemoteServerNote": "Oddaljeno posredovanje lahko zahteva AllowTcpForwarding in GatewayPorts na SSH strežniku končne točke. Oddaljeni port se zapre, ko se ta namizni odjemalec odklopi.",
     "clientTunnelStarted": "Tunel odjemalca je zagnan",
     "clientTunnelStopped": "Tunel odjemalca je ustavljen",
+    "tunnelStarted": "Tunel je zagnán",
+    "tunnelStopped": "Tunel je ustavljen",
     "clientTunnels": "Tuneli odjemalca",
     "connected": "Povezano",
     "connecting": "Povezujem...",
@@ -178,5 +180,9 @@
   },
   "common": {
     "delete": "Izbriši"
+  },
+  "plugin": {
+    "name": "Tuneli",
+    "description": "SSH posredovanje vrat, ki se samodejno ponovno poveže, ter odjemalski tuneli iz namizne aplikacije."
   }
 }

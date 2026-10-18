@@ -85,6 +85,8 @@
     "clientRemoteServerNote": "הפניה מרוחקת עשויה לדרוש AllowTcpForwarding ו-GatewayPorts בשרת SSH של הקצה. הפורט המרוחק נסגר כאשר שולחן העבודה הזה מתנתק.",
     "clientTunnelStarted": "מנהרת לקוח הופעלה",
     "clientTunnelStopped": "מנהרת לקוח הופסקה",
+    "tunnelStarted": "המנהרה הופעלה",
+    "tunnelStopped": "המנהרה הופסקה",
     "clientTunnels": "מנהרות לקוח",
     "connected": "מחובר",
     "connecting": "מתחבר...",
@@ -177,5 +179,9 @@
   },
   "common": {
     "delete": "מחק"
+  },
+  "plugin": {
+    "name": "מנהרות",
+    "description": "העברת פורטים דרך SSH שמחברת מחדש באופן אוטומטי, בנוסף למנהרות לקוח מהאפליקציה לשולחן העבודה."
   }
 }

@@ -88,6 +88,8 @@
     "clientRemoteServerNote": "قد يتطلب التوجيه البعيد تفعيل AllowTcpForwarding و GatewayPorts على خادم SSH النهائي. يُغلق المنفذ البعيد عند قطع اتصال سطح المكتب هذا.",
     "clientTunnelStarted": "بدأ نفق العميل",
     "clientTunnelStopped": "توقف نفق العميل",
+    "tunnelStarted": "تم بدء النفق",
+    "tunnelStopped": "تم إيقاف النفق",
     "clientTunnels": "أنفاق العميل",
     "connected": "متصل",
     "connecting": "جاري الاتصال...",
@@ -180,5 +182,9 @@
   },
   "common": {
     "delete": "حذف"
+  },
+  "plugin": {
+    "name": "الأنفاق",
+    "description": "إعادة توجيه منافذ SSH التي تعيد الاتصال تلقائيًا، بالإضافة إلى أنفاق العميل من تطبيق سطح المكتب."
   }
 }

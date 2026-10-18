@@ -84,6 +84,8 @@
     "clientRemoteServerNote": "Remote forwarding may require AllowTcpForwarding and GatewayPorts on the endpoint SSH server. The remote port closes when this desktop disconnects.",
     "clientTunnelStarted": "Client tunnel started",
     "clientTunnelStopped": "Client tunnel stopped",
+    "tunnelStarted": "Tunnel started",
+    "tunnelStopped": "Tunnel stopped",
     "clientTunnels": "Client Tunnels",
     "connected": "Connected",
     "connecting": "Connecting...",
@@ -176,5 +178,9 @@
   },
   "common": {
     "delete": "Delete"
+  },
+  "plugin": {
+    "name": "Tunnels",
+    "description": "SSH port forwarding that reconnects on its own, plus client tunnels from the desktop app."
   }
 }

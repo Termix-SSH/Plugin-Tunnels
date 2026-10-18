@@ -84,6 +84,8 @@
     "clientRemoteServerNote": "Remote-Weiterleitung erfordert möglicherweise AllowTcpForwarding und GatewayPorts auf dem Endpunkt-SSH-Server. Der Remote-Port wird geschlossen, wenn dieser Desktop getrennt wird.",
     "clientTunnelStarted": "Client-Tunnel gestartet",
     "clientTunnelStopped": "Client-Tunnel gestoppt",
+    "tunnelStarted": "Tunnel gestartet",
+    "tunnelStopped": "Tunnel gestoppt",
     "clientTunnels": "Client-Tunnel",
     "connected": "Verbunden",
     "connecting": "Verbinden...",
@@ -176,5 +178,9 @@
   },
   "common": {
     "delete": "Löschen"
+  },
+  "plugin": {
+    "name": "Tunnel",
+    "description": "SSH-Portweiterleitungen, die sich automatisch wieder verbinden, sowie Client-Tunnel aus der Desktop-App."
   }
 }

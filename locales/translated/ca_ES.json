@@ -85,6 +85,8 @@
     "clientRemoteServerNote": "La retransmissió remota pot requerir AllowTcpForwarding i GatewayPorts al servidor SSH de l'extrem. El port remot es tanca quan aquest escriptori es desconnecta.",
     "clientTunnelStarted": "Túnel del client iniciat",
     "clientTunnelStopped": "Túnel del client aturat",
+    "tunnelStarted": "Túnel iniciat",
+    "tunnelStopped": "Túnel aturat",
     "clientTunnels": "Túnels del client",
     "connected": "Connectat",
     "connecting": "Connectant...",
@@ -177,5 +179,9 @@
   },
   "common": {
     "delete": "Suprimeix"
+  },
+  "plugin": {
+    "name": "Túneles",
+    "description": "Encaminament de ports SSH que es reconnecta automàticament, a més de túnels de client des de l'aplicació d'escriptori."
   }
 }
