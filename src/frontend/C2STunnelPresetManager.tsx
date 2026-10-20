@@ -45,6 +45,17 @@ import {
   getC2STunnelPresets,
   updateC2STunnelPreset,
 } from "./api";
+import {
+  getLocalConfig,
+  getLocalPresetDefaultName,
+  getLocalStatuses,
+  localC2SAvailable,
+  onLocalStatuses,
+  saveLocalConfig as saveLocalTunnelConfig,
+  startLocalTunnel,
+  stopLocalTunnel,
+  testLocalTunnel,
+} from "./c2s-local-api";
 
 interface SshHostOption {
   id: number;
@@ -185,8 +196,7 @@ export function C2STunnelPresetManager(): React.ReactElement {
   const [selectedPresetId, setSelectedPresetId] = React.useState("");
   const [presetName, setPresetName] = React.useState("");
   const [openTunnels, setOpenTunnels] = React.useState<Set<number>>(new Set());
-  const isElectron =
-    typeof window !== "undefined" && window.electronAPI?.isElectron === true;
+  const isElectron = localC2SAvailable();
   const handleC2SRemoteAuthError = React.useCallback(
     (result: { code?: string; error?: string }) => {
       const error = result.error || "";
@@ -375,8 +385,8 @@ export function C2STunnelPresetManager(): React.ReactElement {
   const refreshLocalConfig = React.useCallback(async () => {
     if (!isElectron) return;
     const [config, defaultName] = await Promise.all([
-      window.electronAPI.getC2STunnelConfig(),
-      window.electronAPI.getC2STunnelPresetDefaultName(),
+      getLocalConfig(),
+      getLocalPresetDefaultName(),
     ]);
     const nextHosts = hostsRef.current;
     const normalizedConfig = Array.isArray(config)
@@ -414,14 +424,14 @@ export function C2STunnelPresetManager(): React.ReactElement {
   React.useEffect(() => {
     if (!isElectron) return;
     const refreshStatuses = async () => {
-      const statuses = await window.electronAPI.getC2STunnelStatuses();
+      const statuses = await getLocalStatuses();
       setTunnelStatuses(statuses as Record<string, TunnelStatus>);
     };
     refreshStatuses().catch(() => {});
-    const unsubscribe = window.electronAPI.onC2STunnelStatuses?.((statuses) => {
+    const unsubscribe = onLocalStatuses((statuses) => {
       setTunnelStatuses(statuses as Record<string, TunnelStatus>);
     });
-    return () => unsubscribe?.();
+    return () => unsubscribe();
   }, [isElectron]);
 
   React.useEffect(() => {
@@ -503,8 +513,7 @@ export function C2STunnelPresetManager(): React.ReactElement {
     );
     const validationError = validateLocalConfig(normalizedConfig);
     if (validationError) throw new Error(validationError);
-    const result =
-      await window.electronAPI.saveC2STunnelConfig(normalizedConfig);
+    const result = await saveLocalTunnelConfig(normalizedConfig);
     if (!result.success)
       throw new Error(result.error || t("tunnels.localSaveError"));
     setLocalConfig(normalizedConfig);
@@ -572,10 +581,7 @@ export function C2STunnelPresetManager(): React.ReactElement {
     }
     setTunnelTests((current) => ({ ...current, [tunnelName]: true }));
     try {
-      const result = await window.electronAPI.testC2STunnel(
-        normalizedTunnel,
-        index,
-      );
+      const result = await testLocalTunnel(normalizedTunnel, index);
       if (!result.success && handleC2SRemoteAuthError(result)) {
         return;
       }
@@ -609,16 +615,13 @@ export function C2STunnelPresetManager(): React.ReactElement {
     }
     setTunnelActions((current) => ({ ...current, [tunnelName]: true }));
     try {
-      const result = await window.electronAPI.startC2STunnel(
-        normalizedTunnel,
-        index,
-      );
+      const result = await startLocalTunnel(normalizedTunnel, index);
       if (!result.success && handleC2SRemoteAuthError(result)) {
         return;
       }
       if (!result.success)
         throw new Error(result.error || t("tunnels.manualControlError"));
-      const statuses = await window.electronAPI.getC2STunnelStatuses();
+      const statuses = await getLocalStatuses();
       setTunnelStatuses(statuses as Record<string, TunnelStatus>);
       setTunnelMetadata(index, {
         lastStartedAt: new Date().toISOString(),
@@ -641,10 +644,10 @@ export function C2STunnelPresetManager(): React.ReactElement {
     const tunnelName = getTunnelName(tunnel, index);
     setTunnelActions((current) => ({ ...current, [tunnelName]: true }));
     try {
-      const result = await window.electronAPI.stopC2STunnel(tunnelName);
+      const result = await stopLocalTunnel(tunnelName);
       if (!result.success)
         throw new Error(result.error || t("tunnels.manualControlError"));
-      const statuses = await window.electronAPI.getC2STunnelStatuses();
+      const statuses = await getLocalStatuses();
       setTunnelStatuses(statuses as Record<string, TunnelStatus>);
       toast.success(t("tunnels.clientTunnelStopped"));
     } catch (error) {

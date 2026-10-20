@@ -89,7 +89,10 @@ describe("both SSH legs go through ctx.ssh", () => {
     // The host key check lives in core's connect pipeline. A raw
     // `new Client()` here would skip it, which is the bug this plugin fixed.
     const dir = join(pluginDir, "src", "backend");
-    for (const file of readdirSync(dir)) {
+    const files = readdirSync(dir, { recursive: true }).filter((file) =>
+      String(file).endsWith(".ts"),
+    ) as string[];
+    for (const file of files) {
       const source = readFileSync(join(dir, file), "utf8");
       expect(source, file).not.toMatch(/new Client\(/);
       expect(source, file).not.toMatch(

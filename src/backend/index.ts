@@ -8,6 +8,7 @@ import { registerTunnelRoutes } from "./routes.js";
 import { createC2SRelay } from "./c2s-relay.js";
 import { createTunnelsService } from "./service.js";
 import { startAutoStartTunnels } from "./autostart.js";
+import { registerC2SLocal } from "./c2s-local/local.js";
 
 export type {
   TunnelsAccess,
@@ -26,7 +27,10 @@ export async function activate(ctx: PluginContext) {
   const manager = createTunnelManager(ctx);
   ctx.disposables.add(() => manager.dispose());
 
-  registerTunnelRoutes(ctx.http.router<Router>(), ctx, manager, repository);
+  const router = ctx.http.router<Router>();
+  registerTunnelRoutes(router, ctx, manager, repository);
+  // Client tunnels on this computer. Only the desktop app's own backend has them.
+  await registerC2SLocal(ctx, router);
 
   const relay = createC2SRelay(ctx);
   ctx.ws.route("/c2s/stream", (connection) =>

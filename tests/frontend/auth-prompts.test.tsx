@@ -8,32 +8,35 @@ import type { PluginManifest } from "@termix-ssh/plugin-sdk/manifest";
 import * as plugin from "../../src/frontend/index";
 import manifestJson from "../../manifest.json";
 import locales from "../../locales/en.json";
+const local = vi.hoisted(() => ({
+  receive: null as null | ((event: unknown) => void),
+  answer: vi.fn().mockResolvedValue(undefined),
+  unsubscribe: vi.fn(),
+}));
+vi.mock("../../src/frontend/c2s-local-api", () => ({
+  setLocalC2S: vi.fn(),
+  localC2SAvailable: () => true,
+  startLocalAutoStart: vi.fn().mockResolvedValue(undefined),
+  answerLocalAuth: local.answer,
+  onLocalAuthPrompt: (fn: (event: unknown) => void) => {
+    local.receive = fn;
+    return local.unsubscribe;
+  },
+}));
+
 let rendered: RenderedPluginApp | null = null;
-const original = window.electronAPI;
 afterEach(async () => {
   await act(async () => {
     await rendered?.deactivate();
   });
   rendered = null;
-  window.electronAPI = original;
+  local.answer.mockClear();
+  local.unsubscribe.mockClear();
 });
 
 describe("tunnel prompt overlay", () => {
   it("queues challenges, clears the previous code, and cancels on plugin disposal", async () => {
-    type Event = Parameters<
-      Parameters<typeof window.electronAPI.onC2SAuthPrompt>[0]
-    >[0];
-    let receive!: (event: Event) => void;
-    const answer = vi.fn().mockResolvedValue(true);
-    const unsubscribe = vi.fn();
-    window.electronAPI = {
-      ...original,
-      answerC2SAuth: answer,
-      onC2SAuthPrompt: (fn) => {
-        receive = fn;
-        return unsubscribe;
-      },
-    };
+    const receive = (event: unknown) => local.receive!(event);
     rendered = await renderWithApp(plugin, {
       manifest: manifestJson as unknown as PluginManifest,
       locales,
@@ -41,11 +44,13 @@ describe("tunnel prompt overlay", () => {
     rendered.renderSlot("shell.overlay");
     act(() => {
       receive({
+        type: "auth-prompt",
         id: "one",
         tunnelName: "SOCKS",
         request: { kind: "totp", prompt: "Code:", retry: false },
       });
       receive({
+        type: "auth-prompt",
         id: "two",
         tunnelName: "Other",
         request: { kind: "totp", prompt: "Code:", retry: true },
@@ -55,16 +60,17 @@ describe("tunnel prompt overlay", () => {
     expect(input.getAttribute("type")).toBe("password");
     fireEvent.change(input, { target: { value: "123456" } });
     fireEvent.click(screen.getByText("Continue"));
-    expect(answer).toHaveBeenCalledWith("one", "123456");
+    expect(local.answer).toHaveBeenCalledWith("one", "123456");
     expect(
       (screen.getByLabelText("Authentication response") as HTMLInputElement)
         .value,
     ).toBe("");
     expect(screen.getByRole("alert").textContent).toContain("previous code");
-    act(() => receive({ id: "two", closed: true }));
+    act(() => receive({ type: "auth-prompt-closed", id: "two" }));
     expect(screen.queryByRole("dialog")).toBeNull();
     act(() =>
       receive({
+        type: "auth-prompt",
         id: "three",
         request: {
           kind: "input",
@@ -78,7 +84,7 @@ describe("tunnel prompt overlay", () => {
       await rendered!.deactivate();
     });
     rendered = null;
-    expect(answer).toHaveBeenCalledWith("three", null);
-    expect(unsubscribe).toHaveBeenCalledOnce();
+    expect(local.answer).toHaveBeenCalledWith("three", null);
+    expect(local.unsubscribe).toHaveBeenCalledOnce();
   });
 });

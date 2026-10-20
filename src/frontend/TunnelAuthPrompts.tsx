@@ -2,6 +2,11 @@ import { useEffect, useRef, useState } from "react";
 import type { PluginSshPromptRequest } from "@termix-ssh/plugin-sdk/backend";
 import { useTranslation } from "@termix-ssh/plugin-sdk/frontend";
 import {
+  answerLocalAuth,
+  localC2SAvailable,
+  onLocalAuthPrompt,
+} from "./c2s-local-api";
+import {
   Button,
   Dialog,
   DialogContent,
@@ -21,20 +26,26 @@ export function TunnelAuthPrompts() {
   const pending = useRef(new Set<string>());
   useEffect(() => {
     const active = pending.current;
-    const api = window.electronAPI;
-    if (!api?.onC2SAuthPrompt) return;
-    const dispose = api.onC2SAuthPrompt((event) => {
-      if (event.closed) {
+    if (!localC2SAvailable()) return;
+    const dispose = onLocalAuthPrompt((event) => {
+      if (event.type === "auth-prompt-closed") {
         active.delete(event.id);
         setQueue((items) => items.filter((item) => item.id !== event.id));
-      } else if (event.request && !active.has(event.id)) {
+      } else if (!active.has(event.id)) {
         active.add(event.id);
-        setQueue((items) => [...items, { ...event, request: event.request! }]);
+        setQueue((items) => [
+          ...items,
+          {
+            id: event.id,
+            tunnelName: event.tunnelName,
+            request: event.request,
+          },
+        ]);
       }
     });
     return () => {
       dispose();
-      for (const id of active) void api.answerC2SAuth(id, null);
+      for (const id of active) void answerLocalAuth(id, null).catch(() => {});
       active.clear();
     };
   }, []);
@@ -46,7 +57,7 @@ export function TunnelAuthPrompts() {
       onAnswer={(answer) => {
         pending.current.delete(current.id);
         setQueue((items) => items.filter((item) => item.id !== current.id));
-        void window.electronAPI.answerC2SAuth(current.id, answer);
+        void answerLocalAuth(current.id, answer).catch(() => {});
       }}
     />
   ) : null;

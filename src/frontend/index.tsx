@@ -11,6 +11,11 @@ import {
   TunnelWidgetEditForm,
 } from "./views";
 import { setTunnelsApi } from "./api";
+import {
+  localC2SAvailable,
+  setLocalC2S,
+  startLocalAutoStart,
+} from "./c2s-local-api";
 import { ActiveTunnelsCounter } from "./ActiveTunnelsCounter";
 import { hostTunnelSettings } from "./host-tunnels";
 
@@ -21,13 +26,11 @@ function TunnelTabView({ host }: TabProps) {
   return <TunnelTab host={host} />;
 }
 
-/** This plugin's C2S relay socket, which the desktop app dials on the linked server. */
-const C2S_RELAY_PATH = "/plugin-ws/tunnels/c2s/stream";
-
 export function activate(app: TermixApp): void {
-  if (typeof window !== "undefined" && window.electronAPI?.setC2SRelayPath) {
-    void window.electronAPI.setC2SRelayPath(C2S_RELAY_PATH);
-  }
+  setLocalC2S(app);
+  app.onDispose(() => setLocalC2S(null));
+  // Starts the client tunnels set to start on their own, in the desktop app.
+  if (localC2SAvailable()) void startLocalAutoStart().catch(() => {});
   app.registerSlotContribution("shell.overlay", {
     actionId: "tunnels.authPrompts",
     titleKey: "tunnels.authTitle",

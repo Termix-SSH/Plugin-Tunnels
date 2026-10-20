@@ -1,7 +1,7 @@
 {
   "id": "tunnels",
   "name": "Tunnels",
-  "version": "1.0.3",
+  "version": "1.1.0",
   "description": "SSH port forwarding that reconnects on its own, plus client tunnels from the desktop app.",
   "author": {
     "name": "Termix"
@@ -20,8 +20,8 @@
     "Client tunnels on your own computer from the desktop app, with presets you can save to the server"
   ],
   "engine": {
-    "termix": ">=26.10.0",
-    "api": "^1.2"
+    "termix": ">=26.10.3",
+    "api": "^1.5"
   },
   "capabilities": [
     "hosts:read",
@@ -31,7 +31,8 @@
     "network:serve",
     "ui:surface",
     "users:impersonate",
-    "db:core-refs"
+    "db:core-refs",
+    "desktop:local"
   ],
   "provides": [
     {
