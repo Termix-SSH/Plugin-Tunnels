@@ -4,6 +4,7 @@ import { afterEach, describe, expect, it, vi } from "vitest";
 import { createMockCtx } from "@termix-ssh/plugin-sdk/testing";
 import { createTunnelManager } from "../../src/backend/manager.js";
 import { startAutoStartTunnels } from "../../src/backend/autostart.js";
+import type { SavedTunnelStore } from "../../src/backend/saved-store.js";
 import { host, manifest, withHosts } from "./helpers";
 
 class FakeClient extends EventEmitter {
@@ -29,6 +30,18 @@ const tunnel = (autoStart: boolean, sourcePort: number) => ({
   autoStart,
 });
 
+function fakeStore(
+  rows: Array<{ hostId: number; userId: string; connections: unknown[] }>,
+  fail = false,
+) {
+  return {
+    listAll: async () => {
+      if (fail) throw new Error("no database");
+      return rows;
+    },
+  } as unknown as SavedTunnelStore;
+}
+
 describe("autostart", () => {
   it("starts only autostart tunnels on enabled hosts, as each host's owner", async () => {
     const mock = createMockCtx({
@@ -42,18 +55,21 @@ describe("autostart", () => {
       "user-2": [host({ id: 8, userId: "user-2", name: "db" })],
     });
     await mock.ctx.settings.setHost(7, "enableTunnel", true);
-    await mock.ctx.settings.setHost(7, "tunnelConnections", [
-      tunnel(true, 0),
-      tunnel(false, 0),
-    ]);
     await mock.ctx.settings.setHost(8, "enableTunnel", false);
-    await mock.ctx.settings.setHost(8, "tunnelConnections", [tunnel(true, 0)]);
     manager = createTunnelManager(mock.ctx);
 
-    const started = await startAutoStartTunnels(mock.ctx, manager, async () => [
-      { id: 7, userId: "user-1" },
-      { id: 8, userId: "user-2" },
-    ]);
+    const started = await startAutoStartTunnels(
+      mock.ctx,
+      manager,
+      fakeStore([
+        {
+          hostId: 7,
+          userId: "user-1",
+          connections: [tunnel(true, 0), tunnel(false, 0)],
+        },
+        { hostId: 8, userId: "user-2", connections: [tunnel(true, 0)] },
+      ]),
+    );
 
     expect(started).toBe(1);
     expect([...manager.configs.keys()]).toEqual(["7::0::web::0::127.0.0.1::9"]);
@@ -62,7 +78,7 @@ describe("autostart", () => {
     ).toBe("user-1");
   });
 
-  it("does nothing when the host list cannot be read", async () => {
+  it("does nothing when the saved tunnels cannot be read", async () => {
     const mock = createMockCtx({
       pluginId: manifest.id,
       manifest,
@@ -70,9 +86,7 @@ describe("autostart", () => {
     });
     manager = createTunnelManager(mock.ctx);
     await expect(
-      startAutoStartTunnels(mock.ctx, manager, async () => {
-        throw new Error("no database");
-      }),
+      startAutoStartTunnels(mock.ctx, manager, fakeStore([], true)),
     ).resolves.toBe(0);
   });
 });

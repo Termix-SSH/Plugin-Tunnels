@@ -11,8 +11,8 @@ import {
   Select2,
 } from "@termix-ssh/plugin-sdk/ui";
 import { TunnelTab } from "./TunnelTab";
+import { hostTunnelsEnabled } from "./host-tunnels";
 import { C2STunnelPresetManager } from "./C2STunnelPresetManager";
-import { hostTunnelSettings } from "./host-tunnels";
 
 /** The `?view=tunnel` full-screen page for one host. */
 export function TunnelStandalone({ hostId }: StandaloneViewProps) {
@@ -87,7 +87,7 @@ export function TunnelWidget({
   const host = hosts.find(
     (candidate) =>
       String(candidate.id) === String(config.hostId) &&
-      hostTunnelSettings(candidate).enabled,
+      hostTunnelsEnabled(candidate),
   );
   if (!host) return placeholder(t("common.noHostConfigured"));
 
@@ -124,7 +124,7 @@ export function TunnelWidgetEditForm({
   const { t } = useTranslation();
   const { hosts } = useHosts();
   const options = hosts.filter(
-    (host) => host.enableSsh !== false && hostTunnelSettings(host).enabled,
+    (host) => host.enableSsh !== false && hostTunnelsEnabled(host),
   );
 
   return (

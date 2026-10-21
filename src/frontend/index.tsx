@@ -3,6 +3,8 @@ import { Network } from "lucide-react";
 import type { TabProps, TermixApp } from "@termix-ssh/plugin-sdk/frontend";
 import { TunnelAuthPrompts } from "./TunnelAuthPrompts";
 import { TunnelTab } from "./TunnelTab";
+import { hostTunnelsEnabled } from "./host-tunnels";
+import { TunnelsHome } from "./TunnelsHome";
 import { HostTunnelsSection } from "./HostTunnelsSection";
 import {
   PortForwardingPanel,
@@ -17,13 +19,12 @@ import {
   startLocalAutoStart,
 } from "./c2s-local-api";
 import { ActiveTunnelsCounter } from "./ActiveTunnelsCounter";
-import { hostTunnelSettings } from "./host-tunnels";
 
 // Matches the homepage canvas grid.
 const GRID_SIZE = 30;
 
 function TunnelTabView({ host }: TabProps) {
-  return <TunnelTab host={host} />;
+  return <TunnelsHome host={host} />;
 }
 
 export function activate(app: TermixApp): void {
@@ -64,8 +65,7 @@ export function activate(app: TermixApp): void {
     order: 40,
     tabType: "tunnel",
     copyUrlView: "tunnel",
-    when: (host) =>
-      host.enableSsh !== false && hostTunnelSettings(host).enabled,
+    when: (host) => host.enableSsh !== false && hostTunnelsEnabled(host),
   });
 
   app.registerHostEditorSection({
@@ -78,6 +78,16 @@ export function activate(app: TermixApp): void {
   });
 
   app.registerPanel("port-forwarding", PortForwardingPanel);
+  // The Tunnels tab itself: SSH tunnels and gateways.
+  app.registerRailItem({
+    id: "tunnel",
+    icon: Network,
+    titleKey: "nav.tunnels",
+    kind: "tab",
+    group: "tools",
+    after: "credentials",
+    permission: "use",
+  });
   app.registerRailItem({
     id: "port-forwarding",
     icon: Network,

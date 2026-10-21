@@ -1,9 +1,10 @@
-import { useEffect, useState } from "react";
+import { useEffect, useState, type ReactNode } from "react";
 import {
   AlertCircle,
   Clock,
   ExternalLink,
   Network,
+  Pencil,
   Play,
   RefreshCw,
   Settings,
@@ -15,18 +16,25 @@ import {
   logActivity,
   useHost,
   useHosts,
+  usePluginPanelView,
   useToast,
   useTranslation,
   type PluginHostRecord,
 } from "@termix-ssh/plugin-sdk/frontend";
 import {
   Button,
+  AddButton,
   Card,
+  DataView,
   EmptyState,
   GroupHeading,
   PanelSearch,
   PanelShell,
   Segmented,
+  InlineView,
+  ListRow,
+  ViewToggle,
+  type DataColumn,
 } from "@termix-ssh/plugin-sdk/ui";
 import type { TunnelConnection, TunnelStatus } from "../shared/types";
 import { serverTunnelName, tunnelHostLabel } from "../shared/tunnel-naming";
@@ -39,10 +47,15 @@ import {
 } from "./api";
 import {
   connectRequestFor,
-  hostTunnelSettings,
+  hostTunnelsEnabled,
   tunnelMode,
 } from "./host-tunnels";
+import { useSavedTunnels } from "./saved-tunnels";
+import { TunnelEditorView } from "./TunnelEditorView";
 import { docsUrl } from "./docs";
+
+// The orange add button with a light orange fill, used for every add action.
+export const ADD_CLASS = "bg-accent-brand/10 dark:bg-accent-brand/10";
 
 type StatusLabel =
   "CONNECTED" | "CONNECTING" | "ERROR" | "WAITING" | "DISCONNECTED";
@@ -70,12 +83,14 @@ function TunnelCard({
   status,
   isActing,
   onAction,
+  onEdit,
 }: {
   host: PluginHostRecord;
   tunnel: TunnelConnection;
   status: TunnelStatus | undefined;
   isActing: boolean;
   onAction: (action: "connect" | "disconnect" | "cancel") => void;
+  onEdit: () => void;
 }) {
   const { t } = useTranslation();
   const [showSettings, setShowSettings] = useState(false);
@@ -239,6 +254,15 @@ function TunnelCard({
             </Button>
           )}
           <Button
+            variant="ghost"
+            size="icon"
+            className="h-8 w-8 text-muted-foreground hover:text-foreground"
+            title={t("tunnels.edit")}
+            onClick={onEdit}
+          >
+            <Pencil className="size-3.5" />
+          </Button>
+          <Button
             variant={showSettings ? "secondary" : "ghost"}
             size="icon"
             className={`h-8 w-8 ${showSettings ? "bg-accent-brand/10 text-accent-brand" : "text-muted-foreground hover:text-foreground"}`}
@@ -260,8 +284,11 @@ interface TunnelEntry {
   name: string;
 }
 
-function tunnelEntries(host: PluginHostRecord): TunnelEntry[] {
-  return hostTunnelSettings(host).connections.map((tunnel, index) => ({
+function tunnelEntries(
+  host: PluginHostRecord,
+  saved: Map<number, TunnelConnection[]>,
+): TunnelEntry[] {
+  return (saved.get(Number(host.id)) ?? []).map((tunnel, index) => ({
     host,
     tunnel,
     index,
@@ -273,7 +300,14 @@ function tunnelEntries(host: PluginHostRecord): TunnelEntry[] {
  * One host's tunnels, or with no host (the dashboard's counter) every host
  * that has tunnels, grouped by host.
  */
-export function TunnelTab({ host: given }: { host?: PluginHostRecord }) {
+export function TunnelTab({
+  host: given,
+  switcher,
+}: {
+  host?: PluginHostRecord;
+  /** The SSH tunnels | Gateways switch, shown first in the toolbar. */
+  switcher?: ReactNode;
+}) {
   const { t } = useTranslation();
   const toast = useToast();
   const live = useHost(given?.id);
@@ -296,9 +330,22 @@ export function TunnelTab({ host: given }: { host?: PluginHostRecord }) {
     logActivity("tunnel", hostId, hostLabel).catch(() => {});
   }, [hostId]); // eslint-disable-line react-hooks/exhaustive-deps
 
+  const saved = useSavedTunnels();
+  const [editing, setEditing] = useState<{
+    host: PluginHostRecord;
+    index: number | null;
+  } | null>(null);
+  const { view, density, setView, setDensity } = usePluginPanelView();
+  const [picking, setPicking] = useState(false);
+
   const entries: TunnelEntry[] = host
-    ? tunnelEntries(host)
-    : hosts.filter((h) => hostTunnelSettings(h).enabled).flatMap(tunnelEntries);
+    ? tunnelEntries(host, saved.byHost)
+    : hosts
+        .filter(hostTunnelsEnabled)
+        .flatMap((h) => tunnelEntries(h, saved.byHost));
+  const sshHosts = hosts.filter(
+    (h) => h.enableSsh !== false && hostTunnelsEnabled(h),
+  );
   const connectedCount = entries.filter(
     (entry) => statuses[entry.name]?.status === "connected",
   ).length;
@@ -353,6 +400,128 @@ export function TunnelTab({ host: given }: { host?: PluginHostRecord }) {
     groups.set(String(entry.host.id), list);
   }
 
+  const listColumns: DataColumn<TunnelEntry>[] = [
+    {
+      key: "port",
+      header: t("tunnels.listPort"),
+      width: "minmax(0,1fr)",
+      cell: (entry) => (
+        <span className="truncate font-mono font-semibold">
+          {entry.tunnel.sourcePort}
+        </span>
+      ),
+    },
+    ...(host
+      ? []
+      : [
+          {
+            key: "host",
+            header: t("tunnels.listHost"),
+            width: "minmax(0,1.2fr)",
+            hideBelow: "md" as const,
+            cell: (entry: TunnelEntry) => (
+              <span className="truncate">{entry.host.name}</span>
+            ),
+          },
+        ]),
+    {
+      key: "mode",
+      header: t("tunnels.listMode"),
+      width: "80px",
+      hideBelow: "md",
+      cell: (entry) => (
+        <span className="uppercase text-muted-foreground">
+          {tunnelMode(entry.tunnel)}
+        </span>
+      ),
+    },
+    {
+      key: "destination",
+      header: t("tunnels.listDestination"),
+      width: "minmax(0,2fr)",
+      cell: (entry) => (
+        <span className="truncate font-mono text-muted-foreground">
+          {tunnelMode(entry.tunnel) === "dynamic"
+            ? t("tunnels.socksProxy")
+            : `${entry.tunnel.endpointHost ?? ""}:${entry.tunnel.endpointPort}`}
+        </span>
+      ),
+    },
+    {
+      key: "status",
+      header: t("tunnels.listStatus"),
+      width: "110px",
+      cell: (entry) => {
+        const label = statusLabel(statuses[entry.name]);
+        const tone =
+          label === "CONNECTED"
+            ? "text-accent-brand"
+            : label === "ERROR"
+              ? "text-destructive"
+              : label === "DISCONNECTED"
+                ? "text-muted-foreground"
+                : "text-warning";
+        return (
+          <span className={`truncate font-semibold ${tone}`}>
+            {t(STATUS_TEXT_KEYS[label])}
+          </span>
+        );
+      },
+    },
+    {
+      key: "actions",
+      header: "",
+      width: "76px",
+      align: "end",
+      cell: (entry) => {
+        const label = statusLabel(statuses[entry.name]);
+        const running = label === "CONNECTED";
+        const waiting = label === "CONNECTING" || label === "WAITING";
+        return (
+          <span
+            className="flex items-center justify-end gap-0.5"
+            onClick={(e) => e.stopPropagation()}
+          >
+            <Button
+              variant="ghost"
+              size="icon-xs"
+              disabled={acting[entry.name]}
+              title={
+                running
+                  ? t("tunnels.stop")
+                  : waiting
+                    ? t("tunnels.cancel")
+                    : t("tunnels.start")
+              }
+              onClick={() =>
+                void handleAction(
+                  running ? "disconnect" : waiting ? "cancel" : "connect",
+                  entry,
+                )
+              }
+            >
+              {running || waiting ? (
+                <Square className="size-3" />
+              ) : (
+                <Play className="size-3" />
+              )}
+            </Button>
+            <Button
+              variant="ghost"
+              size="icon-xs"
+              title={t("tunnels.edit")}
+              onClick={() =>
+                setEditing({ host: entry.host, index: entry.index })
+              }
+            >
+              <Pencil className="size-3" />
+            </Button>
+          </span>
+        );
+      },
+    },
+  ];
+
   const card = (entry: TunnelEntry) => (
     <TunnelCard
       key={entry.name}
@@ -361,6 +530,7 @@ export function TunnelTab({ host: given }: { host?: PluginHostRecord }) {
       status={statuses[entry.name]}
       isActing={acting[entry.name] ?? false}
       onAction={(action) => handleAction(action, entry)}
+      onEdit={() => setEditing({ host: entry.host, index: entry.index })}
     />
   );
 
@@ -373,39 +543,65 @@ export function TunnelTab({ host: given }: { host?: PluginHostRecord }) {
         total: entries.length,
       })}
       actions={
-        <a
-          href={docsUrl()}
-          target="_blank"
-          rel="noreferrer"
-          className="flex size-8 items-center justify-center text-muted-foreground transition-colors hover:text-foreground"
-          title={t("hosts.docsLink")}
-        >
-          <ExternalLink className="size-4" />
-        </a>
+        <>
+          <AddButton
+            label={t("tunnels.addTunnel")}
+            className={ADD_CLASS}
+            onClick={() => {
+              if (host) setEditing({ host, index: null });
+              else if (sshHosts.length === 1)
+                setEditing({ host: sshHosts[0], index: null });
+              else setPicking(true);
+            }}
+            disabled={sshHosts.length === 0 && !host}
+          />
+          <a
+            href={docsUrl()}
+            target="_blank"
+            rel="noreferrer"
+            className="flex size-8 items-center justify-center text-muted-foreground transition-colors hover:text-foreground"
+            title={t("hosts.docsLink")}
+          >
+            <ExternalLink className="size-4" />
+          </a>
+        </>
       }
       toolbar={
-        entries.length > 0 ? (
+        entries.length > 0 || switcher ? (
           <>
-            <PanelSearch
-              value={query}
-              onChange={setQuery}
-              placeholder={t("tunnels.search")}
-            />
-            <Segmented<"all" | "connected" | "stopped">
-              value={stateFilter}
-              onChange={setStateFilter}
-              options={[
-                { value: "all", label: t("tunnels.filterAll") },
-                { value: "connected", label: t("tunnels.connected") },
-                { value: "stopped", label: t("tunnels.filterStopped") },
-              ]}
-            />
-            <span className="ml-auto text-[11px] tabular-nums text-muted-foreground">
-              {t("tunnels.shownCount", {
-                shown: visible.length,
-                total: entries.length,
-              })}
-            </span>
+            {switcher}
+            {entries.length > 0 && (
+              <>
+                <PanelSearch
+                  value={query}
+                  onChange={setQuery}
+                  placeholder={t("tunnels.search")}
+                />
+                <Segmented<"all" | "connected" | "stopped">
+                  value={stateFilter}
+                  onChange={setStateFilter}
+                  options={[
+                    { value: "all", label: t("tunnels.filterAll") },
+                    { value: "connected", label: t("tunnels.connected") },
+                    { value: "stopped", label: t("tunnels.filterStopped") },
+                  ]}
+                />
+                <div className="ml-auto flex items-center gap-2">
+                  <span className="text-[11px] tabular-nums text-muted-foreground">
+                    {t("tunnels.shownCount", {
+                      shown: visible.length,
+                      total: entries.length,
+                    })}
+                  </span>
+                  <ViewToggle
+                    view={view}
+                    onView={setView}
+                    density={density}
+                    onDensity={setDensity}
+                  />
+                </div>
+              </>
+            )}
           </>
         ) : undefined
       }
@@ -420,10 +616,27 @@ export function TunnelTab({ host: given }: { host?: PluginHostRecord }) {
         />
       ) : visible.length === 0 ? (
         <EmptyState icon={Network} title={t("tunnels.noMatches")} />
+      ) : view === "list" ? (
+        <DataView
+          items={visible}
+          view="list"
+          density={density}
+          getKey={(entry) => entry.name}
+          renderCard={card}
+          columns={{ base: 1 }}
+          listColumns={listColumns}
+          empty={<EmptyState icon={Network} title={t("tunnels.noMatches")} />}
+        />
       ) : host ? (
-        <div className="grid grid-cols-1 gap-2 md:grid-cols-2 lg:grid-cols-3">
-          {visible.map(card)}
-        </div>
+        <DataView
+          items={visible}
+          view="grid"
+          getKey={(entry) => entry.name}
+          renderCard={card}
+          columns={{ base: 1, md: 2, lg: 3 }}
+          listColumns={listColumns}
+          empty={<EmptyState icon={Network} title={t("tunnels.noMatches")} />}
+        />
       ) : (
         [...groups.values()].map((group) => (
           <div key={group[0].host.id} className="flex flex-col gap-2">
@@ -437,6 +650,42 @@ export function TunnelTab({ host: given }: { host?: PluginHostRecord }) {
             </div>
           </div>
         ))
+      )}
+      {picking && (
+        <InlineView
+          open
+          onOpenChange={(open) => {
+            if (!open) setPicking(false);
+          }}
+          title={t("tunnels.pickHost")}
+          icon={<Network className="size-4" />}
+        >
+          <div className="flex flex-col gap-1 p-3">
+            {sshHosts.map((h) => (
+              <ListRow
+                key={h.id}
+                icon={<Network className="size-4" />}
+                title={h.name || h.ip}
+                meta={h.ip}
+                onClick={() => {
+                  setPicking(false);
+                  setEditing({ host: h, index: null });
+                }}
+              />
+            ))}
+          </div>
+        </InlineView>
+      )}
+      {editing && (
+        <TunnelEditorView
+          host={editing.host}
+          all={saved.byHost.get(Number(editing.host.id)) ?? []}
+          index={editing.index}
+          onSave={(connections) =>
+            saved.save(Number(editing.host.id), connections)
+          }
+          onClose={() => setEditing(null)}
+        />
       )}
     </PanelShell>
   );

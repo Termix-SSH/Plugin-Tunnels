@@ -86,3 +86,74 @@ export interface C2STunnelPreset {
   createdAt: string;
   updatedAt: string;
 }
+
+/** One host's saved server tunnels. */
+export interface SavedHostTunnels {
+  hostId: number;
+  connections: TunnelConnection[];
+}
+
+export type GatewayState =
+  | "pending"
+  | "applying"
+  | "up"
+  | "no_handshake"
+  | "rules_missing"
+  | "down"
+  | "unreachable"
+  | "error";
+
+export type GatewayProto = "tcp" | "udp" | "both";
+
+export interface GatewayPort {
+  id: number;
+  gatewayId: number;
+  proto: GatewayProto;
+  publicPort: number;
+  /** Empty means the private host itself. */
+  targetHost: string;
+  targetPort: number;
+  label: string;
+  source: "manual" | "scan";
+  sourceHostId: number | null;
+  enabled: boolean;
+}
+
+export interface GatewayPortStatus {
+  listening?: boolean;
+  reachable?: boolean;
+}
+
+export interface Gateway {
+  id: number;
+  name: string;
+  privateHostId: number;
+  publicHostId: number;
+  endpoint: string;
+  listenPort: number;
+  scanEnabled: boolean;
+  scanInterval: number;
+  autoEnable: boolean;
+  scanGuests: boolean;
+  sourceHostIds: number[];
+  ignoredPorts: number[];
+  publicIp: string;
+  privateIp: string;
+  ports: GatewayPort[];
+  status: {
+    state: GatewayState;
+    message: string | null;
+    handshakeAge: number | null;
+    checkedAt: string | null;
+    lastScanAt: string | null;
+    ports: Record<number, GatewayPortStatus>;
+  };
+}
+
+export interface GatewayPreflight {
+  root: boolean;
+  wireguard: boolean;
+  nftables: boolean;
+  systemd: boolean;
+  packageManager: "apt" | "dnf" | "yum" | "pacman" | null;
+}

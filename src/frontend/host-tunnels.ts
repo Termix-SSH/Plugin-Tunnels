@@ -1,19 +1,15 @@
-import type { PluginHostRecord } from "@termix-ssh/plugin-sdk/frontend";
 import type { TunnelConnectRequest, TunnelConnection } from "../shared/types";
+import type { PluginHostRecord } from "@termix-ssh/plugin-sdk/frontend";
 import { serverTunnelName } from "../shared/tunnel-naming";
 
-/** A host's tunnel settings, as the host payload's pluginSettings carries them. */
-export function hostTunnelSettings(host: PluginHostRecord | null | undefined): {
-  enabled: boolean;
-  connections: TunnelConnection[];
-} {
+/** Whether tunnels are turned on for a host, as its pluginSettings carry it. */
+export function hostTunnelsEnabled(
+  host: PluginHostRecord | null | undefined,
+): boolean {
   const settings = (
     host?.pluginSettings as Record<string, Record<string, unknown>> | undefined
   )?.tunnels;
-  return {
-    enabled: settings?.enableTunnel === true,
-    connections: parseConnections(settings?.tunnelConnections),
-  };
+  return settings?.enableTunnel === true;
 }
 
 export function parseConnections(value: unknown): TunnelConnection[] {

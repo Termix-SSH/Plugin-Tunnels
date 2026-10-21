@@ -10,6 +10,7 @@ import {
   createTunnelsService,
   type TunnelsAccess,
 } from "../../src/backend/service.js";
+import type { SavedTunnelStore } from "../../src/backend/saved-store.js";
 import { host, manifest, withHosts } from "./helpers";
 
 class FakeClient extends EventEmitter {
@@ -43,6 +44,7 @@ function setup(): {
   mock: MockPluginContext;
   client: FakeClient;
   service: TunnelsAccess;
+  saved: Map<number, unknown[]>;
 } {
   const client = new FakeClient();
   const mock = createMockCtx({
@@ -54,7 +56,20 @@ function setup(): {
   });
   withHosts(mock, { "user-1": [host()], "user-2": [] });
   manager = createTunnelManager(mock.ctx);
-  return { mock, client, service: createTunnelsService(mock.ctx, manager) };
+  const saved = new Map<number, unknown[]>();
+  const store = {
+    get: async (hostId: number) => ({
+      hostId,
+      userId: "user-1",
+      connections: saved.get(hostId) ?? [],
+    }),
+  } as unknown as SavedTunnelStore;
+  return {
+    mock,
+    client,
+    saved,
+    service: createTunnelsService(mock.ctx, manager, store),
+  };
 }
 
 const target = { targetHost: "127.0.0.1", targetPort: 8006 };
@@ -132,9 +147,9 @@ describe("tunnels.access start/stop/status", () => {
   const name = "7::0::web::0::127.0.0.1::9";
 
   it("starts a host's saved tunnel by name and stops it again", async () => {
-    const { service, mock } = setup();
+    const { service, saved: store, mock } = setup();
     await mock.ctx.settings.setHost(7, "enableTunnel", true);
-    await mock.ctx.settings.setHost(7, "tunnelConnections", [saved]);
+    store.set(7, [saved]);
 
     await service.start(name);
     await vi.waitFor(async () =>
@@ -147,18 +162,18 @@ describe("tunnels.access start/stop/status", () => {
   });
 
   it("refuses a name that matches no saved tunnel", async () => {
-    const { service, mock } = setup();
+    const { service, saved: store, mock } = setup();
     await mock.ctx.settings.setHost(7, "enableTunnel", false);
-    await mock.ctx.settings.setHost(7, "tunnelConnections", [saved]);
+    store.set(7, [saved]);
 
     await expect(service.start(name)).rejects.toThrow(/not configured/);
     await expect(service.start("nope")).rejects.toThrow(/not configured/);
   });
 
   it("hides a tunnel from a user who cannot reach its host", async () => {
-    const { service, mock } = setup();
+    const { service, mock, saved: store } = setup();
     await mock.ctx.settings.setHost(7, "enableTunnel", true);
-    await mock.ctx.settings.setHost(7, "tunnelConnections", [saved]);
+    store.set(7, [saved]);
     await service.start(name);
     // The fake context tracks one actor globally, so let the connect settle
     // before switching users.

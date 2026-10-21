@@ -30,6 +30,8 @@ Read the [docs](https://docs.termix.site/plugins/tunnels) to set it up and use i
 - Reconnects on its own when a tunnel drops
 - Start tunnels on boot
 - Route a tunnel through a second host
+- WireGuard gateways that forward public ports to services on a private host
+- Finds listening ports on its own, with a switch for each one
 - Client tunnels on your own computer from the desktop app, with presets you can save to the server
 
 <br />

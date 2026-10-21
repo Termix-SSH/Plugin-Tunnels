@@ -1,6 +1,11 @@
 import type { PluginApiClient } from "@termix-ssh/plugin-sdk/frontend";
 import type {
   C2STunnelPreset,
+  Gateway,
+  GatewayPort,
+  GatewayPreflight,
+  GatewayProto,
+  SavedHostTunnels,
   TunnelConnectRequest,
   TunnelConnection,
   TunnelStatus,
@@ -287,4 +292,120 @@ export async function updateC2STunnelPreset(
 
 export async function deleteC2STunnelPreset(id: number): Promise<void> {
   await api().delete(`/presets/${id}`);
+}
+
+export async function getSavedTunnels(): Promise<SavedHostTunnels[]> {
+  const response = await api().get<SavedHostTunnels[]>("/saved");
+  return response.data || [];
+}
+
+export async function saveHostTunnels(
+  hostId: number,
+  connections: TunnelConnection[],
+): Promise<void> {
+  await api().put(`/saved/${hostId}`, { connections });
+}
+
+export async function listGateways(): Promise<Gateway[]> {
+  const response = await api().get<Gateway[]>("/gateways");
+  return response.data || [];
+}
+
+export async function preflightHost(hostId: number): Promise<GatewayPreflight> {
+  const response = await api().post<GatewayPreflight>("/gateways/preflight", {
+    hostId,
+  });
+  return response.data;
+}
+
+export async function installGatewayPackages(hostId: number): Promise<void> {
+  await api().post("/gateways/install", { hostId });
+}
+
+export async function createGateway(input: {
+  name: string;
+  privateHostId: number;
+  publicHostId: number;
+  endpoint: string;
+  listenPort?: number;
+}): Promise<Gateway> {
+  const response = await api().post<Gateway>("/gateways", input);
+  return response.data;
+}
+
+export async function updateGateway(
+  id: number,
+  input: Partial<{
+    name: string;
+    endpoint: string;
+    listenPort: number;
+    scanEnabled: boolean;
+    scanInterval: number;
+    autoEnable: boolean;
+    scanGuests: boolean;
+    sourceHostIds: number[];
+    ignoredPorts: number[];
+  }>,
+): Promise<Gateway> {
+  const response = await api().patch<Gateway>(`/gateways/${id}`, input);
+  return response.data;
+}
+
+export async function deleteGateway(id: number): Promise<void> {
+  await api().delete(`/gateways/${id}`);
+}
+
+export async function applyGateway(id: number): Promise<Gateway> {
+  const response = await api().post<Gateway>(`/gateways/${id}/apply`);
+  return response.data;
+}
+
+export async function checkGateway(id: number): Promise<Gateway> {
+  const response = await api().post<Gateway>(`/gateways/${id}/check`);
+  return response.data;
+}
+
+export async function scanGateway(id: number): Promise<number> {
+  const response = await api().post<{ found: number }>(`/gateways/${id}/scan`);
+  return response.data.found;
+}
+
+export interface GatewayPortInput {
+  proto?: GatewayProto;
+  publicPort?: number;
+  targetHost?: string;
+  targetPort?: number;
+  label?: string;
+  enabled?: boolean;
+  force?: boolean;
+}
+
+export async function addGatewayPort(
+  id: number,
+  input: GatewayPortInput,
+): Promise<GatewayPort> {
+  const response = await api().post<GatewayPort>(
+    `/gateways/${id}/ports`,
+    input,
+  );
+  return response.data;
+}
+
+export async function updateGatewayPort(
+  id: number,
+  portId: number,
+  input: GatewayPortInput,
+): Promise<GatewayPort> {
+  const response = await api().patch<GatewayPort>(
+    `/gateways/${id}/ports/${portId}`,
+    input,
+  );
+  return response.data;
+}
+
+export async function deleteGatewayPort(
+  id: number,
+  portId: number,
+): Promise<void> {
+  await api().delete(`/gateways/${id}/ports/${portId}`);
 }

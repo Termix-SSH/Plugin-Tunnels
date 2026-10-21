@@ -29,28 +29,25 @@ const webHost = {
   port: 22,
   username: "root",
   enableSsh: true,
-  pluginSettings: {
-    tunnels: {
-      enableTunnel: true,
-      tunnelConnections: [
-        {
-          scope: "s2s",
-          mode: "local",
-          sourcePort: 8080,
-          endpointHost: "db",
-          endpointPort: 5432,
-          maxRetries: 3,
-          retryInterval: 10,
-          autoStart: false,
-        },
-      ],
-    },
-  },
+  pluginSettings: { tunnels: { enableTunnel: true } },
+};
+
+const savedTunnel = {
+  scope: "s2s",
+  mode: "local",
+  sourcePort: 8080,
+  endpointHost: "db",
+  endpointPort: 5432,
+  maxRetries: 3,
+  retryInterval: 10,
+  autoStart: false,
 };
 
 function stubApi(): PluginApiClient {
   return {
-    get: vi.fn(async () => ({ data: {} })),
+    get: vi.fn(async (url: string) => ({
+      data: url === "/saved" ? [{ hostId: 7, connections: [savedTunnel] }] : {},
+    })),
     post: vi.fn(async () => ({ data: {} })),
     put: vi.fn(async () => ({ data: {} })),
     patch: vi.fn(async () => ({ data: {} })),

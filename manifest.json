@@ -1,8 +1,8 @@
 {
   "id": "tunnels",
   "name": "Tunnels",
-  "version": "1.1.0",
-  "description": "SSH port forwarding that reconnects on its own, plus client tunnels from the desktop app.",
+  "version": "1.2.0",
+  "description": "SSH port forwarding that reconnects on its own, WireGuard gateways that publish private services, and client tunnels from the desktop app.",
   "author": {
     "name": "Termix"
   },
@@ -17,6 +17,8 @@
     "Reconnects on its own when a tunnel drops",
     "Start tunnels on boot",
     "Route a tunnel through a second host",
+    "WireGuard gateways that forward public ports to services on a private host",
+    "Finds listening ports on its own, with a switch for each one",
     "Client tunnels on your own computer from the desktop app, with presets you can save to the server"
   ],
   "engine": {
@@ -32,7 +34,8 @@
     "ui:surface",
     "users:impersonate",
     "db:core-refs",
-    "desktop:local"
+    "desktop:local",
+    "secrets:own"
   ],
   "provides": [
     {
@@ -87,10 +90,12 @@
         "fields": [
           {
             "key": "tunnelConnections",
+            "labelKey": "hosts.tabTunnels",
             "type": "custom",
             "component": "tunnelConnections",
             "requires": "enableTunnel",
-            "defaultable": false
+            "defaultable": false,
+            "hidden": true
           }
         ]
       }
@@ -99,6 +104,20 @@
       "key": "enableTunnel",
       "labelKey": "hosts.tabTunnels",
       "editorTab": "general"
+    },
+    "uiPresets": {
+      "simple": {
+        "viewMode": "grid",
+        "density": "comfortable"
+      },
+      "balanced": {
+        "viewMode": "grid",
+        "density": "comfortable"
+      },
+      "advanced": {
+        "viewMode": "list",
+        "density": "compact"
+      }
     },
     "uses": ["homepage.widgets"]
   },

@@ -40,14 +40,14 @@ const webHost = {
   port: 22,
   username: "root",
   enableSsh: true,
-  pluginSettings: {
-    tunnels: { enableTunnel: true, tunnelConnections: [savedTunnel] },
-  },
+  pluginSettings: { tunnels: { enableTunnel: true } },
 };
 
 function stubApi(overrides: Partial<PluginApiClient> = {}): PluginApiClient {
   return {
-    get: vi.fn(async () => ({ data: {} })),
+    get: vi.fn(async (url: string) => ({
+      data: url === "/saved" ? [{ hostId: 7, connections: [savedTunnel] }] : {},
+    })),
     post: vi.fn(async () => ({ data: {} })),
     put: vi.fn(async () => ({ data: {} })),
     patch: vi.fn(async () => ({ data: {} })),
@@ -79,11 +79,14 @@ describe(`${manifest.id} activate`, () => {
     expect(rendered.registered.slot("dashboard.counters")).toEqual([
       "tunnels.open",
     ]);
-    const [rail] = rendered.registered.railItems();
-    expect(rail).toMatchObject({
-      id: "port-forwarding",
-      permission: "tunnels.use",
-    });
+    const rail = rendered.registered.railItems();
+    expect(rail.map((item) => item.id).sort()).toEqual([
+      "port-forwarding",
+      "tunnel",
+    ]);
+    for (const item of rail) {
+      expect(item).toMatchObject({ permission: "tunnels.use" });
+    }
   });
 
   it("removes everything it registered on deactivate", async () => {
@@ -132,16 +135,13 @@ describe("tunnel tab", () => {
 });
 
 describe("host editor section", () => {
-  it("writes the tunnel list into the form's tunnels plugin settings", async () => {
+  it("switches tunnels on for the host, off by default", async () => {
     rendered = await renderWithApp(plugin, {
       manifest,
       locales,
       api: stubApi(),
     });
-    let form: Record<string, unknown> = {
-      name: "web",
-      pluginSettings: { tunnels: { enableTunnel: true } },
-    };
+    let form: Record<string, unknown> = { name: "web" };
     const updateForm = vi.fn(
       (
         patch: (current: Record<string, unknown>) => Record<string, unknown>,
@@ -156,15 +156,21 @@ describe("host editor section", () => {
       updateForm,
       protocols: { ssh: true },
     });
-    fireEvent.click(screen.getByText(locales.hosts.addTunnelBtn));
+    expect(screen.getByText(locales.hosts.tunnelsMoved)).toBeTruthy();
+    expect(screen.queryByText(locales.hosts.addTunnelBtn)).toBeNull();
 
+    fireEvent.click(screen.getByRole("switch"));
     const settings = (form.pluginSettings as Record<string, unknown>)
-      .tunnels as { enableTunnel: boolean; tunnelConnections: unknown[] };
+      .tunnels as { enableTunnel: boolean };
     expect(settings.enableTunnel).toBe(true);
-    expect(settings.tunnelConnections).toHaveLength(1);
-    expect(settings.tunnelConnections[0]).toMatchObject({
-      scope: "s2s",
-      mode: "local",
-    });
+  });
+
+  it("is off unless a host or its defaults turn it on", () => {
+    const host = manifest.contributes?.settings?.host as {
+      enableKey?: string;
+      enableDefault?: boolean;
+    };
+    expect(host.enableKey).toBe("enableTunnel");
+    expect(host.enableDefault).toBeFalsy();
   });
 });

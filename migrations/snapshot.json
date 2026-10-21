@@ -40,6 +40,202 @@
       },
       "indexes": [],
       "adopts": "c2s_tunnel_presets"
+    },
+    "ssh": {
+      "columns": {
+        "id": {
+          "type": "id",
+          "primaryKey": true,
+          "notNull": true
+        },
+        "userId": {
+          "type": "refUser",
+          "length": 255,
+          "notNull": true
+        },
+        "hostId": {
+          "type": "refHost",
+          "notNull": true
+        },
+        "connections": {
+          "type": "text",
+          "notNull": true
+        },
+        "updatedAt": {
+          "type": "timestamp",
+          "notNull": true,
+          "defaultNow": true
+        }
+      },
+      "indexes": [
+        {
+          "name": "tunnels_ssh_host_unique",
+          "columns": [
+            "hostId"
+          ],
+          "unique": true
+        }
+      ]
+    },
+    "gateways": {
+      "columns": {
+        "id": {
+          "type": "id",
+          "primaryKey": true,
+          "notNull": true
+        },
+        "userId": {
+          "type": "refUser",
+          "length": 255,
+          "notNull": true
+        },
+        "name": {
+          "type": "varchar",
+          "length": 120,
+          "notNull": true
+        },
+        "privateHostId": {
+          "type": "integer",
+          "notNull": true
+        },
+        "publicHostId": {
+          "type": "integer",
+          "notNull": true
+        },
+        "endpoint": {
+          "type": "varchar",
+          "length": 255,
+          "notNull": true
+        },
+        "listenPort": {
+          "type": "integer",
+          "notNull": true
+        },
+        "publicKey": {
+          "type": "varchar",
+          "length": 64,
+          "notNull": true
+        },
+        "privateKey": {
+          "type": "text",
+          "notNull": true
+        },
+        "peerPublicKey": {
+          "type": "varchar",
+          "length": 64,
+          "notNull": true
+        },
+        "peerPrivateKey": {
+          "type": "text",
+          "notNull": true
+        },
+        "scanEnabled": {
+          "type": "boolean",
+          "notNull": true,
+          "defaultValue": false
+        },
+        "scanInterval": {
+          "type": "integer",
+          "notNull": true,
+          "defaultValue": 10
+        },
+        "autoEnable": {
+          "type": "boolean",
+          "notNull": true,
+          "defaultValue": false
+        },
+        "scanGuests": {
+          "type": "boolean",
+          "notNull": true,
+          "defaultValue": true
+        },
+        "sourceHostIds": {
+          "type": "text",
+          "notNull": true,
+          "defaultValue": "[]"
+        },
+        "ignoredPorts": {
+          "type": "text",
+          "notNull": true,
+          "defaultValue": "[]"
+        },
+        "createdAt": {
+          "type": "timestamp",
+          "notNull": true,
+          "defaultNow": true
+        },
+        "updatedAt": {
+          "type": "timestamp",
+          "notNull": true,
+          "defaultNow": true
+        }
+      },
+      "indexes": []
+    },
+    "gateway_ports": {
+      "columns": {
+        "id": {
+          "type": "id",
+          "primaryKey": true,
+          "notNull": true
+        },
+        "gatewayId": {
+          "type": "integer",
+          "notNull": true
+        },
+        "proto": {
+          "type": "varchar",
+          "length": 8,
+          "notNull": true
+        },
+        "publicPort": {
+          "type": "integer",
+          "notNull": true
+        },
+        "targetHost": {
+          "type": "varchar",
+          "length": 255,
+          "notNull": true,
+          "defaultValue": ""
+        },
+        "targetPort": {
+          "type": "integer",
+          "notNull": true
+        },
+        "label": {
+          "type": "varchar",
+          "length": 120,
+          "notNull": true,
+          "defaultValue": ""
+        },
+        "source": {
+          "type": "varchar",
+          "length": 8,
+          "notNull": true,
+          "defaultValue": "manual"
+        },
+        "sourceHostId": {
+          "type": "integer"
+        },
+        "enabled": {
+          "type": "boolean",
+          "notNull": true,
+          "defaultValue": true
+        },
+        "createdAt": {
+          "type": "timestamp",
+          "notNull": true,
+          "defaultNow": true
+        }
+      },
+      "indexes": [
+        {
+          "name": "tunnels_gateway_ports_gateway",
+          "columns": [
+            "gatewayId"
+          ]
+        }
+      ]
     }
   }
 }

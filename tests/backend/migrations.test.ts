@@ -49,7 +49,11 @@ describe("adopting c2s_tunnel_presets", () => {
       },
     });
 
-    expect(db.applied).toEqual(["0001_adopt_c2s_tunnel_presets"]);
+    expect(db.applied).toEqual([
+      "0001_adopt_c2s_tunnel_presets",
+      "0002_update",
+      "0003_scan_guests",
+    ]);
     expect(tableExists("c2s_tunnel_presets")).toBe(false);
     expect(tableExists("p_tunnels_presets")).toBe(true);
 

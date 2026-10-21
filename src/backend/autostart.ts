@@ -1,64 +1,44 @@
 import type { PluginContext } from "@termix-ssh/plugin-sdk/backend";
 import type { TunnelManager } from "./manager.js";
 import { errorMessage } from "./manager.js";
+import type { SavedTunnelStore, SavedTunnels } from "./saved-store.js";
 import {
   buildTunnelConfig,
   connectionToRequest,
-  readTunnelConnections,
   resolveEndpoint,
 } from "./config.js";
-
-export interface HostOwner {
-  id: number;
-  userId: string;
-}
-
-/** Every host and its owner, straight from ssh_data. */
-async function listHostOwners(ctx: PluginContext): Promise<HostOwner[]> {
-  /* eslint-disable @typescript-eslint/no-explicit-any */
-  const { hosts } = await ctx.db.refs<{ hosts: any }>();
-  const drizzle = await ctx.db.client<any>();
-  /* eslint-enable @typescript-eslint/no-explicit-any */
-  const rows = (await drizzle
-    .select({ id: hosts.id, userId: hosts.userId })
-    .from(hosts)) as HostOwner[];
-  return rows.filter((row) => Number.isInteger(row.id) && !!row.userId);
-}
 
 /**
  * Starts every saved tunnel marked autoStart, across every user.
  *
- * ctx.hosts only sees the acting user's hosts, so the owners come from
- * ssh_data first and each host is then resolved and connected as its owner.
+ * ctx.hosts only sees the acting user's hosts, so each saved list is
+ * resolved and connected as the user it belongs to.
  */
 export async function startAutoStartTunnels(
   ctx: PluginContext,
   manager: TunnelManager,
-  listOwners: () => Promise<HostOwner[]> = () => listHostOwners(ctx),
+  store: SavedTunnelStore,
 ): Promise<number> {
   let started = 0;
-  let owners: HostOwner[];
+  let saved: SavedTunnels[];
   try {
-    owners = await listOwners();
+    saved = await store.listAll();
   } catch (error) {
     ctx.log.warn(
-      `Could not list hosts for tunnel autostart: ${errorMessage(error)}`,
+      `Could not read saved tunnels for autostart: ${errorMessage(error)}`,
     );
     return 0;
   }
 
-  for (const owner of owners) {
+  for (const { hostId, userId, connections } of saved) {
     try {
-      if (!(await ctx.settings.getHost<boolean>(owner.id, "enableTunnel"))) {
+      if (!connections.some((connection) => connection.autoStart)) continue;
+      if (!(await ctx.settings.getHost<boolean>(hostId, "enableTunnel"))) {
         continue;
       }
-      const connections = readTunnelConnections(
-        await ctx.settings.getHost(owner.id, "tunnelConnections"),
-      );
-      if (!connections.some((connection) => connection.autoStart)) continue;
 
-      started += await ctx.asUser(owner.userId, async () => {
-        const host = await ctx.hosts.get(owner.id);
+      started += await ctx.asUser(userId, async () => {
+        const host = await ctx.hosts.get(hostId);
         if (!host) return 0;
         let count = 0;
         for (const [index, connection] of connections.entries()) {
@@ -69,14 +49,14 @@ export async function startAutoStartTunnels(
               buildTunnelConfig(
                 host,
                 connectionToRequest(host, index, connection),
-                owner.userId,
+                userId,
               ),
             );
             await manager.start(config);
             count++;
           } catch (error) {
             ctx.log.warn(
-              `Autostart tunnel ${index + 1} on host ${owner.id} skipped: ${errorMessage(error)}`,
+              `Autostart tunnel ${index + 1} on host ${hostId} skipped: ${errorMessage(error)}`,
             );
           }
         }
@@ -84,7 +64,7 @@ export async function startAutoStartTunnels(
       });
     } catch (error) {
       ctx.log.warn(
-        `Autostart failed for host ${owner.id}: ${errorMessage(error)}`,
+        `Autostart failed for host ${hostId}: ${errorMessage(error)}`,
       );
     }
   }

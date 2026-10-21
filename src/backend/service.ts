@@ -8,6 +8,7 @@ import {
   isReservedTunnelName,
   parseReservedTunnelName,
 } from "./utils.js";
+import type { SavedTunnelStore } from "./saved-store.js";
 import { authorizeTunnelAction } from "./authorize.js";
 import {
   buildTunnelConfig,
@@ -97,6 +98,7 @@ function isPort(value: unknown, allowZero = false): value is number {
 export function createTunnelsService(
   ctx: PluginContext,
   manager: TunnelManager,
+  store: SavedTunnelStore,
 ): TunnelsAccess {
   // What each live forward was opened for, so an edited target reopens it
   // instead of silently forwarding to the old one.
@@ -225,7 +227,7 @@ export function createTunnelsService(
         return;
       }
 
-      const saved = await findSavedTunnel(ctx, name);
+      const saved = await findSavedTunnel(ctx, store, name);
       if (!saved) throw new Error(`Tunnel "${name}" is not configured`);
       const config = await resolveEndpoint(
         ctx,
