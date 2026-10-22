@@ -192,6 +192,31 @@
       "enable": {
         "label": "Povoliť tunely",
         "description": "Nastavenie SSH tunelov cez tento hostiteľ."
+      },
+      "showPanel": {
+        "label": "Panel vedľa terminálu",
+        "description": "Umožní zobraziť panel tunelov vedľa SSH terminálu tohto hostiteľa."
+      }
+    },
+    "user": {
+      "companionAutoOpen": {
+        "label": "Otvoriť panel tunelov s terminálom",
+        "description": "Zobraziť panel tunelov pri otvorení terminálu na hostiteľovi, ktorý ho má."
+      },
+      "companionSide": {
+        "label": "Poloha panela tunelov",
+        "description": "Kde sa panel nachádza vedľa terminálu.",
+        "right": "Vpravo",
+        "left": "Vľavo",
+        "bottom": "Dole"
+      },
+      "companionSize": {
+        "label": "Veľkosť panela tunelov",
+        "description": "Šírka, alebo výška pri umiestnení dole, v pixeloch."
+      },
+      "companionEdgeButton": {
+        "label": "Tlačidlo okraja panela tunelov",
+        "description": "Zobraziť malé tlačidlo na okraji terminálu na otvorenie panela."
       }
     }
   },
@@ -290,5 +315,9 @@
     "portCount": "{{count}} portov",
     "scanGuestsLabel": "Skenovať hostí Proxmox",
     "scanGuestsDesc": "Na hostiteľovi Proxmox skenujte aj bežiace VM a kontajnery. VM vyžadujú agenta hostí."
+  },
+  "companion": {
+    "toggle": "Panel tunelov",
+    "openTab": "Otvoriť kartu Tunely"
   }
 }

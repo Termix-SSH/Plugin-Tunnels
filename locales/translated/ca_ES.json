@@ -191,6 +191,31 @@
       "enable": {
         "label": "Activa els túnels",
         "description": "Configura túnels SSH a través d'aquest amfitrió."
+      },
+      "showPanel": {
+        "label": "Panell al costat del terminal",
+        "description": "Mostra un panell de túnels al costat del terminal SSH d'aquest amfitrió."
+      }
+    },
+    "user": {
+      "companionAutoOpen": {
+        "label": "Obre el panell de túnels amb un terminal",
+        "description": "Mostra el panell de túnels quan s'obre un terminal en un amfitrió que en tingui."
+      },
+      "companionSide": {
+        "label": "Posició del panell de túnels",
+        "description": "On es troba el panell al costat del terminal.",
+        "right": "Dreta",
+        "left": "Esquerra",
+        "bottom": "Inferior"
+      },
+      "companionSize": {
+        "label": "Mida del panell de túnels",
+        "description": "Amplada, o alçada si és a la part inferior, en píxels."
+      },
+      "companionEdgeButton": {
+        "label": "Botó lateral del panell de túnels",
+        "description": "Mostra un botó petit al costat del terminal per obrir el panell."
       }
     }
   },
@@ -289,5 +314,9 @@
     "portCount": "{{count}} ports",
     "scanGuestsLabel": "Escaneja convidats de Proxmox",
     "scanGuestsDesc": "En un amfitrió Proxmox, busca també dins de les màquines virtuals i contenidors en execució. Les màquines virtuals necessiten l'agent convidat."
+  },
+  "companion": {
+    "toggle": "Panell de túnels",
+    "openTab": "Obre la pestanya de túnels"
   }
 }

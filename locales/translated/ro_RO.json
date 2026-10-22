@@ -191,6 +191,31 @@
       "enable": {
         "label": "Activează tunelurile",
         "description": "Configurați tunelurile SSH prin această gazdă."
+      },
+      "showPanel": {
+        "label": "Panoul lângă terminal",
+        "description": "Afișează un panou de tuneluri lângă terminalul SSH al acestui gazdă."
+      }
+    },
+    "user": {
+      "companionAutoOpen": {
+        "label": "Deschide panoul de tuneluri împreună cu un terminal",
+        "description": "Afișează panoul de tuneluri când se deschide un terminal pe o gazdă care are acest panou configurat."
+      },
+      "companionSide": {
+        "label": "Poziția panoului de tuneluri",
+        "description": "Unde se află panoul în raport cu terminalul.",
+        "right": "Dreapta",
+        "left": "Stânga",
+        "bottom": "Jos"
+      },
+      "companionSize": {
+        "label": "Dimensiunea panoului de tuneluri",
+        "description": "Lățimea, sau înălțimea dacă este jos, în pixeli."
+      },
+      "companionEdgeButton": {
+        "label": "Butonul de margine al panoului de tuneluri",
+        "description": "Afișează un buton mic pe marginea terminalului pentru a deschide panoul."
       }
     }
   },
@@ -289,5 +314,9 @@
     "portCount": "{{count}} porturi",
     "scanGuestsLabel": "Scanează mașinile virtuale Proxmox",
     "scanGuestsDesc": "Pe o gazdă Proxmox, caută și în interiorul VM-urilor și containerelor care rulează. VM-urile necesită agentul guest."
+  },
+  "companion": {
+    "toggle": "Panoul de tuneluri",
+    "openTab": "Deschide fila Tuneluri"
   }
 }

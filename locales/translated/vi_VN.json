@@ -189,6 +189,31 @@
       "enable": {
         "label": "Bật đường hầm",
         "description": "Thiết lập các đường hầm SSH thông qua máy chủ này."
+      },
+      "showPanel": {
+        "label": "Bảng điều khiển bên cạnh terminal",
+        "description": "Hiển thị bảng điều khiển đường hầm bên cạnh terminal SSH của máy chủ này."
+      }
+    },
+    "user": {
+      "companionAutoOpen": {
+        "label": "Mở bảng điều khiển đường hầm cùng với terminal",
+        "description": "Hiển thị bảng điều khiển đường hầm khi terminal mở trên máy chủ có tính năng này."
+      },
+      "companionSide": {
+        "label": "Vị trí bảng điều khiển đường hầm",
+        "description": "Vị trí của bảng điều khiển so với terminal.",
+        "right": "Phải",
+        "left": "Trái",
+        "bottom": "Dưới"
+      },
+      "companionSize": {
+        "label": "Kích thước bảng điều khiển đường hầm",
+        "description": "Chiều rộng, hoặc chiều cao nếu ở dưới cùng, tính bằng pixel."
+      },
+      "companionEdgeButton": {
+        "label": "Nút mép bảng điều khiển đường hầm",
+        "description": "Hiển thị một nút nhỏ trên mép terminal để mở bảng điều khiển."
       }
     }
   },
@@ -287,5 +312,9 @@
     "portCount": "{{count}} cổng",
     "scanGuestsLabel": "Quét máy khách Proxmox",
     "scanGuestsDesc": "Trên host Proxmox, cũng quét bên trong các VM và container đang chạy. VM cần có agent máy khách."
+  },
+  "companion": {
+    "toggle": "Bảng điều khiển đường hầm",
+    "openTab": "Mở tab Đường hầm"
   }
 }

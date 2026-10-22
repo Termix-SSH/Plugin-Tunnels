@@ -189,6 +189,31 @@
       "enable": {
         "label": "터널 활성화",
         "description": "이 호스트를 통해 SSH 터널을 설정합니다."
+      },
+      "showPanel": {
+        "label": "터미널 옆 패널",
+        "description": "이 호스트의 SSH 터미널 옆에 터널 패널을 제공합니다."
+      }
+    },
+    "user": {
+      "companionAutoOpen": {
+        "label": "터미널과 함께 터널 패널 열기",
+        "description": "터널 패널이 있는 호스트에서 터미널이 열릴 때 터널 패널을 표시합니다."
+      },
+      "companionSide": {
+        "label": "터널 패널 위치",
+        "description": "터미널 옆에 패널이 표시되는 위치입니다.",
+        "right": "오른쪽",
+        "left": "왼쪽",
+        "bottom": "아래쪽"
+      },
+      "companionSize": {
+        "label": "터널 패널 크기",
+        "description": "너비 또는 아래쪽 높이(픽셀 단위)입니다."
+      },
+      "companionEdgeButton": {
+        "label": "터널 패널 가장자리 버튼",
+        "description": "패널을 열 수 있는 작은 버튼을 터미널 가장자리에 표시합니다."
       }
     }
   },
@@ -287,5 +312,9 @@
     "portCount": "포트 {{count}}개",
     "scanGuestsLabel": "Proxmox 게스트 스캔",
     "scanGuestsDesc": "Proxmox 호스트에서 실행 중인 VM 및 컨테이너 내부도 스캔합니다. VM은 게스트 에이전트가 필요합니다."
+  },
+  "companion": {
+    "toggle": "터널 패널",
+    "openTab": "터널 탭 열기"
   }
 }

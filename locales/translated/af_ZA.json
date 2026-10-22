@@ -190,6 +190,31 @@
       "enable": {
         "label": "Aktiveer tunnels",
         "description": "Stel SSH tunnels deur hierdie gasheer op."
+      },
+      "showPanel": {
+        "label": "Paneel langs die terminaal",
+        "description": "Bied 'n tonnels-paneel langs hierdie gasheer se SSH-terminaal."
+      }
+    },
+    "user": {
+      "companionAutoOpen": {
+        "label": "Open die tonnels-paneel met 'n terminaal",
+        "description": "Wys die tonnels-paneel wanneer 'n terminaal oopmaak op 'n gasheer wat dit het."
+      },
+      "companionSide": {
+        "label": "Tonnels-paneel kant",
+        "description": "Waar die paneel langs die terminaal sit.",
+        "right": "Regs",
+        "left": "Links",
+        "bottom": "Onder"
+      },
+      "companionSize": {
+        "label": "Tonnels-paneel grootte",
+        "description": "Wyde, of hoogte aan die onderkant, in pixels."
+      },
+      "companionEdgeButton": {
+        "label": "Tonnels-paneel randknoppie",
+        "description": "Wys 'n klein knoppie op die terminaalrand om die paneel oop te maak."
       }
     }
   },
@@ -202,6 +227,7 @@
   },
   "gateways": {
     "title": "Kykplekke",
+    "count": "one: {{count}} poort",
     "empty": "Nog geen kykplekke nie",
     "emptyHint": "'n Kykplek publiseer dienste op 'n private gasheer deur 'n openbare gasheer, oor WireGuard.",
     "newGateway": "Nuwe kykplek",
@@ -287,5 +313,9 @@
     "portCount": "{{count}} porte",
     "scanGuestsLabel": "Skandeer Proxmox-gaste",
     "scanGuestsDesc": "Op 'n Proxmox-gasheer, kyk ook binne lopende VM's en houer. VM's benodig die gasagent."
+  },
+  "companion": {
+    "toggle": "Tonnels-paneel",
+    "openTab": "Open die Tonnels-oortjie"
   }
 }

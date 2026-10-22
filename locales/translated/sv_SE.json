@@ -190,6 +190,31 @@
       "enable": {
         "label": "Aktivera tunnlar",
         "description": "Ställ in SSH-tunnlar via denna värd."
+      },
+      "showPanel": {
+        "label": "Panel bredvid terminalen",
+        "description": "Erbjud en panel för tunnlar bredvid SSH-terminalen för denna värd."
+      }
+    },
+    "user": {
+      "companionAutoOpen": {
+        "label": "Öppna panelen för tunnlar tillsammans med en terminal",
+        "description": "Visa panelen för tunnlar när en terminal öppnas på en värd som har den."
+      },
+      "companionSide": {
+        "label": "Placering av panelen för tunnlar",
+        "description": "Var panelen visas i förhållande till terminalen.",
+        "right": "Höger",
+        "left": "Vänster",
+        "bottom": "Nere"
+      },
+      "companionSize": {
+        "label": "Storlek på panelen för tunnlar",
+        "description": "Bredd, eller höjd om den visas nederst, i pixlar."
+      },
+      "companionEdgeButton": {
+        "label": "Knapp för panelen för tunnlar vid kanten",
+        "description": "Visa en liten knapp vid terminalens kant för att öppna panelen."
       }
     }
   },
@@ -288,5 +313,9 @@
     "portCount": "{{count}} portar",
     "scanGuestsLabel": "Skanna Proxmox-gäster",
     "scanGuestsDesc": "På en Proxmox-värd, leta även inuti körande virtuella maskiner och containrar. Virtuella maskiner kräver gästagenten."
+  },
+  "companion": {
+    "toggle": "Panel för tunnlar",
+    "openTab": "Öppna fliken för tunnlar"
   }
 }

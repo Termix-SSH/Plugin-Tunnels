@@ -190,6 +190,31 @@
       "enable": {
         "label": "Ota tunnelit käyttöön",
         "description": "Määritä SSH-tunnelit tämän isäntäpalvelimen kautta."
+      },
+      "showPanel": {
+        "label": "Paneeli terminaalin vieressä",
+        "description": "Tarjoa tunnelipaneeli tämän isäntäterminaalin vieressä."
+      }
+    },
+    "user": {
+      "companionAutoOpen": {
+        "label": "Avaa tunnelipaneeli terminaalin kanssa",
+        "description": "Näytä tunnelipaneeli, kun terminaali avautuu isännällä, jossa se on käytössä."
+      },
+      "companionSide": {
+        "label": "Tunnelipaneelin sijainti",
+        "description": "Missä paneeli sijaitsee terminaalin vieressä.",
+        "right": "Oikealla",
+        "left": "Vasemmalla",
+        "bottom": "Alareunassa"
+      },
+      "companionSize": {
+        "label": "Tunnelipaneelin koko",
+        "description": "Leveys tai alareunan korkeus pikseleinä."
+      },
+      "companionEdgeButton": {
+        "label": "Tunnelipaneelin reunapainike",
+        "description": "Näytä pieni painike terminaalin reunassa paneelin avaamiseksi."
       }
     }
   },
@@ -288,5 +313,9 @@
     "portCount": "{{count}} porttia",
     "scanGuestsLabel": "Skannaa Proxmox-vieraskoneet",
     "scanGuestsDesc": "Proxmox-palvelimella etsi myös käynnissä olevista virtuaalikoneista ja konteista. Virtuaalikoneet vaativat vierasagentin."
+  },
+  "companion": {
+    "toggle": "Tunnelipaneeli",
+    "openTab": "Avaa tunnelivälilehti"
   }
 }

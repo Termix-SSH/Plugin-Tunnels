@@ -3,7 +3,12 @@ import { Network } from "lucide-react";
 import type { TabProps, TermixApp } from "@termix-ssh/plugin-sdk/frontend";
 import { TunnelAuthPrompts } from "./TunnelAuthPrompts";
 import { TunnelTab } from "./TunnelTab";
-import { hostTunnelsEnabled } from "./host-tunnels";
+import { hostTunnelsEnabled, hostTunnelsPanelEnabled } from "./host-tunnels";
+import {
+  TunnelsCard,
+  TunnelsCompanion,
+  useTunnelsCompanionDefaults,
+} from "./TunnelsCompanion";
 import { TunnelsHome } from "./TunnelsHome";
 import { HostTunnelsSection } from "./HostTunnelsSection";
 import {
@@ -127,4 +132,53 @@ export function activate(app: TermixApp): void {
       />
     )) as never,
   });
+
+  app.registerDashboardCard({
+    id: "tunnels",
+    titleKey: "nav.tunnels",
+    defaultPanel: "side",
+    defaultHeight: 220,
+    frame: "framed",
+    component: TunnelsCard,
+  });
+
+  // Older cores have no panels beside tabs.
+  if (typeof app.registerCompanion === "function") {
+    // Companion filters run synchronously, so the permission is read once here.
+    let canUse = true;
+    void app.hasPermission("use").then((allowed) => {
+      canUse = allowed;
+    });
+    app.registerCompanion("tunnels", TunnelsCompanion, {
+      icon: Network,
+      titleKey: "nav.tunnels",
+      order: 80,
+      tabTypes: ["terminal"],
+      when: (_tab, host) =>
+        canUse && host?.enableSsh !== false && hostTunnelsPanelEnabled(host),
+      useDefaults: useTunnelsCompanionDefaults,
+    });
+    app.registerAction("tunnels.togglePanel", ((
+      _handle: unknown,
+      tab: unknown,
+    ) => app.toggleCompanion(tab as never, "tunnels")) as never);
+    app.registerSlotContribution("tab.menu", {
+      actionId: "tunnels.togglePanel",
+      titleKey: "companion.toggle",
+      icon: Network,
+      kind: "button",
+      order: 11,
+      when: (context) => {
+        const tab = context.tab as {
+          type?: string;
+          host?: unknown;
+          hostConfig?: unknown;
+        } | null;
+        return (
+          tab?.type === "terminal" &&
+          hostTunnelsPanelEnabled((tab.host ?? tab.hostConfig) as never)
+        );
+      },
+    });
+  }
 }

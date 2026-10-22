@@ -189,6 +189,31 @@
       "enable": {
         "label": "啟用隧道",
         "description": "透過此主機設定 SSH 隧道。"
+      },
+      "showPanel": {
+        "label": "終端機旁的面板",
+        "description": "在此主機的 SSH 終端機旁提供隧道面板。"
+      }
+    },
+    "user": {
+      "companionAutoOpen": {
+        "label": "開啟終端機時顯示隧道面板",
+        "description": "當開啟具有此功能的主機終端機時，顯示隧道面板。"
+      },
+      "companionSide": {
+        "label": "隧道面板位置",
+        "description": "面板相對於終端機的位置。",
+        "right": "右側",
+        "left": "左側",
+        "bottom": "底部"
+      },
+      "companionSize": {
+        "label": "隧道面板大小",
+        "description": "寬度，或位於底部時的高度，單位為像素。"
+      },
+      "companionEdgeButton": {
+        "label": "隧道面板邊緣按鈕",
+        "description": "在終端機邊緣顯示小按鈕以開啟面板。"
       }
     }
   },
@@ -287,5 +312,9 @@
     "portCount": "{{count}} 個連接埠",
     "scanGuestsLabel": "掃描 Proxmox 客體",
     "scanGuestsDesc": "在 Proxmox 主機上，同時掃描正在執行的虛擬機器與容器。虛擬機器需要安裝客體代理程式。"
+  },
+  "companion": {
+    "toggle": "隧道面板",
+    "openTab": "開啟隧道分頁"
   }
 }

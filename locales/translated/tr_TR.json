@@ -190,6 +190,31 @@
       "enable": {
         "label": "Tünelleri etkinleştir",
         "description": "Bu sunucu üzerinden SSH tünelleri kurun."
+      },
+      "showPanel": {
+        "label": "Terminalin yanında panel",
+        "description": "Bu sunucunun SSH terminalinin yanında bir tünel paneli göster."
+      }
+    },
+    "user": {
+      "companionAutoOpen": {
+        "label": "Terminal ile tünel panelini aç",
+        "description": "Tünel paneli olan bir sunucuda terminal açıldığında paneli göster."
+      },
+      "companionSide": {
+        "label": "Tünel paneli konumu",
+        "description": "Panelin terminalin yanında nerede yer alacağı.",
+        "right": "Sağ",
+        "left": "Sol",
+        "bottom": "Alt"
+      },
+      "companionSize": {
+        "label": "Tünel paneli boyutu",
+        "description": "Genişlik veya altta yükseklik, piksel cinsinden."
+      },
+      "companionEdgeButton": {
+        "label": "Tünel paneli kenar düğmesi",
+        "description": "Paneli açmak için terminal kenarında küçük bir düğme göster."
       }
     }
   },
@@ -288,5 +313,9 @@
     "portCount": "{{count}} port",
     "scanGuestsLabel": "Proxmox sanal makinelerini tara",
     "scanGuestsDesc": "Proxmox sunucusunda çalışan sanal makinelerin ve konteynerlerin içine de bakın. Sanal makineler için misafir aracı gerekir."
+  },
+  "companion": {
+    "toggle": "Tünel paneli",
+    "openTab": "Tüneller sekmesini aç"
   }
 }

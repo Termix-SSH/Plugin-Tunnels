@@ -17,7 +17,11 @@ type Drizzle = any;
 export type SavedTunnelStore = ReturnType<typeof createSavedTunnelStore>;
 
 /** Each host's saved server tunnels, one row per host. */
-export function createSavedTunnelStore(db: PluginDatabase, table: Table) {
+export function createSavedTunnelStore(
+  db: PluginDatabase,
+  table: Table,
+  onSaved?: (hostId: number, connections: TunnelConnection[]) => Promise<void>,
+) {
   const client = () => db.client<Drizzle>();
 
   const toSaved = (row: {
@@ -90,6 +94,7 @@ export function createSavedTunnelStore(db: PluginDatabase, table: Table) {
         });
       }
       await db.persist();
+      await onSaved?.(hostId, connections);
     },
   };
 }

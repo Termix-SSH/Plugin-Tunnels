@@ -189,6 +189,31 @@
       "enable": {
         "label": "Dayakan terowong",
         "description": "Sediakan terowong SSH melalui hos ini."
+      },
+      "showPanel": {
+        "label": "Panel di sebelah terminal",
+        "description": "Tawarkan panel terowong di sebelah terminal SSH hos ini."
+      }
+    },
+    "user": {
+      "companionAutoOpen": {
+        "label": "Buka panel terowong bersama terminal",
+        "description": "Paparkan panel terowong apabila terminal dibuka pada hos yang memilikinya."
+      },
+      "companionSide": {
+        "label": "Sisi panel terowong",
+        "description": "Di mana panel diletakkan bersebelahan dengan terminal.",
+        "right": "Kanan",
+        "left": "Kiri",
+        "bottom": "Bawah"
+      },
+      "companionSize": {
+        "label": "Saiz panel terowong",
+        "description": "Lebar, atau tinggi di bahagian bawah, dalam piksel."
+      },
+      "companionEdgeButton": {
+        "label": "Butang tepi panel terowong",
+        "description": "Paparkan butang kecil di tepi terminal untuk membuka panel."
       }
     }
   },
@@ -287,5 +312,9 @@
     "portCount": "{{count}} port",
     "scanGuestsLabel": "Imbas tetamu Proxmox",
     "scanGuestsDesc": "Pada hos Proxmox, juga lihat di dalam VM dan kontena yang berjalan. VM memerlukan ejen tetamu."
+  },
+  "companion": {
+    "toggle": "Panel terowong",
+    "openTab": "Buka tab Terowong"
   }
 }

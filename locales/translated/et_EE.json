@@ -190,6 +190,31 @@
       "enable": {
         "label": "Luba sillad",
         "description": "Seadista SSH sillad selle teenri kaudu."
+      },
+      "showPanel": {
+        "label": "Paneel terminali kõrval",
+        "description": "Kuvab tunnelide paneeli selle hosti SSH-terminali kõrval."
+      }
+    },
+    "user": {
+      "companionAutoOpen": {
+        "label": "Ava tunnelide paneel koos terminaliga",
+        "description": "Kuva tunnelide paneel, kui terminal avatakse hostil, millel see on olemas."
+      },
+      "companionSide": {
+        "label": "Tunnelide paneeli asukoht",
+        "description": "Kus paneel terminali kõrval asub.",
+        "right": "Parem",
+        "left": "Vasak",
+        "bottom": "Alumine"
+      },
+      "companionSize": {
+        "label": "Tunnelide paneeli suurus",
+        "description": "Laius või alumisel küljel kõrgus pikslites."
+      },
+      "companionEdgeButton": {
+        "label": "Tunnelide paneeli servanupp",
+        "description": "Kuva terminali serval väike nupp paneeli avamiseks."
       }
     }
   },
@@ -288,5 +313,9 @@
     "portCount": "{{count}} porti",
     "scanGuestsLabel": "Skaneeri Proxmoxi külalisi",
     "scanGuestsDesc": "Proxmoxi hostil otsi ka töölevalvate VM-ide ja konteinerite sisse. VM-id vajavad külalistearienti."
+  },
+  "companion": {
+    "toggle": "Tunnelide paneel",
+    "openTab": "Ava tunnelide vaheleht"
   }
 }

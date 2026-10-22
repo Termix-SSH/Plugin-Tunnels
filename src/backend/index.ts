@@ -8,7 +8,11 @@ import { registerGatewayRoutes } from "./gateway/routes.js";
 import { createPresetRepository } from "./repository.js";
 import { createSavedTunnelStore } from "./saved-store.js";
 import { registerSavedTunnelRoutes } from "./saved-routes.js";
-import { moveLegacyTunnels } from "./legacy-move.js";
+import {
+  mirrorAllTunnels,
+  mirrorTunnels,
+  moveLegacyTunnels,
+} from "./legacy-move.js";
 import { createTunnelManager } from "./manager.js";
 import { registerTunnelRoutes } from "./routes.js";
 import { createC2SRelay } from "./c2s-relay.js";
@@ -30,7 +34,11 @@ const AUTOSTART_DELAY_MS = 3000;
 export async function activate(ctx: PluginContext) {
   const table = await ctx.db.define(presets);
   const repository = createPresetRepository(ctx.db, table);
-  const store = createSavedTunnelStore(ctx.db, await ctx.db.define(sshTunnels));
+  const store = createSavedTunnelStore(
+    ctx.db,
+    await ctx.db.define(sshTunnels),
+    (hostId, connections) => mirrorTunnels(ctx, hostId, connections),
+  );
 
   const manager = createTunnelManager(ctx);
   ctx.disposables.add(() => manager.dispose());
@@ -58,7 +66,7 @@ export async function activate(ctx: PluginContext) {
     relay(connection.socket as WebSocket, connection.userId),
   );
 
-  // Older clients still save tunnels as a host setting. Take them from there.
+  // Older clients and linked desktops carry tunnels as a host setting. Take them from there.
   ctx.disposables.add(
     ctx.settings.onChange("tunnelConnections", () => {
       void moveLegacyTunnels(ctx, store, true);
@@ -72,9 +80,9 @@ export async function activate(ctx: PluginContext) {
 
   // Deferred so activation is not held up by SSH handshakes.
   const autostart = setTimeout(() => {
-    void moveLegacyTunnels(ctx, store).then(() =>
-      startAutoStartTunnels(ctx, manager, store),
-    );
+    void moveLegacyTunnels(ctx, store)
+      .then(() => mirrorAllTunnels(ctx, store))
+      .then(() => startAutoStartTunnels(ctx, manager, store));
   }, AUTOSTART_DELAY_MS);
   autostart.unref?.();
   ctx.disposables.add(() => clearTimeout(autostart));

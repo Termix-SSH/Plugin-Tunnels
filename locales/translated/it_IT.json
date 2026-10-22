@@ -191,6 +191,31 @@
       "enable": {
         "label": "Abilita tunnel",
         "description": "Configura i tunnel SSH attraverso questo host."
+      },
+      "showPanel": {
+        "label": "Pannello accanto al terminale",
+        "description": "Mostra un pannello dei tunnel accanto al terminale SSH di questo host."
+      }
+    },
+    "user": {
+      "companionAutoOpen": {
+        "label": "Apri il pannello dei tunnel con un terminale",
+        "description": "Mostra il pannello dei tunnel quando si apre un terminale su un host che lo supporta."
+      },
+      "companionSide": {
+        "label": "Posizione del pannello dei tunnel",
+        "description": "Dove si trova il pannello rispetto al terminale.",
+        "right": "Destra",
+        "left": "Sinistra",
+        "bottom": "In basso"
+      },
+      "companionSize": {
+        "label": "Dimensione del pannello dei tunnel",
+        "description": "Larghezza, o altezza se in basso, in pixel."
+      },
+      "companionEdgeButton": {
+        "label": "Pulsante laterale del pannello dei tunnel",
+        "description": "Mostra un piccolo pulsante sul bordo del terminale per aprire il pannello."
       }
     }
   },
@@ -289,5 +314,9 @@
     "portCount": "{{count}} porte",
     "scanGuestsLabel": "Scansiona gli ospiti Proxmox",
     "scanGuestsDesc": "Su un host Proxmox, cerca anche all'interno di VM e container in esecuzione. Le VM richiedono l'agente guest."
+  },
+  "companion": {
+    "toggle": "Pannello dei tunnel",
+    "openTab": "Apri la scheda Tunnel"
   }
 }

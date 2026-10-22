@@ -191,6 +191,31 @@
       "enable": {
         "label": "Iespējot tuneļus",
         "description": "Iestatiet SSH tuneļus caur šo tālvietni."
+      },
+      "showPanel": {
+        "label": "Panelis blakus terminālim",
+        "description": "Piedāvāt tunelu paneli blakus šī hosta SSH terminālim."
+      }
+    },
+    "user": {
+      "companionAutoOpen": {
+        "label": "Atvērt tunelu paneli kopā ar termināli",
+        "description": "Rādīt tunelu paneli, kad terminālis atveras uz hosta, kam tas ir pieejams."
+      },
+      "companionSide": {
+        "label": "Tunelu paneļa puse",
+        "description": "Kur panelis atrodas blakus terminālim.",
+        "right": "Labajā pusē",
+        "left": "Kreisajā pusē",
+        "bottom": "Apakšā"
+      },
+      "companionSize": {
+        "label": "Tunelu paneļa izmērs",
+        "description": "Platums vai augstums apakšā pikseļos."
+      },
+      "companionEdgeButton": {
+        "label": "Tunelu paneļa malas poga",
+        "description": "Rādīt mazu pogu termināļa malā, lai atvērtu paneli."
       }
     }
   },
@@ -289,5 +314,9 @@
     "portCount": "{{count}} porti",
     "scanGuestsLabel": "Skenēt Proxmox viesus",
     "scanGuestsDesc": "Proxmox mezglā skenēt arī darbojošās VM un konteinerus. VM ir nepieciešams viesu aģents."
+  },
+  "companion": {
+    "toggle": "Tunelu panelis",
+    "openTab": "Atvērt Tunelu cilni"
   }
 }

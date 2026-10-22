@@ -190,6 +190,31 @@
       "enable": {
         "label": "Enable tunnels",
         "description": "Set up SSH tunnels through this host."
+      },
+      "showPanel": {
+        "label": "Panel beside the terminal",
+        "description": "Offer a tunnels panel next to this host's SSH terminal."
+      }
+    },
+    "user": {
+      "companionAutoOpen": {
+        "label": "Open the tunnels panel with a terminal",
+        "description": "Show the tunnels panel when a terminal opens on a host that has it."
+      },
+      "companionSide": {
+        "label": "Tunnels panel side",
+        "description": "Where the panel sits next to the terminal.",
+        "right": "Right",
+        "left": "Left",
+        "bottom": "Bottom"
+      },
+      "companionSize": {
+        "label": "Tunnels panel size",
+        "description": "Width, or height at the bottom, in pixels."
+      },
+      "companionEdgeButton": {
+        "label": "Tunnels panel edge button",
+        "description": "Show a small button on the terminal edge to open the panel."
       }
     }
   },
@@ -288,5 +313,9 @@
     "portCount": "{{count}} ports",
     "scanGuestsLabel": "Scan Proxmox guests",
     "scanGuestsDesc": "On a Proxmox host, also look inside running VMs and containers. VMs need the guest agent."
+  },
+  "companion": {
+    "toggle": "Tunnels panel",
+    "openTab": "Open the Tunnels tab"
   }
 }

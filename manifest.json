@@ -1,7 +1,7 @@
 {
   "id": "tunnels",
   "name": "Tunnels",
-  "version": "1.2.0",
+  "version": "1.2.1",
   "description": "SSH port forwarding that reconnects on its own, WireGuard gateways that publish private services, and client tunnels from the desktop app.",
   "author": {
     "name": "Termix"
@@ -19,7 +19,8 @@
     "Route a tunnel through a second host",
     "WireGuard gateways that forward public ports to services on a private host",
     "Finds listening ports on its own, with a switch for each one",
-    "Client tunnels on your own computer from the desktop app, with presets you can save to the server"
+    "Client tunnels on your own computer from the desktop app, with presets you can save to the server",
+    "A tunnels panel beside any SSH terminal and a tunnels dashboard card"
   ],
   "engine": {
     "termix": ">=26.10.3",
@@ -96,9 +97,63 @@
             "requires": "enableTunnel",
             "defaultable": false,
             "hidden": true
+          },
+          {
+            "key": "showPanel",
+            "type": "boolean",
+            "labelKey": "settings.host.showPanel.label",
+            "descriptionKey": "settings.host.showPanel.description",
+            "default": true,
+            "requires": "enableTunnel"
           }
         ]
-      }
+      },
+      "user": [
+        {
+          "key": "companionAutoOpen",
+          "type": "boolean",
+          "labelKey": "settings.user.companionAutoOpen.label",
+          "descriptionKey": "settings.user.companionAutoOpen.description",
+          "default": false
+        },
+        {
+          "key": "companionSide",
+          "type": "select",
+          "labelKey": "settings.user.companionSide.label",
+          "descriptionKey": "settings.user.companionSide.description",
+          "default": "right",
+          "options": [
+            {
+              "value": "right",
+              "labelKey": "settings.user.companionSide.right"
+            },
+            {
+              "value": "left",
+              "labelKey": "settings.user.companionSide.left"
+            },
+            {
+              "value": "bottom",
+              "labelKey": "settings.user.companionSide.bottom"
+            }
+          ]
+        },
+        {
+          "key": "companionSize",
+          "type": "number",
+          "labelKey": "settings.user.companionSize.label",
+          "descriptionKey": "settings.user.companionSize.description",
+          "min": 240,
+          "max": 900,
+          "default": 320
+        },
+        {
+          "key": "companionEdgeButton",
+          "type": "boolean",
+          "labelKey": "settings.user.companionEdgeButton.label",
+          "descriptionKey": "settings.user.companionEdgeButton.description",
+          "default": true
+        }
+      ]
     },
     "hostCapability": {
       "key": "enableTunnel",
@@ -119,7 +174,14 @@
         "density": "compact"
       }
     },
-    "uses": ["homepage.widgets"]
+    "uses": ["homepage.widgets"],
+    "dashboardCards": [
+      {
+        "id": "tunnels",
+        "titleKey": "nav.tunnels",
+        "icon": "Network"
+      }
+    ]
   },
   "locales": "locales",
   "platforms": ["linux", "win32", "darwin"]

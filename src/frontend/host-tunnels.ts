@@ -12,6 +12,16 @@ export function hostTunnelsEnabled(
   return settings?.enableTunnel === true;
 }
 
+/** Whether the tunnels panel beside this host's terminal is on. */
+export function hostTunnelsPanelEnabled(
+  host: PluginHostRecord | null | undefined,
+): boolean {
+  const settings = (
+    host?.pluginSettings as Record<string, Record<string, unknown>> | undefined
+  )?.tunnels;
+  return settings?.enableTunnel === true && settings.showPanel !== false;
+}
+
 export function parseConnections(value: unknown): TunnelConnection[] {
   let parsed = value;
   if (typeof parsed === "string") {

@@ -190,6 +190,31 @@
       "enable": {
         "label": "Aktiver tunneler",
         "description": "Sett opp SSH-tunneler gjennom denne verten."
+      },
+      "showPanel": {
+        "label": "Panel ved siden av terminalen",
+        "description": "Vis et tunnelpanel ved siden av SSH-terminalen for denne verten."
+      }
+    },
+    "user": {
+      "companionAutoOpen": {
+        "label": "Åpne tunnelpanelet sammen med terminalen",
+        "description": "Vis tunnelpanelet når en terminal åpnes på en vert som har det."
+      },
+      "companionSide": {
+        "label": "Plassering av tunnelpanelet",
+        "description": "Hvor panelet vises i forhold til terminalen.",
+        "right": "Høyre",
+        "left": "Venstre",
+        "bottom": "Bunn"
+      },
+      "companionSize": {
+        "label": "Størrelse på tunnelpanelet",
+        "description": "Bredde, eller høyde hvis det er på bunnen, i piksler."
+      },
+      "companionEdgeButton": {
+        "label": "Kantknapp for tunnelpanelet",
+        "description": "Vis en liten knapp på kanten av terminalen for å åpne panelet."
       }
     }
   },
@@ -288,5 +313,9 @@
     "portCount": "{{count}} porter",
     "scanGuestsLabel": "Skann Proxmox-gjester",
     "scanGuestsDesc": "På en Proxmox-vert, se også inni kjørende VM-er og containere. VM-er trenger gjesteagenten."
+  },
+  "companion": {
+    "toggle": "Tunnelpanel",
+    "openTab": "Åpne fanen for tunneler"
   }
 }

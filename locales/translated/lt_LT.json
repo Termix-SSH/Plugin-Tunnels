@@ -192,6 +192,31 @@
       "enable": {
         "label": "Įjungti tunelius",
         "description": "Sukonfigūruoti SSH tunelius per šį serverį."
+      },
+      "showPanel": {
+        "label": "Skydelis šalia terminalo",
+        "description": "Rodyti tunelių skydelį šalia šio hosto SSH terminalo."
+      }
+    },
+    "user": {
+      "companionAutoOpen": {
+        "label": "Atidaryti tunelių skydelį kartu su terminalu",
+        "description": "Rodyti tunelių skydelį, kai atidaromas terminalas hoste, kuriame jis yra."
+      },
+      "companionSide": {
+        "label": "Tunelių skydelio padėtis",
+        "description": "Kur skydelis rodomas šalia terminalo.",
+        "right": "Dešinėje",
+        "left": "Kairėje",
+        "bottom": "Apačioje"
+      },
+      "companionSize": {
+        "label": "Tunelių skydelio dydis",
+        "description": "Plotis arba aukštis (jei apačioje) pikseliais."
+      },
+      "companionEdgeButton": {
+        "label": "Tunelių skydelio krašto mygtukas",
+        "description": "Rodyti mažą mygtuką terminalo krašte, skirtą atidaryti skydelį."
       }
     }
   },
@@ -290,5 +315,9 @@
     "portCount": "{{count}} prievadai",
     "scanGuestsLabel": "Skaityti Proxmox svečius",
     "scanGuestsDesc": "Proxmox serveryje taip pat ieškoti viduje veikiančių virtualių mašinų ir konteinerių. Virtualioms mašinoms reikia svečio agento."
+  },
+  "companion": {
+    "toggle": "Tunelių skydelis",
+    "openTab": "Atidaryti „Tunelių“ skirtuką"
   }
 }

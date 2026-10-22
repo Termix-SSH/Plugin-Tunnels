@@ -1,6 +1,10 @@
 import { afterEach, describe, expect, it, vi } from "vitest";
 import type { PluginContext } from "@termix-ssh/plugin-sdk/backend";
-import { moveLegacyTunnels } from "../../src/backend/legacy-move.js";
+import {
+  mirrorAllTunnels,
+  mirrorTunnels,
+  moveLegacyTunnels,
+} from "../../src/backend/legacy-move.js";
 import type { SavedTunnelStore } from "../../src/backend/saved-store.js";
 import type { TunnelConnection } from "../../src/backend/types.js";
 import { host, startServer, type TestServer } from "./helpers";
@@ -51,6 +55,21 @@ describe("saved tunnel routes", () => {
     expect((await server.request("GET", "/saved")).body).toEqual([]);
   });
 
+  it("mirrors a saved list to the host setting so sync carries it", async () => {
+    server = await start();
+    await server.request("PUT", "/saved/7", {
+      body: { connections: [tunnel()] },
+    });
+    expect(
+      await server.mock.ctx.settings.getHost(7, "tunnelConnections"),
+    ).toEqual([tunnel()]);
+
+    await server.request("PUT", "/saved/7", { body: { connections: [] } });
+    expect(
+      await server.mock.ctx.settings.getHost(7, "tunnelConnections"),
+    ).toEqual([]);
+  });
+
   it("hides a host's tunnels from a user who cannot reach it", async () => {
     server = await start();
     await server.request("PUT", "/saved/7", {
@@ -94,7 +113,9 @@ describe("old clients", () => {
     expect((await server.request("GET", "/saved")).body).toEqual([
       { hostId: 7, connections: [tunnel()] },
     ]);
-    expect(await mock.ctx.settings.getHost(7, "tunnelConnections")).toEqual([]);
+    expect(await mock.ctx.settings.getHost(7, "tunnelConnections")).toEqual([
+      tunnel(),
+    ]);
 
     await mock.ctx.settings.setHost(7, "tunnelConnections", [
       tunnel({ sourcePort: 2222 }),
@@ -130,10 +151,56 @@ describe("moving old host settings", () => {
     expect(await moveLegacyTunnels(ctx, store)).toBe(1);
     expect(set).toHaveBeenCalledTimes(1);
     expect(set).toHaveBeenCalledWith(7, "user-1", value);
-    expect(setHost).toHaveBeenCalledTimes(2);
+    expect(setHost).not.toHaveBeenCalled();
 
     set.mockClear();
     expect(await moveLegacyTunnels(ctx, store, true)).toBe(2);
     expect(set).toHaveBeenCalledTimes(2);
+  });
+
+  it("does not rewrite a row that already matches", async () => {
+    const value = [tunnel()];
+    const set = vi.fn(async () => {});
+    const ctx = {
+      settings: {
+        listHostValues: async () => [{ hostId: 7, userId: "user-1", value }],
+      },
+      log: { warn: vi.fn(), info: vi.fn() },
+    } as unknown as PluginContext;
+    const store = {
+      get: async (hostId: number) => ({ hostId, connections: value }),
+      set,
+    } as unknown as SavedTunnelStore;
+
+    expect(await moveLegacyTunnels(ctx, store, true)).toBe(0);
+    expect(set).not.toHaveBeenCalled();
+  });
+});
+
+describe("mirroring saved tunnels", () => {
+  it("writes the list to the host setting so sync carries it", async () => {
+    const setHost = vi.fn(async () => {});
+    const ctx = {
+      settings: { getHost: async () => [], setHost },
+      log: { warn: vi.fn(), info: vi.fn() },
+    } as unknown as PluginContext;
+    const store = {
+      listAll: async () => [
+        { hostId: 7, userId: "user-1", connections: [tunnel()] },
+      ],
+    } as unknown as SavedTunnelStore;
+
+    await mirrorAllTunnels(ctx, store);
+    expect(setHost).toHaveBeenCalledWith(7, "tunnelConnections", [tunnel()]);
+  });
+
+  it("leaves a setting that already matches", async () => {
+    const setHost = vi.fn(async () => {});
+    const ctx = {
+      settings: { getHost: async () => [tunnel()], setHost },
+      log: { warn: vi.fn(), info: vi.fn() },
+    } as unknown as PluginContext;
+    await mirrorTunnels(ctx, 7, [tunnel()]);
+    expect(setHost).not.toHaveBeenCalled();
   });
 });

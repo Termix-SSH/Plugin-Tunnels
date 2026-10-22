@@ -190,6 +190,31 @@
       "enable": {
         "label": "Tunnels inschakelen",
         "description": "SSH-tunnels via deze host instellen."
+      },
+      "showPanel": {
+        "label": "Paneel naast de terminal",
+        "description": "Toon een tunnels-paneel naast de SSH-terminal van deze host."
+      }
+    },
+    "user": {
+      "companionAutoOpen": {
+        "label": "Tunnels-paneel openen met een terminal",
+        "description": "Toon het tunnels-paneel wanneer een terminal opent op een host die dit heeft."
+      },
+      "companionSide": {
+        "label": "Positie tunnels-paneel",
+        "description": "Waar het paneel naast de terminal staat.",
+        "right": "Rechts",
+        "left": "Links",
+        "bottom": "Onder"
+      },
+      "companionSize": {
+        "label": "Grootte tunnels-paneel",
+        "description": "Breedte, of hoogte onderaan, in pixels."
+      },
+      "companionEdgeButton": {
+        "label": "Knop aan de rand voor tunnels-paneel",
+        "description": "Toon een kleine knop aan de rand van de terminal om het paneel te openen."
       }
     }
   },
@@ -288,5 +313,9 @@
     "portCount": "{{count}} poorten",
     "scanGuestsLabel": "Proxmox-gasten scannen",
     "scanGuestsDesc": "Zoek op een Proxmox-host ook binnen draaiende VM's en containers. VM's hebben de guest agent nodig."
+  },
+  "companion": {
+    "toggle": "Tunnels-paneel",
+    "openTab": "Tabblad Tunnels openen"
   }
 }

@@ -190,6 +190,31 @@
       "enable": {
         "label": "Tunnel aktivieren",
         "description": "SSH-Tunnel über diesen Host einrichten."
+      },
+      "showPanel": {
+        "label": "Panel neben dem Terminal",
+        "description": "Zeigt ein Tunnel-Panel neben dem SSH-Terminal dieses Hosts an."
+      }
+    },
+    "user": {
+      "companionAutoOpen": {
+        "label": "Tunnel-Panel mit Terminal öffnen",
+        "description": "Zeigt das Tunnel-Panel an, wenn ein Terminal auf einem Host geöffnet wird, der dieses Feature unterstützt."
+      },
+      "companionSide": {
+        "label": "Position des Tunnel-Panels",
+        "description": "Wo sich das Panel neben dem Terminal befindet.",
+        "right": "Rechts",
+        "left": "Links",
+        "bottom": "Unten"
+      },
+      "companionSize": {
+        "label": "Größe des Tunnel-Panels",
+        "description": "Breite oder Höhe (wenn unten) in Pixeln."
+      },
+      "companionEdgeButton": {
+        "label": "Kantenschaltfläche für Tunnel-Panel",
+        "description": "Zeigt eine kleine Schaltfläche am Terminalrand an, um das Panel zu öffnen."
       }
     }
   },
@@ -288,5 +313,9 @@
     "portCount": "{{count}} Ports",
     "scanGuestsLabel": "Proxmox-Gäste scannen",
     "scanGuestsDesc": "Auf einem Proxmox-Host auch in laufenden VMs und Containern suchen. VMs benötigen den Guest-Agent."
+  },
+  "companion": {
+    "toggle": "Tunnel-Panel",
+    "openTab": "Tunnel-Tab öffnen"
   }
 }

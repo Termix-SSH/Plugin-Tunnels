@@ -189,6 +189,31 @@
       "enable": {
         "label": "Aktifkan terowongan",
         "description": "Atur terowongan SSH melalui host ini."
+      },
+      "showPanel": {
+        "label": "Panel di samping terminal",
+        "description": "Tampilkan panel terowongan di sebelah terminal SSH host ini."
+      }
+    },
+    "user": {
+      "companionAutoOpen": {
+        "label": "Buka panel terowongan bersama terminal",
+        "description": "Tampilkan panel terowongan saat terminal terbuka pada host yang memilikinya."
+      },
+      "companionSide": {
+        "label": "Posisi panel terowongan",
+        "description": "Di mana panel berada di samping terminal.",
+        "right": "Kanan",
+        "left": "Kiri",
+        "bottom": "Bawah"
+      },
+      "companionSize": {
+        "label": "Ukuran panel terowongan",
+        "description": "Lebar, atau tinggi jika di bawah, dalam piksel."
+      },
+      "companionEdgeButton": {
+        "label": "Tombol tepi panel terowongan",
+        "description": "Tampilkan tombol kecil di tepi terminal untuk membuka panel."
       }
     }
   },
@@ -287,5 +312,9 @@
     "portCount": "{{count}} port",
     "scanGuestsLabel": "Pindai tamu Proxmox",
     "scanGuestsDesc": "Pada host Proxmox, juga cari di dalam VM dan container yang berjalan. VM memerlukan agen tamu."
+  },
+  "companion": {
+    "toggle": "Panel terowongan",
+    "openTab": "Buka tab Terowongan"
   }
 }

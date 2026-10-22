@@ -191,6 +191,31 @@
       "enable": {
         "label": "Omogući tunele",
         "description": "Postavite SSH tunele putem ovog hosta."
+      },
+      "showPanel": {
+        "label": "Panel uz terminal",
+        "description": "Prikaži panel tunela uz SSH terminal ovog hosta."
+      }
+    },
+    "user": {
+      "companionAutoOpen": {
+        "label": "Otvori panel tunela s terminalom",
+        "description": "Prikaži panel tunela kada se terminal otvori na hostu koji ga ima."
+      },
+      "companionSide": {
+        "label": "Stranica panela tunela",
+        "description": "Gdje se panel nalazi uz terminal.",
+        "right": "Desno",
+        "left": "Lijevo",
+        "bottom": "Dolje"
+      },
+      "companionSize": {
+        "label": "Veličina panela tunela",
+        "description": "Širina, ili visina ako je na dnu, u pikselima."
+      },
+      "companionEdgeButton": {
+        "label": "Gumb na rubu za panel tunela",
+        "description": "Prikaži mali gumb na rubu terminala za otvaranje panela."
       }
     }
   },
@@ -289,5 +314,9 @@
     "portCount": "{{count}} portova",
     "scanGuestsLabel": "Skeniraj Proxmox goste",
     "scanGuestsDesc": "Na Proxmox hostu, potraži i unutar pokrenutih VM-ova i kontejnera. VM-ovi zahtijevaju guest agent."
+  },
+  "companion": {
+    "toggle": "Panel tunela",
+    "openTab": "Otvori karticu Tunela"
   }
 }

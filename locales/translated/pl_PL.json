@@ -192,6 +192,31 @@
       "enable": {
         "label": "Włącz tunele",
         "description": "Skonfiguruj tunele SSH przez tego hosta."
+      },
+      "showPanel": {
+        "label": "Panel obok terminala",
+        "description": "Wyświetl panel tuneli obok terminala SSH tego hosta."
+      }
+    },
+    "user": {
+      "companionAutoOpen": {
+        "label": "Otwieraj panel tuneli razem z terminalem",
+        "description": "Wyświetlaj panel tuneli, gdy terminal otwiera się na hoście, który go posiada."
+      },
+      "companionSide": {
+        "label": "Położenie panelu tuneli",
+        "description": "Gdzie panel znajduje się względem terminala.",
+        "right": "Prawa",
+        "left": "Lewa",
+        "bottom": "Dolna"
+      },
+      "companionSize": {
+        "label": "Rozmiar panelu tuneli",
+        "description": "Szerokość, lub wysokość w przypadku położenia dolnego, w pikselach."
+      },
+      "companionEdgeButton": {
+        "label": "Przycisk krawędziowy panelu tuneli",
+        "description": "Wyświetl mały przycisk na krawędzi terminala, aby otworzyć panel."
       }
     }
   },
@@ -290,5 +315,9 @@
     "portCount": "{{count}} portów",
     "scanGuestsLabel": "Skanuj gości Proxmox",
     "scanGuestsDesc": "Na hoście Proxmox szukaj również w działających maszynach wirtualnych i kontenerach. Maszyny wirtualne wymagają agenta gościa."
+  },
+  "companion": {
+    "toggle": "Panel tuneli",
+    "openTab": "Otwórz kartę Tuneli"
   }
 }

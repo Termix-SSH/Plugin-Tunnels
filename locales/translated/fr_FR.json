@@ -191,6 +191,31 @@
       "enable": {
         "label": "Activer les tunnels",
         "description": "Configurer les tunnels SSH via cet hôte."
+      },
+      "showPanel": {
+        "label": "Panneau à côté du terminal",
+        "description": "Afficher un panneau de tunnels à côté du terminal SSH de cet hôte."
+      }
+    },
+    "user": {
+      "companionAutoOpen": {
+        "label": "Ouvrir le panneau de tunnels avec un terminal",
+        "description": "Afficher le panneau de tunnels lorsqu'un terminal s'ouvre sur un hôte qui en possède un."
+      },
+      "companionSide": {
+        "label": "Position du panneau de tunnels",
+        "description": "Emplacement du panneau par rapport au terminal.",
+        "right": "Droite",
+        "left": "Gauche",
+        "bottom": "Bas"
+      },
+      "companionSize": {
+        "label": "Taille du panneau de tunnels",
+        "description": "Largeur, ou hauteur en bas, en pixels."
+      },
+      "companionEdgeButton": {
+        "label": "Bouton latéral du panneau de tunnels",
+        "description": "Afficher un petit bouton sur le bord du terminal pour ouvrir le panneau."
       }
     }
   },
@@ -289,5 +314,9 @@
     "portCount": "{{count}} ports",
     "scanGuestsLabel": "Rechercher les invités Proxmox",
     "scanGuestsDesc": "Sur un hôte Proxmox, recherchez également à l'intérieur des machines virtuelles et des conteneurs en cours d'exécution. Les machines virtuelles nécessitent l'agent invité."
+  },
+  "companion": {
+    "toggle": "Panneau de tunnels",
+    "openTab": "Ouvrir l'onglet Tunnels"
   }
 }

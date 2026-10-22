@@ -192,6 +192,31 @@
       "enable": {
         "label": "Omogoči tunele",
         "description": "Nastavite SSH tunele prek tega gostitelja."
+      },
+      "showPanel": {
+        "label": "Plošča ob terminalu",
+        "description": "Omogoči ploščo tunlov ob SSH terminalu tega gostitelja."
+      }
+    },
+    "user": {
+      "companionAutoOpen": {
+        "label": "Odpri ploščo tunlov s terminalom",
+        "description": "Prikaži ploščo tunlov, ko se terminal odpre na gostitelju, ki jo ima."
+      },
+      "companionSide": {
+        "label": "Stran plošče tunlov",
+        "description": "Kje se plošča nahaja ob terminalu.",
+        "right": "Desno",
+        "left": "Levo",
+        "bottom": "Spodaj"
+      },
+      "companionSize": {
+        "label": "Velikost plošče tunlov",
+        "description": "Širina ali višina (če je spodaj) v pixelih."
+      },
+      "companionEdgeButton": {
+        "label": "Gumb na robu plošče tunlov",
+        "description": "Prikaži majhen gumb na robu terminala za odpiranje plošče."
       }
     }
   },
@@ -290,5 +315,9 @@
     "portCount": "{{count}} vrat",
     "scanGuestsLabel": "Skeniraj Proxmox goste",
     "scanGuestsDesc": "Na gostitelju Proxmox poglejte tudi v notranjost delujočih navideznih strojev in kontejnerjev. Navidezni stroji potrebujejo gostov agent."
+  },
+  "companion": {
+    "toggle": "Plošča tunlov",
+    "openTab": "Odpri zavihek Tunli"
   }
 }

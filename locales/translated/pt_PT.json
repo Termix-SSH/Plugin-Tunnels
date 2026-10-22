@@ -191,6 +191,31 @@
       "enable": {
         "label": "Ativar túneis",
         "description": "Configurar túneis SSH através deste host."
+      },
+      "showPanel": {
+        "label": "Painel ao lado do terminal",
+        "description": "Exibir um painel de túneis ao lado do terminal SSH deste host."
+      }
+    },
+    "user": {
+      "companionAutoOpen": {
+        "label": "Abrir o painel de túneis com um terminal",
+        "description": "Mostrar o painel de túneis quando um terminal for aberto num host que o tenha."
+      },
+      "companionSide": {
+        "label": "Lado do painel de túneis",
+        "description": "Onde o painel fica ao lado do terminal.",
+        "right": "Direita",
+        "left": "Esquerda",
+        "bottom": "Inferior"
+      },
+      "companionSize": {
+        "label": "Tamanho do painel de túneis",
+        "description": "Largura, ou altura na parte inferior, em pixels."
+      },
+      "companionEdgeButton": {
+        "label": "Botão lateral do painel de túneis",
+        "description": "Mostrar um pequeno botão na borda do terminal para abrir o painel."
       }
     }
   },
@@ -289,5 +314,9 @@
     "portCount": "{{count}} portas",
     "scanGuestsLabel": "Varrer convidados do Proxmox",
     "scanGuestsDesc": "Num host Proxmox, procure também dentro de VMs e contentores em execução. As VMs necessitam do agente convidado."
+  },
+  "companion": {
+    "toggle": "Painel de túneis",
+    "openTab": "Abrir a aba de Túneis"
   }
 }

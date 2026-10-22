@@ -189,6 +189,31 @@
       "enable": {
         "label": "トンネルを有効化",
         "description": "このホスト経由でSSHトンネルを設定します。"
+      },
+      "showPanel": {
+        "label": "ターミナル横のパネル",
+        "description": "このホストの SSH ターミナルの横にトンネルパネルを表示します。"
+      }
+    },
+    "user": {
+      "companionAutoOpen": {
+        "label": "ターミナルと共にトンネルパネルを開く",
+        "description": "トンネルパネルが設定されたホストでターミナルを開いた際、トンネルパネルを表示します。"
+      },
+      "companionSide": {
+        "label": "トンネルパネルの配置位置",
+        "description": "ターミナルの横にパネルを表示する位置です。",
+        "right": "右",
+        "left": "左",
+        "bottom": "下"
+      },
+      "companionSize": {
+        "label": "トンネルパネルのサイズ",
+        "description": "幅、または下部配置時の高さをピクセル単位で指定します。"
+      },
+      "companionEdgeButton": {
+        "label": "トンネルパネルのエッジボタン",
+        "description": "パネルを開くための小さなボタンをターミナルの端に表示します。"
       }
     }
   },
@@ -287,5 +312,9 @@
     "portCount": "{{count}} 個のポート",
     "scanGuestsLabel": "Proxmox ゲストをスキャン",
     "scanGuestsDesc": "Proxmox ホストでは、実行中の VM とコンテナ内もスキャンします。VM にはゲストエージェントが必要です。"
+  },
+  "companion": {
+    "toggle": "トンネルパネル",
+    "openTab": "トンネルタブを開く"
   }
 }

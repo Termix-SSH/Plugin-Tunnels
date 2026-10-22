@@ -190,6 +190,31 @@
       "enable": {
         "label": "Alagutak engedélyezése",
         "description": "SSH-alagutak beállítása ezen a gazdagépen keresztül."
+      },
+      "showPanel": {
+        "label": "Panel a terminál mellett",
+        "description": "Alagutak panel megjelenítése a gazdagép SSH terminálja mellett."
+      }
+    },
+    "user": {
+      "companionAutoOpen": {
+        "label": "Alagutak panel megnyitása terminállal együtt",
+        "description": "Az alagutak panel megjelenítése, amikor egy olyan gazdagépen nyílik terminál, amelyik támogatja."
+      },
+      "companionSide": {
+        "label": "Alagutak panel oldala",
+        "description": "Ahol a panel helyezkedik el a terminál mellett.",
+        "right": "Jobb",
+        "left": "Bal",
+        "bottom": "Alsó"
+      },
+      "companionSize": {
+        "label": "Alagutak panel mérete",
+        "description": "Szélesség, vagy az alsó elhelyezés esetén magasság, pixelben."
+      },
+      "companionEdgeButton": {
+        "label": "Alagutak panel szélgombja",
+        "description": "Egy kis gomb megjelenítése a terminál szélén a panel megnyitásához."
       }
     }
   },
@@ -288,5 +313,9 @@
     "portCount": "{{count}} port",
     "scanGuestsLabel": "Proxmox vendégek szkennelése",
     "scanGuestsDesc": "Proxmox gazdagépen nézz bele a futó virtuális gépekbe és konténerekbe is. A virtuális gépekhez vendégügynök szükséges."
+  },
+  "companion": {
+    "toggle": "Alagutak panel",
+    "openTab": "Alagutak fül megnyitása"
   }
 }

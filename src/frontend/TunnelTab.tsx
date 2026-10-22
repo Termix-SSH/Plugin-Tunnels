@@ -57,10 +57,10 @@ import { docsUrl } from "./docs";
 // The orange add button with a light orange fill, used for every add action.
 export const ADD_CLASS = "bg-accent-brand/10 dark:bg-accent-brand/10";
 
-type StatusLabel =
+export type StatusLabel =
   "CONNECTED" | "CONNECTING" | "ERROR" | "WAITING" | "DISCONNECTED";
 
-function statusLabel(status: TunnelStatus | undefined): StatusLabel {
+export function statusLabel(status: TunnelStatus | undefined): StatusLabel {
   const value = status?.status?.toUpperCase();
   if (value === "CONNECTED") return "CONNECTED";
   if (value === "CONNECTING" || value === "VERIFYING") return "CONNECTING";
@@ -69,7 +69,7 @@ function statusLabel(status: TunnelStatus | undefined): StatusLabel {
   return "DISCONNECTED";
 }
 
-const STATUS_TEXT_KEYS: Record<StatusLabel, string> = {
+export const STATUS_TEXT_KEYS: Record<StatusLabel, string> = {
   CONNECTED: "tunnels.connected",
   CONNECTING: "tunnels.connecting",
   ERROR: "tunnels.error",
@@ -277,14 +277,14 @@ function TunnelCard({
 }
 
 /** A host's saved server tunnels, with live status and start/stop controls. */
-interface TunnelEntry {
+export interface TunnelEntry {
   host: PluginHostRecord;
   tunnel: TunnelConnection;
   index: number;
   name: string;
 }
 
-function tunnelEntries(
+export function tunnelEntries(
   host: PluginHostRecord,
   saved: Map<number, TunnelConnection[]>,
 ): TunnelEntry[] {
@@ -335,7 +335,8 @@ export function TunnelTab({
     host: PluginHostRecord;
     index: number | null;
   } | null>(null);
-  const { view, density, setView, setDensity } = usePluginPanelView();
+  const { view, density, columns, setView, setDensity, setColumns } =
+    usePluginPanelView();
   const [picking, setPicking] = useState(false);
 
   const entries: TunnelEntry[] = host
@@ -598,6 +599,8 @@ export function TunnelTab({
                     onView={setView}
                     density={density}
                     onDensity={setDensity}
+                    columns={columns}
+                    onColumns={setColumns}
                   />
                 </div>
               </>
@@ -634,6 +637,8 @@ export function TunnelTab({
           getKey={(entry) => entry.name}
           renderCard={card}
           columns={{ base: 1, md: 2, lg: 3 }}
+          size={columns}
+          minCardWidth={300}
           listColumns={listColumns}
           empty={<EmptyState icon={Network} title={t("tunnels.noMatches")} />}
         />
@@ -645,9 +650,17 @@ export function TunnelTab({
               count={group.length}
               className="pt-1"
             />
-            <div className="grid grid-cols-1 gap-2 md:grid-cols-2 lg:grid-cols-3">
-              {group.map(card)}
-            </div>
+            <DataView
+              items={group}
+              view="grid"
+              getKey={(entry) => entry.name}
+              renderCard={card}
+              columns={{ base: 1, md: 2, lg: 3 }}
+              size={columns}
+              minCardWidth={300}
+              listColumns={listColumns}
+              empty={null}
+            />
           </div>
         ))
       )}

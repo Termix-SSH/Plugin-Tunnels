@@ -75,7 +75,14 @@ describe(`${manifest.id} activate`, () => {
     expect(rendered.registered.hostActions()).toEqual([
       expect.objectContaining({ id: "tunnel", tabType: "tunnel" }),
     ]);
-    expect(rendered.registered.actions().sort()).toEqual(["tunnels.open"]);
+    expect(rendered.registered.actions().sort()).toEqual([
+      "tunnels.open",
+      "tunnels.togglePanel",
+    ]);
+    expect(rendered.registered.dashboardCards()).toEqual(["tunnels"]);
+    expect(rendered.registered.slot("tab.menu")).toEqual([
+      "tunnels.togglePanel",
+    ]);
     expect(rendered.registered.slot("dashboard.counters")).toEqual([
       "tunnels.open",
     ]);

@@ -189,6 +189,31 @@
       "enable": {
         "label": "启用隧道",
         "description": "通过此主机设置 SSH 隧道。"
+      },
+      "showPanel": {
+        "label": "终端旁边的面板",
+        "description": "在此主机的 SSH 终端旁提供隧道面板。"
+      }
+    },
+    "user": {
+      "companionAutoOpen": {
+        "label": "随终端打开隧道面板",
+        "description": "当在具有该功能的主机上打开终端时，显示隧道面板。"
+      },
+      "companionSide": {
+        "label": "隧道面板位置",
+        "description": "面板相对于终端的位置。",
+        "right": "右侧",
+        "left": "左侧",
+        "bottom": "底部"
+      },
+      "companionSize": {
+        "label": "隧道面板大小",
+        "description": "宽度（或位于底部时的高度），单位为像素。"
+      },
+      "companionEdgeButton": {
+        "label": "隧道面板边缘按钮",
+        "description": "在终端边缘显示一个小按钮，用于打开面板。"
       }
     }
   },
@@ -287,5 +312,9 @@
     "portCount": "{{count}} 个端口",
     "scanGuestsLabel": "扫描 Proxmox 虚拟机",
     "scanGuestsDesc": "在 Proxmox 主机上，同时扫描正在运行的虚拟机和容器。虚拟机需要安装 Guest Agent。"
+  },
+  "companion": {
+    "toggle": "隧道面板",
+    "openTab": "打开隧道选项卡"
   }
 }
