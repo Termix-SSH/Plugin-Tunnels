@@ -188,17 +188,18 @@ type EndpointHostLike = {
 export function findHostByTunnelEndpoint<T extends EndpointHostLike>(
   hosts: T[],
   endpointHost?: string | null,
+  options: { byAddress?: boolean } = {},
 ): T | undefined {
   const value = endpointHost?.trim();
   if (!value) return undefined;
+  const byAddress = options.byAddress ?? true;
 
   return hosts.find((host) => {
     const userAtIp = host.username ? `${host.username}@${host.ip}` : "";
     return (
       String(host.id) === value ||
       host.name === value ||
-      host.ip === value ||
-      userAtIp === value
+      (byAddress && (host.ip === value || userAtIp === value))
     );
   });
 }

@@ -1,5 +1,11 @@
 # Changelog
 
+## 1.2.2
+
+### Fixed
+
+- A local tunnel to an address that a saved host also uses now listens on this machine like any other local tunnel, instead of quietly listening on the SSH host. Pick the saved host by name to route through it
+
 ## 1.2.1
 
 ### Added

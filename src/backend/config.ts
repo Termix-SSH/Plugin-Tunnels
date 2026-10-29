@@ -105,7 +105,12 @@ export async function resolveEndpoint(
   if (isSingleHostTunnel(config)) return config;
 
   const hosts = await ctx.hosts.list();
-  const endpoint = findHostByTunnelEndpoint(hosts, config.endpointHost);
+  // A local forward to a plain address is just a TCP target, even when a saved
+  // host has that address; it becomes a host hop only when picked by name.
+  // Matching the address moved the listener off this machine.
+  const endpoint = findHostByTunnelEndpoint(hosts, config.endpointHost, {
+    byAddress: getTunnelMode(config) === "remote",
+  });
 
   if (!endpoint) {
     if (getTunnelMode(config) === "remote") {
