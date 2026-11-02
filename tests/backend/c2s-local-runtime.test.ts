@@ -1,4 +1,5 @@
 import { EventEmitter } from "node:events";
+import { PassThrough } from "node:stream";
 import { describe, expect, it, vi } from "vitest";
 import type { WebSocket } from "ws";
 import {
@@ -73,6 +74,55 @@ const defaultLink = {
 };
 
 describe("client tunnel runtime", () => {
+  it("preserves flowing socket data while the relay link is being resolved", async () => {
+    let resolveLink!: (link: typeof defaultLink) => void;
+    const link = new Promise<typeof defaultLink>((resolve) => {
+      resolveLink = resolve;
+    });
+    const { runtime, sockets } = setup(link);
+    const local = new PassThrough();
+    // SOCKS negotiation leaves the socket flowing after removing its handler.
+    const negotiation = () => {};
+    local.on("data", negotiation);
+    local.removeListener("data", negotiation);
+    const initialData = Buffer.from("POST /login HTTP/1.1\r\n");
+    const first = Buffer.from("Content-Length: 4\r\n\r\n");
+    const second = Buffer.from("test");
+
+    try {
+      const opening = runtime.openRelay(
+        { name: "socks" },
+        "service.example",
+        8080,
+        local as never,
+        initialData,
+      );
+      local.write(first);
+      // Let the stream process incoming bytes while getLink is still pending.
+      await new Promise<void>((resolve) => setImmediate(resolve));
+      expect(sockets).toHaveLength(0);
+      resolveLink(defaultLink);
+      await opening;
+      local.write(second);
+      // Data must wait for the relay's ready message, including initialData.
+      expect(
+        sockets[0].send.mock.calls.filter(([data]) => Buffer.isBuffer(data)),
+      ).toHaveLength(0);
+      sockets[0].ready();
+      await vi.waitFor(() => {
+        const forwarded = sockets[0].send.mock.calls
+          .map(([data]) => data)
+          .filter(Buffer.isBuffer);
+        expect(Buffer.concat(forwarded)).toEqual(
+          Buffer.concat([initialData, first, second]),
+        );
+      });
+    } finally {
+      local.destroy();
+      for (const socket of sockets) socket.close();
+    }
+  });
+
   it("holds the preflight open, refuses early connections and stops cleanly", async () => {
     const { runtime, sockets, urls, server, attachAuth, incoming } = setup();
     const tunnel = {
@@ -170,7 +220,12 @@ describe("client tunnel runtime", () => {
       bindHost: "127.0.0.1",
     } as never);
     const local = () =>
-      Object.assign(new EventEmitter(), { destroy: vi.fn(), write: vi.fn() });
+      Object.assign(new EventEmitter(), {
+        destroy: vi.fn(),
+        write: vi.fn(),
+        pause: vi.fn(),
+        resume: vi.fn(),
+      });
 
     const first = local();
     await runtime.openRelay({ name: "web" }, "127.0.0.1", 8006, first as never);
