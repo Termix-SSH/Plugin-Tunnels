@@ -84,6 +84,51 @@ describe("remote client tunnels on one shared connection", () => {
 });
 
 describe("local client tunnel errors", () => {
+  it("closes the relay when the target ends its side of the channel", async () => {
+    const mock = createMockCtx({
+      pluginId: "tunnels",
+      manifest,
+      capabilities: manifest.capabilities,
+      permissions: ["tunnels.use"],
+      hosts: [host()],
+    });
+    const outbound = new PassThrough();
+    const client = Object.assign(new EventEmitter(), {
+      forwardOut: vi.fn(
+        (
+          _sh: string,
+          _sp: number,
+          _th: string,
+          _tp: number,
+          cb: (e?: Error, stream?: PassThrough) => void,
+        ) => cb(undefined, outbound),
+      ),
+    });
+    mock.ctx.ssh.connect = (async () => ({
+      client,
+      dispose: vi.fn(),
+      host: host(),
+      jumpClient: null,
+    })) as unknown as typeof mock.ctx.ssh.connect;
+    const socket = new Socket();
+    createC2SRelay(mock.ctx)(socket.ws, "user-1");
+    socket.message({
+      type: "open",
+      tunnelConfig: { sourceHostId: 7, mode: "local", endpointPort: 8888 },
+    });
+    await vi.waitFor(() =>
+      expect(socket.messages().at(-1)?.type).toBe("ready"),
+    );
+
+    // Half-close only: the stream ends but is never destroyed, like an
+    // SSH channel whose target sent FIN after an idle keep-alive timeout.
+    outbound.push(null);
+    outbound.resume();
+
+    await vi.waitFor(() => expect(socket.readyState).toBe(3));
+    expect(outbound.destroyed).toBe(true);
+  });
+
   it("says which target the endpoint host could not reach", async () => {
     const mock = createMockCtx({
       pluginId: "tunnels",
