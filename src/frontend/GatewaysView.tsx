@@ -562,7 +562,8 @@ function GatewayDetail({
           </Button>
         </div>
       }
-      className="gap-3 p-2.5"
+      // Sections keep their height so the panel scrolls instead of squeezing them.
+      className="gap-3 p-2.5 [&>*]:shrink-0"
     >
       <div className="border border-border bg-muted/20 p-3 text-xs">
         <div className="grid grid-cols-1 gap-1 md:grid-cols-2">

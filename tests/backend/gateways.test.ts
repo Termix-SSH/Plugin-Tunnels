@@ -331,6 +331,28 @@ describe("gateways", () => {
     expect(fake.applied().length).toBe(2);
   });
 
+  it("never forwards the tunnel's own WireGuard port", async () => {
+    const { started, fake } = await start();
+    server = started;
+    const gateway = (
+      await started.request("POST", "/gateways", { body: createBody })
+    ).body;
+    fake.listening[PRIVATE] = [
+      `udp UNCONN 0 0 0.0.0.0:${gateway.listenPort} 0.0.0.0:*`,
+      "udp UNCONN 0 0 0.0.0.0:12820 0.0.0.0:*",
+    ].join("\n");
+
+    expect(
+      (await started.request("POST", `/gateways/${gateway.id}/scan`)).body
+        .found,
+    ).toBe(1);
+    const listed = (await started.request("GET", `/gateways/${gateway.id}`))
+      .body;
+    expect(
+      listed.ports.map((p: { publicPort: number }) => p.publicPort),
+    ).toEqual([12820]);
+  });
+
   it("does not forward a scanned port the public host already uses", async () => {
     const { started, fake } = await start();
     server = started;

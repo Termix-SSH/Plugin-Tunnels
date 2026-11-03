@@ -69,6 +69,8 @@ export function privateWgConf(side: PrivateSide): string {
   return [
     "[Interface]",
     `Address = ${privateWgIp(side.gatewayId)}/30`,
+    // A fixed port, so the port scan can tell it apart from a service.
+    `ListenPort = ${side.listenPort}`,
     `PrivateKey = ${side.privateKey}`,
     "",
     "[Peer]",
@@ -93,7 +95,7 @@ export function publicNft(gatewayId: number, ports: ScriptPort[]): string {
     const to = destinationFor(gatewayId, port.targetHost);
     for (const proto of protos(port.proto)) {
       dnat.push(
-        `    iifname != "${iface}" ${proto} dport ${port.publicPort} dnat to ${to}:${port.targetPort}`,
+        `    iifname != "${iface}" fib daddr type local ${proto} dport ${port.publicPort} dnat to ${to}:${port.targetPort}`,
       );
     }
   }

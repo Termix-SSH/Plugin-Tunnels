@@ -1,5 +1,13 @@
 # Changelog
 
+## 1.2.3
+
+### Fixed
+
+- The gateway port scan no longer forwards the tunnel's own WireGuard port. The private end now uses a fixed port instead of a random one
+- Gateway ports only catch traffic sent to the public host itself, so other machines behind it can still reach those ports on the internet
+- A gateway's page scrolls again instead of squeezing its sections to fit the window
+
 ## 1.2.2
 
 ### Fixed

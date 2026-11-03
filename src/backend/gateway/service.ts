@@ -507,9 +507,12 @@ export function createGatewayService(
   async function scanNow(id: number): Promise<number> {
     const gateway = await repo.getGateway(id);
     if (!gateway) throw new GatewayError("Gateway not found", 404);
+    // Every gateway's tunnel port, in case a host runs more than one.
+    const tunnelPorts = (await repo.listGateways()).map((g) => g.listenPort);
     const ignored = new Set([
       ...DEFAULT_IGNORED_PORTS,
       gateway.listenPort,
+      ...tunnelPorts,
       ...parseNumbers(gateway.ignoredPorts),
     ]);
     const sources = [

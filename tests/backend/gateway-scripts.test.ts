@@ -4,6 +4,7 @@ import {
   parseProbe,
   privateInstallScript,
   privateNft,
+  privateWgConf,
   probeScript,
   publicInstallScript,
   publicNft,
@@ -75,7 +76,7 @@ describe("gateway rules", () => {
     const nft = publicNft(2, ports);
     expect(nft).toContain("table ip termix_gw_2");
     expect(nft).toContain(
-      'iifname != "wgtx2" tcp dport 25565 dnat to 10.77.3.2:25565',
+      'iifname != "wgtx2" fib daddr type local tcp dport 25565 dnat to 10.77.3.2:25565',
     );
     expect(nft).toContain("tcp dport 7777 dnat to 192.168.1.50:7778");
     expect(nft).toContain("udp dport 7777 dnat to 192.168.1.50:7778");
@@ -112,6 +113,18 @@ describe("gateway rules", () => {
     });
     expect(conf).toContain("ListenPort = 51832");
     expect(conf).toContain("AllowedIPs = 10.77.3.2/32, 192.168.1.50/32");
+  });
+
+  it("gives the private end a fixed port so a scan can skip it", () => {
+    const conf = privateWgConf({
+      gatewayId: 2,
+      endpoint: "203.0.113.5",
+      listenPort: 51832,
+      privateKey: client.privateKey,
+      peerPublicKey: server.publicKey,
+    });
+    expect(conf).toContain("ListenPort = 51832");
+    expect(conf).toContain("Endpoint = 203.0.113.5:51832");
   });
 
   it("masquerades into the LAN on the private side", () => {
