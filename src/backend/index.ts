@@ -17,6 +17,7 @@ import { createTunnelManager } from "./manager.js";
 import { registerTunnelRoutes } from "./routes.js";
 import { createC2SRelay } from "./c2s-relay.js";
 import { createTunnelsService } from "./service.js";
+import { registerOperations } from "./operations.js";
 import { startAutoStartTunnels } from "./autostart.js";
 import { registerC2SLocal } from "./c2s-local/local.js";
 
@@ -73,10 +74,9 @@ export async function activate(ctx: PluginContext) {
     }),
   );
 
-  ctx.services.provide(
-    "tunnels.access",
-    createTunnelsService(ctx, manager, store),
-  );
+  const access = createTunnelsService(ctx, manager, store);
+  ctx.services.provide("tunnels.access", access);
+  registerOperations(ctx, access);
 
   // Deferred so activation is not held up by SSH handshakes.
   const autostart = setTimeout(() => {

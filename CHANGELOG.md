@@ -1,5 +1,16 @@
 # Changelog
 
+## 1.3.0
+
+### Added
+
+- Connect and disconnect tunnels from Automations, the CLI, the phone app and the command palette through Termix actions
+- Tunnels that are down show as a status tile
+
+### Changed
+
+- Needs Termix 26.11.1 or newer
+
 ## 1.2.3
 
 ### Fixed

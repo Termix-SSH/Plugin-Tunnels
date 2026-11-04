@@ -1,7 +1,7 @@
 {
   "id": "tunnels",
   "name": "Tunnels",
-  "version": "1.2.3",
+  "version": "1.3.0",
   "description": "SSH port forwarding that reconnects on its own, WireGuard gateways that publish private services, and client tunnels from the desktop app.",
   "author": {
     "name": "Termix"
@@ -23,7 +23,7 @@
     "A tunnels panel beside any SSH terminal and a tunnels dashboard card"
   ],
   "engine": {
-    "termix": ">=26.10.3",
+    "termix": ">=26.11.1-0",
     "api": "^1.5"
   },
   "capabilities": [
@@ -36,7 +36,8 @@
     "users:impersonate",
     "db:core-refs",
     "desktop:local",
-    "secrets:own"
+    "secrets:own",
+    "operations:provide"
   ],
   "provides": [
     {
@@ -181,7 +182,92 @@
         "titleKey": "nav.tunnels",
         "icon": "Network"
       }
-    ]
+    ],
+    "operations": {
+      "actions": [
+        {
+          "id": "tunnels.list",
+          "titleKey": "operations.list.title",
+          "scope": "server",
+          "risk": "read",
+          "permission": "use",
+          "surfaces": {
+            "assistant": true,
+            "mcp": true,
+            "palette": false
+          }
+        },
+        {
+          "id": "tunnels.down",
+          "titleKey": "operations.down.title",
+          "scope": "server",
+          "risk": "read",
+          "permission": "use",
+          "surfaces": {
+            "palette": false
+          }
+        },
+        {
+          "id": "tunnels.connect",
+          "titleKey": "operations.connect.title",
+          "icon": "Plug",
+          "scope": "server",
+          "risk": "change",
+          "permission": "use",
+          "dryRun": "describe",
+          "undo": "tunnels.disconnect",
+          "idempotent": true,
+          "inputs": [
+            {
+              "key": "name",
+              "type": "select",
+              "labelKey": "operations.name",
+              "required": true,
+              "optionsFrom": "tunnels.list"
+            }
+          ],
+          "surfaces": {
+            "assistant": true,
+            "mcp": true
+          }
+        },
+        {
+          "id": "tunnels.disconnect",
+          "titleKey": "operations.disconnect.title",
+          "icon": "Unplug",
+          "scope": "server",
+          "risk": "change",
+          "permission": "use",
+          "dryRun": "describe",
+          "undo": "tunnels.connect",
+          "idempotent": true,
+          "inputs": [
+            {
+              "key": "name",
+              "type": "select",
+              "labelKey": "operations.name",
+              "required": true,
+              "optionsFrom": "tunnels.list"
+            }
+          ],
+          "surfaces": {
+            "assistant": true,
+            "mcp": true
+          }
+        }
+      ],
+      "signals": [
+        {
+          "id": "tunnels.down",
+          "titleKey": "operations.down.title",
+          "read": "tunnels.down",
+          "scope": "server",
+          "kind": "count",
+          "refreshSec": 60,
+          "fix": "tunnels.connect"
+        }
+      ]
+    }
   },
   "locales": "locales",
   "platforms": ["linux", "win32", "darwin"]

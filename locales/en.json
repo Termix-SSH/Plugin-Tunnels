@@ -317,5 +317,20 @@
   "companion": {
     "toggle": "Tunnels panel",
     "openTab": "Open the Tunnels tab"
+  },
+  "operations": {
+    "list": {
+      "title": "List tunnels"
+    },
+    "down": {
+      "title": "Tunnels down"
+    },
+    "connect": {
+      "title": "Connect a tunnel"
+    },
+    "disconnect": {
+      "title": "Disconnect a tunnel"
+    },
+    "name": "Tunnel"
   }
 }
