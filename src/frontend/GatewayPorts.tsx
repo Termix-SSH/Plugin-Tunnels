@@ -12,6 +12,8 @@ import {
   ListRow,
   Select2,
   useConfirm,
+  ListBadge,
+  StatusBadge,
 } from "@termix-ssh/plugin-sdk/ui";
 import type { Gateway, GatewayPort, GatewayProto } from "../shared/types";
 import {
@@ -128,7 +130,7 @@ function PortForm({
           <Select2
             value={draft.proto}
             onChange={(e) => set({ proto: e.target.value as GatewayProto })}
-            className="h-8 text-xs border border-border bg-background px-2"
+            className="h-8 px-2.5 text-xs"
           >
             <option value="tcp">TCP</option>
             <option value="udp">UDP</option>
@@ -238,23 +240,13 @@ function PortRowView({
 
   const badges = (
     <>
-      <span className="border border-border px-1.5 py-px text-[10px] font-semibold uppercase text-muted-foreground">
-        {port.proto === "both" ? "tcp+udp" : port.proto}
-      </span>
-      {port.source === "scan" && (
-        <span className="border border-border px-1.5 py-px text-[10px] text-muted-foreground">
-          {t("gateways.found")}
-        </span>
-      )}
+      <ListBadge>{port.proto === "both" ? "tcp+udp" : port.proto}</ListBadge>
+      {port.source === "scan" && <ListBadge>{t("gateways.found")}</ListBadge>}
       {port.enabled && status?.reachable === false && (
-        <span className="border border-destructive/40 px-1.5 py-px text-[10px] text-destructive">
-          {t("gateways.noAnswer")}
-        </span>
+        <StatusBadge tone="bad">{t("gateways.noAnswer")}</StatusBadge>
       )}
       {port.source === "scan" && status?.listening === false && (
-        <span className="border border-warning/40 px-1.5 py-px text-[10px] text-warning">
-          {t("gateways.notListening")}
-        </span>
+        <StatusBadge tone="warn">{t("gateways.notListening")}</StatusBadge>
       )}
     </>
   );
@@ -333,8 +325,9 @@ export function GatewayPorts({
     ));
 
   return (
-    <div className="flex flex-col gap-2">
+    <div className="flex flex-col">
       <GroupHeading
+        className="px-3 pb-1.5 pt-3"
         title={t("gateways.ports")}
         count={manual.length}
         action={
@@ -347,7 +340,7 @@ export function GatewayPorts({
         }
       />
       {manual.length === 0 ? (
-        <p className="px-1 text-xs text-muted-foreground">
+        <p className="px-3 pb-3 text-xs text-muted-foreground">
           {t("gateways.noPorts")}
         </p>
       ) : (
@@ -355,7 +348,11 @@ export function GatewayPorts({
       )}
       {found.length > 0 && (
         <>
-          <GroupHeading title={t("gateways.foundPorts")} count={found.length} />
+          <GroupHeading
+            className="px-3 pb-1.5 pt-3"
+            title={t("gateways.foundPorts")}
+            count={found.length}
+          />
           {rows(found)}
         </>
       )}

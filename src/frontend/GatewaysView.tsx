@@ -22,6 +22,7 @@ import {
   SettingRow,
   Select2,
   useConfirm,
+  TileStack,
 } from "@termix-ssh/plugin-sdk/ui";
 import type { Gateway, GatewayPreflight } from "../shared/types";
 import {
@@ -124,7 +125,7 @@ function HostCheck({
   );
 
   return (
-    <div className="border border-border bg-muted/20 p-3 text-xs">
+    <div className="border border-border p-3 text-xs">
       <div className="mb-1 font-bold text-muted-foreground">
         {side === "private"
           ? t("gateways.privateHostCheck")
@@ -258,7 +259,7 @@ function CreateGateway({
             value={privateId ?? ""}
             onChange={(e) => setPrivateId(Number(e.target.value) || null)}
             placeholder={t("common.selectHost")}
-            className="h-8 text-xs border border-border bg-background px-2"
+            className="h-8 px-2.5 text-xs"
           >
             {options(publicId)}
           </Select2>
@@ -280,7 +281,7 @@ function CreateGateway({
               if (picked && !endpoint) setEndpoint(picked.ip);
             }}
             placeholder={t("common.selectHost")}
-            className="h-8 text-xs border border-border bg-background px-2"
+            className="h-8 px-2.5 text-xs"
           >
             {options(privateId)}
           </Select2>
@@ -562,62 +563,62 @@ function GatewayDetail({
           </Button>
         </div>
       }
-      // Sections keep their height so the panel scrolls instead of squeezing them.
-      className="gap-3 p-2.5 [&>*]:shrink-0"
     >
-      <div className="border border-border bg-muted/20 p-3 text-xs">
-        <div className="grid grid-cols-1 gap-1 md:grid-cols-2">
-          <span>
-            <span className="text-muted-foreground">
-              {t("gateways.privateHost")}:{" "}
+      <TileStack>
+        <div className="px-3 py-2.5 text-xs">
+          <div className="grid grid-cols-1 gap-1 md:grid-cols-2">
+            <span>
+              <span className="text-muted-foreground">
+                {t("gateways.privateHost")}:{" "}
+              </span>
+              {hostName(hosts, gateway.privateHostId)}
             </span>
-            {hostName(hosts, gateway.privateHostId)}
-          </span>
-          <span>
-            <span className="text-muted-foreground">
-              {t("gateways.publicHost")}:{" "}
+            <span>
+              <span className="text-muted-foreground">
+                {t("gateways.publicHost")}:{" "}
+              </span>
+              {hostName(hosts, gateway.publicHostId)} ({gateway.endpoint})
             </span>
-            {hostName(hosts, gateway.publicHostId)} ({gateway.endpoint})
-          </span>
-          <span>
-            <span className="text-muted-foreground">
-              {t("gateways.tunnelPort")}:{" "}
+            <span>
+              <span className="text-muted-foreground">
+                {t("gateways.tunnelPort")}:{" "}
+              </span>
+              UDP {gateway.listenPort}
             </span>
-            UDP {gateway.listenPort}
-          </span>
-          <span>
-            <span className="text-muted-foreground">
-              {t("gateways.handshake")}:{" "}
+            <span>
+              <span className="text-muted-foreground">
+                {t("gateways.handshake")}:{" "}
+              </span>
+              {age === null
+                ? t("gateways.never")
+                : t("gateways.secondsAgo", { count: age })}
             </span>
-            {age === null
-              ? t("gateways.never")
-              : t("gateways.secondsAgo", { count: age })}
-          </span>
+          </div>
+          {gateway.status.message && (
+            <p className="mt-2 text-warning">{gateway.status.message}</p>
+          )}
         </div>
-        {gateway.status.message && (
-          <p className="mt-2 text-warning">{gateway.status.message}</p>
-        )}
-      </div>
 
-      <GatewayPorts gateway={gateway} onChanged={() => void reload()} />
+        <GatewayPorts gateway={gateway} onChanged={() => void reload()} />
 
-      <ScanSettings
-        gateway={gateway}
-        hosts={hosts}
-        onChanged={() => void reload()}
-      />
+        <ScanSettings
+          gateway={gateway}
+          hosts={hosts}
+          onChanged={() => void reload()}
+        />
 
-      <SectionCard
-        title={t("gateways.firewallTitle")}
-        icon={<Globe className="size-3.5" />}
-      >
-        <div className="py-3 text-xs">
-          <p className="mb-2 text-muted-foreground">
-            {t("gateways.firewallHint")}
-          </p>
-          <p className="font-mono">{firewall.join(", ")}</p>
-        </div>
-      </SectionCard>
+        <SectionCard
+          title={t("gateways.firewallTitle")}
+          icon={<Globe className="size-3.5" />}
+        >
+          <div className="py-3 text-xs">
+            <p className="mb-2 text-muted-foreground">
+              {t("gateways.firewallHint")}
+            </p>
+            <p className="font-mono">{firewall.join(", ")}</p>
+          </div>
+        </SectionCard>
+      </TileStack>
     </PanelShell>
   );
 }
@@ -674,7 +675,6 @@ export function GatewaysView({ switcher }: { switcher?: ReactNode }) {
         />
       }
       toolbar={switcher}
-      className="gap-2 p-2.5"
     >
       {gateways && gateways.length === 0 ? (
         <EmptyState
@@ -685,7 +685,11 @@ export function GatewaysView({ switcher }: { switcher?: ReactNode }) {
         />
       ) : (
         <>
-          <GroupHeading title={t("gateways.title")} count={gateways?.length} />
+          <GroupHeading
+            title={t("gateways.title")}
+            count={gateways?.length}
+            className="px-3 pb-1.5 pt-3"
+          />
           {gateways?.map((gateway) => (
             <ListRow
               key={gateway.id}

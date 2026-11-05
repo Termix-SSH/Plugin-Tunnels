@@ -81,7 +81,7 @@ export function TunnelForm({
                 {t("hosts.endpointHost")}
               </label>
               <Input
-                className="h-7 text-xs border border-border bg-background px-2 outline-none focus:ring-1 focus:ring-ring"
+                className="h-7 text-xs"
                 list={endpointInputId}
                 placeholder={t("hosts.endpointHostPlaceholder")}
                 value={tunnel.endpointHost ?? ""}

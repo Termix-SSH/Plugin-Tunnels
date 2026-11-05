@@ -137,7 +137,7 @@ export function TunnelWidgetEditForm({
         onChange={(e) =>
           onChange({ ...config, hostId: Number(e.target.value) })
         }
-        className="h-8 text-xs border border-border bg-background px-2"
+        className="h-8 px-2.5 text-xs"
       >
         <option value="">{t("common.selectHost")}</option>
         {options.map((host) => (

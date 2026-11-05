@@ -10,6 +10,7 @@
 ### Changed
 
 - Needs Termix 26.11.1 or newer
+- Tunnel and gateway pages use the Termix tile look, with cards edge to edge and lines between them instead of gaps
 
 ## 1.2.3
 
