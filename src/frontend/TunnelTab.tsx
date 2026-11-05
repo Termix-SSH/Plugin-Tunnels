@@ -563,10 +563,10 @@ export function TunnelTab({
           </a>
         </>
       }
+      tabs={switcher}
       toolbar={
-        entries.length > 0 || switcher ? (
+        entries.length > 0 ? (
           <>
-            {switcher}
             {entries.length > 0 && (
               <>
                 <PanelSearch

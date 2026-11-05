@@ -674,7 +674,7 @@ export function GatewaysView({ switcher }: { switcher?: ReactNode }) {
           onClick={() => setCreating(true)}
         />
       }
-      toolbar={switcher}
+      tabs={switcher}
     >
       {gateways && gateways.length === 0 ? (
         <EmptyState

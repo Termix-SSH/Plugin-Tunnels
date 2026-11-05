@@ -3,7 +3,7 @@ import {
   useTranslation,
   type PluginHostRecord,
 } from "@termix-ssh/plugin-sdk/frontend";
-import { Segmented } from "@termix-ssh/plugin-sdk/ui";
+import { TabStrip } from "@termix-ssh/plugin-sdk/ui";
 import { TunnelTab } from "./TunnelTab";
 import { GatewaysView } from "./GatewaysView";
 
@@ -36,13 +36,13 @@ export function TunnelsHome({ host }: { host?: PluginHostRecord | null }) {
   };
 
   const switcher = (
-    <Segmented<View>
-      value={view}
-      onChange={change}
-      options={[
-        { value: "ssh", label: t("tunnels.sshTunnels") },
-        { value: "gateways", label: t("gateways.title") },
+    <TabStrip
+      tabs={[
+        { id: "ssh", label: t("tunnels.sshTunnels") },
+        { id: "gateways", label: t("gateways.title") },
       ]}
+      activeTab={view}
+      onTabChange={(id) => change(id as View)}
     />
   );
 
