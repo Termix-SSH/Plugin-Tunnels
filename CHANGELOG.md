@@ -4,6 +4,9 @@
 
 ### Added
 
+- Tunnels host page tile
+- An alert and a Termix event when a tunnel fails for good, and an event when it is back
+- Tunnels are listed as a resource for Termix actions
 - Connect and disconnect tunnels from Automations, the CLI, the phone app and the command palette through Termix actions
 - Tunnels that are down show as a status tile
 

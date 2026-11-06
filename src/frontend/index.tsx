@@ -7,6 +7,7 @@ import { hostTunnelsEnabled, hostTunnelsPanelEnabled } from "./host-tunnels";
 import {
   TunnelsCard,
   TunnelsCompanion,
+  TunnelsHostTile,
   useTunnelsCompanionDefaults,
 } from "./TunnelsCompanion";
 import { TunnelsHome } from "./TunnelsHome";
@@ -140,6 +141,18 @@ export function activate(app: TermixApp): void {
     defaultHeight: 220,
     frame: "framed",
     component: TunnelsCard,
+  });
+
+  app.registerSlotContribution("host-page.tiles", {
+    actionId: "tunnels.hostTile",
+    titleKey: "hostTile.title",
+    icon: Network,
+    kind: "component",
+    component: TunnelsHostTile as unknown as ComponentType<
+      Record<string, unknown>
+    >,
+    when: (context?: { host?: unknown }) =>
+      !context?.host || hostTunnelsEnabled(context.host as never),
   });
 
   // Older cores have no panels beside tabs.

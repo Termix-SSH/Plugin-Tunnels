@@ -331,6 +331,18 @@
     "disconnect": {
       "title": "Disconnect a tunnel"
     },
-    "name": "Tunnel"
+    "name": "Tunnel",
+    "tunnel": {
+      "title": "Tunnels",
+      "reason": "Last error"
+    },
+    "events": {
+      "down": "Tunnel went down",
+      "up": "Tunnel is back"
+    }
+  },
+  "hostTile": {
+    "title": "Tunnels",
+    "empty": "No saved tunnels on this host."
   }
 }

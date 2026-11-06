@@ -1,5 +1,6 @@
 import { ExternalLink } from "lucide-react";
 import {
+  useHost,
   useHosts,
   useSettings,
   useTabs,
@@ -54,6 +55,30 @@ export function TunnelsCompanion({ host, isVisible }: CompanionProps) {
         }
       />
     </div>
+  );
+}
+
+/** This host's tunnels as a tile on the host page. */
+export function TunnelsHostTile({
+  hostId,
+  isVisible = true,
+}: {
+  hostId: number;
+  isVisible?: boolean;
+}) {
+  const { t } = useTranslation();
+  const host = useHost(hostId);
+  return (
+    <TunnelList
+      hosts={host ? [host] : []}
+      showHost={false}
+      isVisible={isVisible}
+      empty={
+        <p className="p-3 text-xs text-muted-foreground">
+          {t("hostTile.empty")}
+        </p>
+      }
+    />
   );
 }
 

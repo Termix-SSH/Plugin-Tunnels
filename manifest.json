@@ -37,6 +37,7 @@
     "db:core-refs",
     "desktop:local",
     "secrets:own",
+    "notify:send",
     "operations:provide"
   ],
   "provides": [
@@ -254,6 +255,38 @@
             "assistant": true,
             "mcp": true
           }
+        }
+      ],
+      "resources": [
+        {
+          "id": "tunnels.tunnel",
+          "titleKey": "operations.tunnel.title",
+          "icon": "Network",
+          "list": "tunnels.list",
+          "key": "name",
+          "name": "name",
+          "status": "status",
+          "tab": "tunnel",
+          "columns": [
+            {
+              "key": "reason",
+              "titleKey": "operations.tunnel.reason"
+            }
+          ]
+        }
+      ],
+      "events": [
+        {
+          "id": "tunnels.tunnel-down",
+          "titleKey": "operations.events.down",
+          "severity": "warning",
+          "scope": "host"
+        },
+        {
+          "id": "tunnels.tunnel-up",
+          "titleKey": "operations.events.up",
+          "severity": "info",
+          "scope": "host"
         }
       ],
       "signals": [

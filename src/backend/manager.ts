@@ -79,6 +79,7 @@ export function createTunnelManager(ctx: PluginContext) {
   const lastErrorTypes = new Map<string, TunnelStatus["errorType"]>();
   const pendingOperations = new Map<string, Promise<void>>();
   const listeners = new Set<() => void>();
+  const alerted = new Set<string>();
   const accessCache = new Map<string, { allowed: boolean; at: number }>();
   let disposed = false;
 
@@ -89,6 +90,44 @@ export function createTunnelManager(ctx: PluginContext) {
       } catch (error) {
         log.warn(`Tunnel status listener failed: ${errorMessage(error)}`);
       }
+    }
+  }
+
+  /** One alert and event when a tunnel fails for good, one when it is back. */
+  function reportOutcome(name: string, status: TunnelStatus): void {
+    const config = configs.get(name);
+    if (!config?.requestingUserId || disposed) return;
+    const hostId = config.sourceHostId;
+    const failed =
+      status.status === CONNECTION_STATES.FAILED && !status.manualDisconnect;
+    const back = status.status === CONNECTION_STATES.CONNECTED;
+    if (failed && !alerted.has(name)) {
+      alerted.add(name);
+      void ctx.operations
+        .emit(
+          "tunnels.tunnel-down",
+          { name, reason: status.reason },
+          { hostId },
+        )
+        .catch(() => undefined);
+      void ctx.notify
+        .send({
+          title: `Tunnel ${name} is down`,
+          body: status.reason
+            ? `${config.hostName}: ${status.reason}`
+            : config.hostName,
+          severity: "warning",
+          category: "tunnels.tunnel_down",
+          audience: { userId: config.requestingUserId },
+          link: { tab: "tunnel" },
+          dedupeKey: `tunnels.tunnel_down:${name}`,
+          context: { hostId, hostName: config.hostName },
+        })
+        .catch(() => undefined);
+    } else if (back && alerted.delete(name)) {
+      void ctx.operations
+        .emit("tunnels.tunnel-up", { name }, { hostId })
+        .catch(() => undefined);
     }
   }
 
@@ -129,6 +168,7 @@ export function createTunnelManager(ctx: PluginContext) {
     }
 
     statuses.set(name, next);
+    reportOutcome(name, next);
     ctx.events.emit("plugin.tunnels.status", {
       name,
       sourceHostId: configs.get(name)?.sourceHostId,
