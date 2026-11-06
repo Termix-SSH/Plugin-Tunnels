@@ -15,6 +15,7 @@
 - Needs Termix 26.11.1 or newer
 - Tunnel and gateway pages use the Termix tile look, with cards edge to edge and lines between them instead of gaps
 - SSH tunnels and gateways are tabs above the search bar
+- Toolbars, loading screens, back buttons and Save bars match the rest of Termix
 
 ## 1.2.3
 
