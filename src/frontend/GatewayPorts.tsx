@@ -333,7 +333,6 @@ export function GatewayPorts({
         action={
           <AddButton
             compact
-            className="bg-accent-brand/10 dark:bg-accent-brand/10"
             label={t("gateways.addPort")}
             onClick={() => setEditing("new")}
           />

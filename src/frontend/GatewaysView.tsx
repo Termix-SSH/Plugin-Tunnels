@@ -670,7 +670,6 @@ export function GatewaysView({ switcher }: { switcher?: ReactNode }) {
       actions={
         <AddButton
           label={t("gateways.newGateway")}
-          className="bg-accent-brand/10 dark:bg-accent-brand/10"
           onClick={() => setCreating(true)}
         />
       }

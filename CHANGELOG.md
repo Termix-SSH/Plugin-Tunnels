@@ -17,6 +17,10 @@
 - SSH tunnels and gateways are tabs above the search bar
 - Toolbars, loading screens, back buttons and Save bars match the rest of Termix
 
+### Fixed
+
+- Add tunnel and the other add buttons no longer have a filled box around them
+
 ## 1.2.3
 
 ### Fixed

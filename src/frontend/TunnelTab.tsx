@@ -58,8 +58,6 @@ import { TunnelEditorView } from "./TunnelEditorView";
 import { docsUrl } from "./docs";
 
 // The orange add button with a light orange fill, used for every add action.
-export const ADD_CLASS = "bg-accent-brand/10 dark:bg-accent-brand/10";
-
 export type StatusLabel =
   "CONNECTED" | "CONNECTING" | "ERROR" | "WAITING" | "DISCONNECTED";
 
@@ -543,7 +541,6 @@ export function TunnelTab({
         <>
           <AddButton
             label={t("tunnels.addTunnel")}
-            className={ADD_CLASS}
             onClick={() => {
               if (host) setEditing({ host, index: null });
               else if (sshHosts.length === 1)
