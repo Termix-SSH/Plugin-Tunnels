@@ -1,4 +1,5 @@
 import { EventEmitter } from "node:events";
+import { PassThrough } from "node:stream";
 import { describe, expect, it, vi } from "vitest";
 import type { WebSocket } from "ws";
 import {
@@ -32,8 +33,9 @@ function setup(link: unknown = defaultLink) {
   });
   const attachAuth = vi.fn();
   const statuses = vi.fn();
+  const getLink = vi.fn(async () => link as never);
   const runtime = createC2SRuntime({
-    getLink: async () => link as never,
+    getLink,
     linkJson: async () => ({ id: 9, name: "jump" }),
     relayPath: "/plugin-ws/tunnels/c2s/stream",
     attachAuth,
@@ -61,6 +63,7 @@ function setup(link: unknown = defaultLink) {
     server,
     attachAuth,
     statuses,
+    getLink,
     incoming: () => incoming,
   };
 }
@@ -73,6 +76,97 @@ const defaultLink = {
 };
 
 describe("client tunnel runtime", () => {
+  it.each(["dynamic", "local"])(
+    "destroys the %s client socket when async relay setup fails",
+    async (mode) => {
+      const { runtime, sockets, getLink, incoming } = setup();
+      const tunnel = {
+        name: "setup-failure",
+        mode,
+        sourceHostId: 7,
+        sourcePort: 1080,
+        endpointPort: 8080,
+      };
+      const local = Object.assign(new EventEmitter(), {
+        destroy: vi.fn(),
+        write: vi.fn(),
+        pause: vi.fn(),
+        resume: vi.fn(),
+      });
+      try {
+        await runtime.start(tunnel, 0);
+        await vi.waitFor(() => expect(sockets[0]?.send).toHaveBeenCalled());
+        sockets[0].ready();
+        await vi.waitFor(() =>
+          expect(runtime.statuses()[tunnel.name]?.connected).toBe(true),
+        );
+        getLink.mockRejectedValueOnce(new Error("Link lookup failed"));
+        incoming()(local);
+        if (mode === "dynamic") {
+          // SOCKS5 greeting and CONNECT to 127.0.0.1:8080.
+          local.emit(
+            "data",
+            Buffer.from([5, 1, 0, 5, 1, 0, 1, 127, 0, 0, 1, 0x1f, 0x90]),
+          );
+        }
+        await vi.waitFor(() => expect(local.destroy).toHaveBeenCalled());
+        expect(local.pause).toHaveBeenCalled();
+        expect(getLink).toHaveBeenCalledTimes(2);
+      } finally {
+        await runtime.stop(tunnel.name);
+      }
+    },
+  );
+
+  it("preserves flowing socket data while the relay link is being resolved", async () => {
+    let resolveLink!: (link: typeof defaultLink) => void;
+    const link = new Promise<typeof defaultLink>((resolve) => {
+      resolveLink = resolve;
+    });
+    const { runtime, sockets } = setup(link);
+    const local = new PassThrough();
+    // SOCKS negotiation leaves the socket flowing after removing its handler.
+    const negotiation = () => {};
+    local.on("data", negotiation);
+    local.removeListener("data", negotiation);
+    const initialData = Buffer.from("POST /login HTTP/1.1\r\n");
+    const first = Buffer.from("Content-Length: 4\r\n\r\n");
+    const second = Buffer.from("test");
+
+    try {
+      const opening = runtime.openRelay(
+        { name: "socks" },
+        "service.example",
+        8080,
+        local as never,
+        initialData,
+      );
+      local.write(first);
+      // Let the stream process incoming bytes while getLink is still pending.
+      await new Promise<void>((resolve) => setImmediate(resolve));
+      expect(sockets).toHaveLength(0);
+      resolveLink(defaultLink);
+      await opening;
+      local.write(second);
+      // Data must wait for the relay's ready message, including initialData.
+      expect(
+        sockets[0].send.mock.calls.filter(([data]) => Buffer.isBuffer(data)),
+      ).toHaveLength(0);
+      sockets[0].ready();
+      await vi.waitFor(() => {
+        const forwarded = sockets[0].send.mock.calls
+          .map(([data]) => data)
+          .filter(Buffer.isBuffer);
+        expect(Buffer.concat(forwarded)).toEqual(
+          Buffer.concat([initialData, first, second]),
+        );
+      });
+    } finally {
+      local.destroy();
+      for (const socket of sockets) socket.close();
+    }
+  });
+
   it("holds the preflight open, refuses early connections and stops cleanly", async () => {
     const { runtime, sockets, urls, server, attachAuth, incoming } = setup();
     const tunnel = {
@@ -170,7 +264,12 @@ describe("client tunnel runtime", () => {
       bindHost: "127.0.0.1",
     } as never);
     const local = () =>
-      Object.assign(new EventEmitter(), { destroy: vi.fn(), write: vi.fn() });
+      Object.assign(new EventEmitter(), {
+        destroy: vi.fn(),
+        write: vi.fn(),
+        pause: vi.fn(),
+        resume: vi.fn(),
+      });
 
     const first = local();
     await runtime.openRelay({ name: "web" }, "127.0.0.1", 8006, first as never);

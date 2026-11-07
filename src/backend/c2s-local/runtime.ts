@@ -237,6 +237,9 @@ export function createC2SRuntime(deps: C2SRuntimeDeps) {
     socket: Socket,
     initialData?: Buffer,
   ): Promise<void> {
+    // SOCKS negotiation leaves the socket flowing. Keep incoming bytes buffered
+    // while resolving the relay, before its data handler can be installed.
+    socket.pause();
     const tunnelConfig = normalizeAddresses(tunnel);
     const name = tunnel.name || nameOf(tunnel);
     const { ws, url } = await openSocket(name);
@@ -266,6 +269,7 @@ export function createC2SRuntime(deps: C2SRuntimeDeps) {
     };
 
     socket.on("data", sendChunk);
+    socket.resume();
     socket.on("close", cleanup);
     // One connection failing must not stop the tunnel: the listener refuses
     // new connections while the tunnel is not connected, and a browser opens
