@@ -20,6 +20,8 @@
 ### Fixed
 
 - Add tunnel and the other add buttons no longer have a filled box around them
+- Desktop SOCKS5 tunnels no longer drop the first data a program sends
+- A client tunnel closes its local connection when the target closes, so the next request no longer hangs
 
 ## 1.2.3
 
