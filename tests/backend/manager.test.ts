@@ -228,6 +228,27 @@ describe("failures and stops", () => {
     });
   });
 
+  it("alerts once when a tunnel fails and emits an event", async () => {
+    const { mock } = setup();
+    vi.spyOn(mock.ctx.ssh, "connect").mockRejectedValue(
+      new Error("All configured authentication methods failed"),
+    );
+
+    await manager!.start(config());
+    await new Promise((done) => setTimeout(done, 20));
+    await manager!.start(config());
+    await new Promise((done) => setTimeout(done, 20));
+
+    expect(mock.notifications).toHaveLength(1);
+    expect(mock.notifications[0].notification).toMatchObject({
+      category: "tunnels.tunnel_down",
+      audience: { userId: "user-1" },
+    });
+    expect(mock.operationEvents).toContainEqual(
+      expect.objectContaining({ eventId: "tunnels.tunnel-down", hostId: 7 }),
+    );
+  });
+
   it("stops on request and holds off an immediate reconnect", async () => {
     const { mock } = setup();
     manager!.configs.set(config().name, config());

@@ -318,5 +318,32 @@
   "companion": {
     "toggle": "Pannello dei tunnel",
     "openTab": "Apri la scheda Tunnel"
+  },
+  "operations": {
+    "list": {
+      "title": "Elenco tunnel"
+    },
+    "down": {
+      "title": "Tunnel disconnessi"
+    },
+    "connect": {
+      "title": "Connetti un tunnel"
+    },
+    "disconnect": {
+      "title": "Disconnetti un tunnel"
+    },
+    "name": "Tunnel",
+    "tunnel": {
+      "title": "Tunnel",
+      "reason": "Ultimo errore"
+    },
+    "events": {
+      "down": "Il tunnel è andato in errore",
+      "up": "Il tunnel è tornato online"
+    }
+  },
+  "hostTile": {
+    "title": "Tunnel",
+    "empty": "Nessun tunnel salvato su questo host."
   }
 }

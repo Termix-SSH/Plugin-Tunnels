@@ -318,5 +318,32 @@
   "companion": {
     "toggle": "Painel de túneis",
     "openTab": "Abrir a aba de Túneis"
+  },
+  "operations": {
+    "list": {
+      "title": "Listar túneis"
+    },
+    "down": {
+      "title": "Túneis desativados"
+    },
+    "connect": {
+      "title": "Conectar um túnel"
+    },
+    "disconnect": {
+      "title": "Desconectar um túnel"
+    },
+    "name": "Túnel",
+    "tunnel": {
+      "title": "Túneis",
+      "reason": "Último erro"
+    },
+    "events": {
+      "down": "Túnel caiu",
+      "up": "Túnel está de volta"
+    }
+  },
+  "hostTile": {
+    "title": "Túneis",
+    "empty": "Nenhum túnel salvo neste host."
   }
 }

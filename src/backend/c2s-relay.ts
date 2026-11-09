@@ -401,6 +401,13 @@ export function createC2SRelay(ctx: PluginContext) {
     outbound.on("close", () => {
       if (ws.readyState === 1) ws.close();
     });
+    // The target can half-close the channel (for example an HTTP server
+    // dropping an idle keep-alive connection) without the channel emitting
+    // "close" right away. Forward that EOF so the desktop client closes its
+    // local socket instead of reusing a connection that will never answer.
+    outbound.on("end", () => {
+      if (ws.readyState === 1) ws.close();
+    });
     outbound.on("error", () => {
       if (ws.readyState === 1) ws.close();
     });

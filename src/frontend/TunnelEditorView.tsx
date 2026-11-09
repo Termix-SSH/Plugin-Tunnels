@@ -81,6 +81,7 @@ export function TunnelEditorView({
           : t("tunnels.editTitle", { name: host.name || host.ip })
       }
       icon={<Network className="size-4" />}
+      stacked
       footer={
         <FormFooter
           onCancel={onClose}
@@ -94,16 +95,10 @@ export function TunnelEditorView({
         />
       }
     >
-      <div className="flex flex-col gap-3 p-3">
-        <p className="text-xs text-muted-foreground">
-          {t("hosts.tunnelRequirementsText")}
-        </p>
-        <TunnelForm
-          hostId={Number(host.id)}
-          tunnel={draft}
-          onChange={setDraft}
-        />
-      </div>
+      <p className="px-3 py-3 text-xs text-muted-foreground">
+        {t("hosts.tunnelRequirementsText")}
+      </p>
+      <TunnelForm hostId={Number(host.id)} tunnel={draft} onChange={setDraft} />
     </InlineView>
   );
 }

@@ -317,5 +317,32 @@
   "companion": {
     "toggle": "Alagutak panel",
     "openTab": "Alagutak fül megnyitása"
+  },
+  "operations": {
+    "list": {
+      "title": "Alagutak listázása"
+    },
+    "down": {
+      "title": "Alagutak leállítása"
+    },
+    "connect": {
+      "title": "Alagút csatlakoztatása"
+    },
+    "disconnect": {
+      "title": "Alagút leválasztása"
+    },
+    "name": "Alagút",
+    "tunnel": {
+      "title": "Alagutak",
+      "reason": "Utolsó hiba"
+    },
+    "events": {
+      "down": "Az alagút leállt",
+      "up": "Az alagút újra elérhető"
+    }
+  },
+  "hostTile": {
+    "title": "Alagutak",
+    "empty": "Nincsenek mentett alagutak ezen a hoszton."
   }
 }

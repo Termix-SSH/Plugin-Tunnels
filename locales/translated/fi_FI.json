@@ -317,5 +317,32 @@
   "companion": {
     "toggle": "Tunnelipaneeli",
     "openTab": "Avaa tunnelivälilehti"
+  },
+  "operations": {
+    "list": {
+      "title": "Listaa tunnelit"
+    },
+    "down": {
+      "title": "Tunnelit poissa käytöstä"
+    },
+    "connect": {
+      "title": "Yhdistä tunneli"
+    },
+    "disconnect": {
+      "title": "Katkaise tunnelin yhteys"
+    },
+    "name": "Tunneli",
+    "tunnel": {
+      "title": "Tunnelit",
+      "reason": "Viimeisin virhe"
+    },
+    "events": {
+      "down": "Tunneli katkesi",
+      "up": "Tunneli on takaisin"
+    }
+  },
+  "hostTile": {
+    "title": "Tunnelit",
+    "empty": "Tällä palvelimella ei ole tallennettuja tunnelia."
   }
 }

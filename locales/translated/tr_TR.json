@@ -317,5 +317,32 @@
   "companion": {
     "toggle": "Tünel paneli",
     "openTab": "Tüneller sekmesini aç"
+  },
+  "operations": {
+    "list": {
+      "title": "Tünelleri listele"
+    },
+    "down": {
+      "title": "Tünelleri kapat"
+    },
+    "connect": {
+      "title": "Bir tüneli bağla"
+    },
+    "disconnect": {
+      "title": "Bir tüneli ayır"
+    },
+    "name": "Tünel",
+    "tunnel": {
+      "title": "Tüneller",
+      "reason": "Son hata"
+    },
+    "events": {
+      "down": "Tünel kapandı",
+      "up": "Tünel geri döndü"
+    }
+  },
+  "hostTile": {
+    "title": "Tüneller",
+    "empty": "Bu ana bilgisayarda kayıtlı tünel yok."
   }
 }

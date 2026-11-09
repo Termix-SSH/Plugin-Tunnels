@@ -124,4 +124,16 @@ describe("tunnels panel and card", () => {
     rendered.renderDashboardCard("tunnels");
     expect(await screen.findByText(/web \| local/)).toBeTruthy();
   });
+
+  it("shows the host's tunnels in the host page tile", async () => {
+    rendered = await renderWithApp(plugin, {
+      manifest,
+      locales,
+      api: stubApi(),
+      hosts: [webHost],
+    });
+    expect(rendered.registered.slot("host-page.tiles")).toHaveLength(1);
+    rendered.renderSlot("host-page.tiles", { hostId: 7, isVisible: true });
+    expect(await screen.findByText(/8080/)).toBeTruthy();
+  });
 });

@@ -318,5 +318,32 @@
   "companion": {
     "toggle": "Tunelu panelis",
     "openTab": "Atvērt Tunelu cilni"
+  },
+  "operations": {
+    "list": {
+      "title": "Tunelu saraksts"
+    },
+    "down": {
+      "title": "Tuneli izslēgt"
+    },
+    "connect": {
+      "title": "Pievienot tuneli"
+    },
+    "disconnect": {
+      "title": "Atvienot tuneli"
+    },
+    "name": "Tunelis",
+    "tunnel": {
+      "title": "Tuneli",
+      "reason": "Pēdējā kļūda"
+    },
+    "events": {
+      "down": "Tunelis tika izslēgts",
+      "up": "Tunelis ir atkal pieejams"
+    }
+  },
+  "hostTile": {
+    "title": "Tuneli",
+    "empty": "Šajā resursdatorā nav saglabātu tunelu."
   }
 }

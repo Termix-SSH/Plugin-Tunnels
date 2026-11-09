@@ -318,5 +318,32 @@
   "companion": {
     "toggle": "Panneau de tunnels",
     "openTab": "Ouvrir l'onglet Tunnels"
+  },
+  "operations": {
+    "list": {
+      "title": "Lister les tunnels"
+    },
+    "down": {
+      "title": "Tunnels arrêtés"
+    },
+    "connect": {
+      "title": "Connecter un tunnel"
+    },
+    "disconnect": {
+      "title": "Déconnecter un tunnel"
+    },
+    "name": "Tunnel",
+    "tunnel": {
+      "title": "Tunnels",
+      "reason": "Dernière erreur"
+    },
+    "events": {
+      "down": "Le tunnel est tombé",
+      "up": "Le tunnel est de retour"
+    }
+  },
+  "hostTile": {
+    "title": "Tunnels",
+    "empty": "Aucun tunnel enregistré sur cet hôte."
   }
 }

@@ -319,5 +319,32 @@
   "companion": {
     "toggle": "Tunelių skydelis",
     "openTab": "Atidaryti „Tunelių“ skirtuką"
+  },
+  "operations": {
+    "list": {
+      "title": "Tunelių sąrašas"
+    },
+    "down": {
+      "title": "Tuneliai išjungti"
+    },
+    "connect": {
+      "title": "Prijungti tunelį"
+    },
+    "disconnect": {
+      "title": "Atsijungti nuo tunelio"
+    },
+    "name": "Tunelis",
+    "tunnel": {
+      "title": "Tuneliai",
+      "reason": "Paskutinė klaida"
+    },
+    "events": {
+      "down": "Tunelis nutrūko",
+      "up": "Tunelis vėl veikia"
+    }
+  },
+  "hostTile": {
+    "title": "Tuneliai",
+    "empty": "Šiame serveryje nėra išsaugotų tunelių."
   }
 }

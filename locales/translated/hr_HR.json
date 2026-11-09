@@ -318,5 +318,32 @@
   "companion": {
     "toggle": "Panel tunela",
     "openTab": "Otvori karticu Tunela"
+  },
+  "operations": {
+    "list": {
+      "title": "Popis tunela"
+    },
+    "down": {
+      "title": "Tuneli su isključeni"
+    },
+    "connect": {
+      "title": "Poveži tunel"
+    },
+    "disconnect": {
+      "title": "Isključi tunel"
+    },
+    "name": "Tunel",
+    "tunnel": {
+      "title": "Tuneli",
+      "reason": "Zadnja greška"
+    },
+    "events": {
+      "down": "Tunel je isključen",
+      "up": "Tunel je ponovno aktivan"
+    }
+  },
+  "hostTile": {
+    "title": "Tuneli",
+    "empty": "Na ovom hostu nema spremljenih tunela."
   }
 }

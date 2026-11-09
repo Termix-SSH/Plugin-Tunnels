@@ -274,5 +274,16 @@
   "gateways.scanGuestsLabel": "45f51ff476f4",
   "gateways.scanGuestsDesc": "a4fafcd15503",
   "companion.toggle": "b525d94669fa",
-  "companion.openTab": "7b3829e776fd"
+  "companion.openTab": "7b3829e776fd",
+  "operations.list.title": "0c9db6b4e81e",
+  "operations.down.title": "66322e57bb6b",
+  "operations.connect.title": "994297ad7445",
+  "operations.disconnect.title": "05cd6f385086",
+  "operations.name": "6477fa501011",
+  "operations.tunnel.title": "8dfa0439a63e",
+  "operations.tunnel.reason": "5e4df866b25f",
+  "operations.events.down": "fa92355d8268",
+  "operations.events.up": "56171d5f936c",
+  "hostTile.title": "8dfa0439a63e",
+  "hostTile.empty": "9a6551b50623"
 }

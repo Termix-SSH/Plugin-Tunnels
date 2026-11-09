@@ -317,5 +317,32 @@
   "companion": {
     "toggle": "Tunnelide paneel",
     "openTab": "Ava tunnelide vaheleht"
+  },
+  "operations": {
+    "list": {
+      "title": "Näita tunnelite loendit"
+    },
+    "down": {
+      "title": "Tunnelid on katkenud"
+    },
+    "connect": {
+      "title": "Ühenda tunnel"
+    },
+    "disconnect": {
+      "title": "Katkesta tunneli ühendus"
+    },
+    "name": "Tunnel",
+    "tunnel": {
+      "title": "Tunnelid",
+      "reason": "Viimane viga"
+    },
+    "events": {
+      "down": "Tunnel katkes",
+      "up": "Tunnel on tagasi"
+    }
+  },
+  "hostTile": {
+    "title": "Tunnelid",
+    "empty": "Sellel hostil pole salvestatud tunnelit."
   }
 }

@@ -4,7 +4,7 @@
 
 <h1>Tunnels</h1>
 
-<p>SSH port forwarding that reconnects on its own, plus client tunnels from the desktop app</p>
+<p>SSH port forwarding that reconnects on its own, WireGuard gateways that publish private services, and client tunnels from the desktop app</p>
 
 <!-- VIDEO:START -->
 
@@ -33,6 +33,8 @@ Read the [docs](https://docs.termix.site/plugins/tunnels) to set it up and use i
 - WireGuard gateways that forward public ports to services on a private host
 - Finds listening ports on its own, with a switch for each one
 - Client tunnels on your own computer from the desktop app, with presets you can save to the server
+- Connect and disconnect tunnels from Automations, the CLI and the command palette
+- An alert when a tunnel fails, and tunnels that are down as a status tile
 
 <br />
 

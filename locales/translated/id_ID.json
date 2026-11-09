@@ -316,5 +316,32 @@
   "companion": {
     "toggle": "Panel terowongan",
     "openTab": "Buka tab Terowongan"
+  },
+  "operations": {
+    "list": {
+      "title": "Daftar terowongan"
+    },
+    "down": {
+      "title": "Terowongan mati"
+    },
+    "connect": {
+      "title": "Sambungkan terowongan"
+    },
+    "disconnect": {
+      "title": "Putuskan terowongan"
+    },
+    "name": "Terowongan",
+    "tunnel": {
+      "title": "Terowongan",
+      "reason": "Kesalahan terakhir"
+    },
+    "events": {
+      "down": "Terowongan mati",
+      "up": "Terowongan kembali"
+    }
+  },
+  "hostTile": {
+    "title": "Terowongan",
+    "empty": "Tidak ada terowongan tersimpan di host ini."
   }
 }

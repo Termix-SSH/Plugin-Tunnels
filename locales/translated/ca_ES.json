@@ -318,5 +318,32 @@
   "companion": {
     "toggle": "Panell de túnels",
     "openTab": "Obre la pestanya de túnels"
+  },
+  "operations": {
+    "list": {
+      "title": "Llista els túnels"
+    },
+    "down": {
+      "title": "Túnels aturats"
+    },
+    "connect": {
+      "title": "Connecta un túnel"
+    },
+    "disconnect": {
+      "title": "Desconnecta un túnel"
+    },
+    "name": "Túnel",
+    "tunnel": {
+      "title": "Túnels",
+      "reason": "Últim error"
+    },
+    "events": {
+      "down": "El túnel s'ha aturat",
+      "up": "El túnel ha tornat a estar actiu"
+    }
+  },
+  "hostTile": {
+    "title": "Túnels",
+    "empty": "No hi ha túnels desats en aquest amfitrió."
   }
 }

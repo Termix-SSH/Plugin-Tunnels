@@ -317,5 +317,32 @@
   "companion": {
     "toggle": "Panel för tunnlar",
     "openTab": "Öppna fliken för tunnlar"
+  },
+  "operations": {
+    "list": {
+      "title": "Lista tunnlar"
+    },
+    "down": {
+      "title": "Tunnlar ner"
+    },
+    "connect": {
+      "title": "Anslut en tunnel"
+    },
+    "disconnect": {
+      "title": "Koppla från en tunnel"
+    },
+    "name": "Tunnel",
+    "tunnel": {
+      "title": "Tunnlar",
+      "reason": "Senaste felet"
+    },
+    "events": {
+      "down": "Tunneln gick ner",
+      "up": "Tunneln är tillbaka"
+    }
+  },
+  "hostTile": {
+    "title": "Tunnlar",
+    "empty": "Inga sparade tunnlar på denna värd."
   }
 }

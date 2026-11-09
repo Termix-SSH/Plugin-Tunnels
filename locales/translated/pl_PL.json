@@ -319,5 +319,32 @@
   "companion": {
     "toggle": "Panel tuneli",
     "openTab": "Otwórz kartę Tuneli"
+  },
+  "operations": {
+    "list": {
+      "title": "Lista tuneli"
+    },
+    "down": {
+      "title": "Tunele wyłączone"
+    },
+    "connect": {
+      "title": "Połącz tunel"
+    },
+    "disconnect": {
+      "title": "Rozłącz tunel"
+    },
+    "name": "Tunel",
+    "tunnel": {
+      "title": "Tunele",
+      "reason": "Ostatni błąd"
+    },
+    "events": {
+      "down": "Tunel został wyłączony",
+      "up": "Tunel jest ponownie dostępny"
+    }
+  },
+  "hostTile": {
+    "title": "Tunele",
+    "empty": "Brak zapisanych tuneli na tym hoście."
   }
 }

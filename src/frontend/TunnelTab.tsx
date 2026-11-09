@@ -35,6 +35,9 @@ import {
   ListRow,
   ViewToggle,
   type DataColumn,
+  StatusBadge,
+  ListBadge,
+  type StatusTone,
 } from "@termix-ssh/plugin-sdk/ui";
 import type { TunnelConnection, TunnelStatus } from "../shared/types";
 import { serverTunnelName, tunnelHostLabel } from "../shared/tunnel-naming";
@@ -55,8 +58,6 @@ import { TunnelEditorView } from "./TunnelEditorView";
 import { docsUrl } from "./docs";
 
 // The orange add button with a light orange fill, used for every add action.
-export const ADD_CLASS = "bg-accent-brand/10 dark:bg-accent-brand/10";
-
 export type StatusLabel =
   "CONNECTED" | "CONNECTING" | "ERROR" | "WAITING" | "DISCONNECTED";
 
@@ -100,14 +101,11 @@ function TunnelCard({
   const isError = label === "ERROR";
   const isWaiting = label === "WAITING";
 
-  let statusColor = "text-muted-foreground border-border bg-muted/30";
-  if (isConnected)
-    statusColor = "text-accent-brand border-accent-brand/40 bg-accent-brand/10";
-  if (isConnecting)
-    statusColor = "text-blue-400 border-blue-400/40 bg-blue-400/10";
-  if (isError)
-    statusColor = "text-destructive border-destructive/40 bg-destructive/10";
-  if (isWaiting) statusColor = "text-warning border-warning/40 bg-warning/10";
+  let tone: StatusTone = "idle";
+  if (isConnected) tone = "ok";
+  if (isConnecting) tone = "info";
+  if (isError) tone = "bad";
+  if (isWaiting) tone = "warn";
 
   const mode = tunnelMode(tunnel);
   const destination =
@@ -117,16 +115,14 @@ function TunnelCard({
 
   return (
     <Card className="flex flex-col overflow-hidden p-0 gap-0">
-      <div className="flex items-center justify-between px-4 py-2.5 border-b border-border bg-muted/10">
+      <div className="flex items-center justify-between gap-2 border-b border-border px-3 py-1.5">
         <div className="flex items-center gap-2">
-          <Network className="size-3.5 text-muted-foreground" />
-          <span className="text-xs font-bold uppercase tracking-widest text-muted-foreground">
+          <Network className="size-3 text-muted-foreground" />
+          <span className="text-[10px] font-semibold uppercase tracking-widest text-muted-foreground">
             {t("tunnels.port")} {tunnel.sourcePort}
           </span>
         </div>
-        <div
-          className={`flex items-center gap-1.5 px-2 py-0.5 border text-[10px] font-bold uppercase ${statusColor}`}
-        >
+        <StatusBadge tone={tone}>
           {isConnecting || isActing ? (
             <RefreshCw className="size-3 animate-spin" />
           ) : isConnected ? (
@@ -139,9 +135,9 @@ function TunnelCard({
             <WifiOff className="size-3" />
           )}
           {isActing ? t("tunnels.working") : t(STATUS_TEXT_KEYS[label])}
-        </div>
+        </StatusBadge>
       </div>
-      <div className="px-4 py-4 flex flex-col gap-3">
+      <div className="flex flex-col gap-3 px-3 py-2.5">
         <div className="flex flex-col gap-1">
           <span className="text-[10px] text-muted-foreground uppercase font-bold tracking-wider">
             {t("tunnels.destination")}
@@ -153,9 +149,7 @@ function TunnelCard({
             {destination}
           </span>
           <div className="flex items-center gap-1.5 mt-1">
-            <span className="text-[10px] font-semibold px-1.5 py-px border border-border text-muted-foreground uppercase">
-              {mode}
-            </span>
+            <ListBadge>{mode}</ListBadge>
             <span className="text-[10px] text-muted-foreground">
               {t("tunnels.listensOn", { port: tunnel.sourcePort })}
             </span>
@@ -163,7 +157,7 @@ function TunnelCard({
         </div>
 
         {isError && status?.reason && (
-          <div className="flex items-start gap-2 p-2 bg-destructive/5 border border-destructive/20 text-destructive text-[10px]">
+          <div className="flex items-start gap-2 bg-destructive/5 p-2 text-[10px] text-destructive">
             <AlertCircle className="size-3 mt-0.5 shrink-0" />
             <span>{status.reason}</span>
           </div>
@@ -258,6 +252,7 @@ function TunnelCard({
             size="icon"
             className="h-8 w-8 text-muted-foreground hover:text-foreground"
             title={t("tunnels.edit")}
+            aria-label={t("tunnels.edit")}
             onClick={onEdit}
           >
             <Pencil className="size-3.5" />
@@ -267,6 +262,9 @@ function TunnelCard({
             size="icon"
             className={`h-8 w-8 ${showSettings ? "bg-accent-brand/10 text-accent-brand" : "text-muted-foreground hover:text-foreground"}`}
             onClick={() => setShowSettings((s) => !s)}
+            title={t("hosts.tunnelSettings")}
+            aria-label={t("hosts.tunnelSettings")}
+            aria-pressed={showSettings}
           >
             <Settings className="size-3.5" />
           </Button>
@@ -547,7 +545,6 @@ export function TunnelTab({
         <>
           <AddButton
             label={t("tunnels.addTunnel")}
-            className={ADD_CLASS}
             onClick={() => {
               if (host) setEditing({ host, index: null });
               else if (sshHosts.length === 1)
@@ -567,10 +564,10 @@ export function TunnelTab({
           </a>
         </>
       }
+      tabs={switcher}
       toolbar={
-        entries.length > 0 || switcher ? (
+        entries.length > 0 ? (
           <>
-            {switcher}
             {entries.length > 0 && (
               <>
                 <PanelSearch
@@ -608,7 +605,6 @@ export function TunnelTab({
           </>
         ) : undefined
       }
-      className="p-2.5 gap-2"
     >
       {entries.length === 0 ? (
         <EmptyState
@@ -644,23 +640,25 @@ export function TunnelTab({
         />
       ) : (
         [...groups.values()].map((group) => (
-          <div key={group[0].host.id} className="flex flex-col gap-2">
+          <div key={group[0].host.id} className="flex flex-col">
             <GroupHeading
               title={group[0].host.name}
               count={group.length}
-              className="pt-1"
+              className="px-3 pb-1.5 pt-3"
             />
-            <DataView
-              items={group}
-              view="grid"
-              getKey={(entry) => entry.name}
-              renderCard={card}
-              columns={{ base: 1, md: 2, lg: 3 }}
-              size={columns}
-              minCardWidth={300}
-              listColumns={listColumns}
-              empty={null}
-            />
+            <div className="border-t border-border">
+              <DataView
+                items={group}
+                view="grid"
+                getKey={(entry) => entry.name}
+                renderCard={card}
+                columns={{ base: 1, md: 2, lg: 3 }}
+                size={columns}
+                minCardWidth={300}
+                listColumns={listColumns}
+                empty={null}
+              />
+            </div>
           </div>
         ))
       )}
@@ -673,7 +671,7 @@ export function TunnelTab({
           title={t("tunnels.pickHost")}
           icon={<Network className="size-4" />}
         >
-          <div className="flex flex-col gap-1 p-3">
+          <div className="flex flex-col">
             {sshHosts.map((h) => (
               <ListRow
                 key={h.id}

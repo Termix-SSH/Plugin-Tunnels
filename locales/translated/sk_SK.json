@@ -319,5 +319,32 @@
   "companion": {
     "toggle": "Panel tunelov",
     "openTab": "Otvoriť kartu Tunely"
+  },
+  "operations": {
+    "list": {
+      "title": "Zoznam tunelov"
+    },
+    "down": {
+      "title": "Tunely vypnuté"
+    },
+    "connect": {
+      "title": "Pripojiť tunel"
+    },
+    "disconnect": {
+      "title": "Odpojiť tunel"
+    },
+    "name": "Tunel",
+    "tunnel": {
+      "title": "Tunely",
+      "reason": "Posledná chyba"
+    },
+    "events": {
+      "down": "Tunel sa odpojil",
+      "up": "Tunel je znova pripojený"
+    }
+  },
+  "hostTile": {
+    "title": "Tunely",
+    "empty": "Na tomto hostiteľovi nie sú žiadne uložené tunely."
   }
 }

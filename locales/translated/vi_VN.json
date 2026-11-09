@@ -316,5 +316,32 @@
   "companion": {
     "toggle": "Bảng điều khiển đường hầm",
     "openTab": "Mở tab Đường hầm"
+  },
+  "operations": {
+    "list": {
+      "title": "Danh sách đường hầm"
+    },
+    "down": {
+      "title": "Đường hầm đã ngắt kết nối"
+    },
+    "connect": {
+      "title": "Kết nối đường hầm"
+    },
+    "disconnect": {
+      "title": "Ngắt kết nối đường hầm"
+    },
+    "name": "Đường hầm",
+    "tunnel": {
+      "title": "Đường hầm",
+      "reason": "Lỗi gần nhất"
+    },
+    "events": {
+      "down": "Đường hầm đã ngắt kết nối",
+      "up": "Đường hầm đã khôi phục"
+    }
+  },
+  "hostTile": {
+    "title": "Đường hầm",
+    "empty": "Không có đường hầm nào được lưu trên máy chủ này."
   }
 }

@@ -316,5 +316,32 @@
   "companion": {
     "toggle": "隧道面板",
     "openTab": "打开隧道选项卡"
+  },
+  "operations": {
+    "list": {
+      "title": "列出隧道"
+    },
+    "down": {
+      "title": "隧道已断开"
+    },
+    "connect": {
+      "title": "连接隧道"
+    },
+    "disconnect": {
+      "title": "断开隧道"
+    },
+    "name": "隧道",
+    "tunnel": {
+      "title": "隧道",
+      "reason": "最近错误"
+    },
+    "events": {
+      "down": "隧道已断开",
+      "up": "隧道已恢复"
+    }
+  },
+  "hostTile": {
+    "title": "隧道",
+    "empty": "此主机上没有已保存的隧道。"
   }
 }

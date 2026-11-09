@@ -316,5 +316,32 @@
   "companion": {
     "toggle": "터널 패널",
     "openTab": "터널 탭 열기"
+  },
+  "operations": {
+    "list": {
+      "title": "터널 목록"
+    },
+    "down": {
+      "title": "터널 종료"
+    },
+    "connect": {
+      "title": "터널 연결"
+    },
+    "disconnect": {
+      "title": "터널 연결 끊기"
+    },
+    "name": "터널",
+    "tunnel": {
+      "title": "터널",
+      "reason": "마지막 오류"
+    },
+    "events": {
+      "down": "터널 연결 끊김",
+      "up": "터널 연결 복구됨"
+    }
+  },
+  "hostTile": {
+    "title": "터널",
+    "empty": "이 호스트에 저장된 터널이 없습니다."
   }
 }

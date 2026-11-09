@@ -316,5 +316,32 @@
   "companion": {
     "toggle": "トンネルパネル",
     "openTab": "トンネルタブを開く"
+  },
+  "operations": {
+    "list": {
+      "title": "トンネルの一覧"
+    },
+    "down": {
+      "title": "トンネルを停止"
+    },
+    "connect": {
+      "title": "トンネルを接続"
+    },
+    "disconnect": {
+      "title": "トンネルを切断"
+    },
+    "name": "トンネル",
+    "tunnel": {
+      "title": "トンネル",
+      "reason": "直近のエラー"
+    },
+    "events": {
+      "down": "トンネルが切断されました",
+      "up": "トンネルが復旧しました"
+    }
+  },
+  "hostTile": {
+    "title": "トンネル",
+    "empty": "このホストに保存されたトンネルはありません。"
   }
 }

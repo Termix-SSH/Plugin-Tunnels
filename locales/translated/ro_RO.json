@@ -318,5 +318,32 @@
   "companion": {
     "toggle": "Panoul de tuneluri",
     "openTab": "Deschide fila Tuneluri"
+  },
+  "operations": {
+    "list": {
+      "title": "Listează tunelurile"
+    },
+    "down": {
+      "title": "Tuneluri inactive"
+    },
+    "connect": {
+      "title": "Conectează un tunel"
+    },
+    "disconnect": {
+      "title": "Deconectează un tunel"
+    },
+    "name": "Tunel",
+    "tunnel": {
+      "title": "Tuneluri",
+      "reason": "Ultima eroare"
+    },
+    "events": {
+      "down": "Tunelul a devenit inactiv",
+      "up": "Tunelul este din nou activ"
+    }
+  },
+  "hostTile": {
+    "title": "Tuneluri",
+    "empty": "Nu există tuneluri salvate pe acest gazdă."
   }
 }

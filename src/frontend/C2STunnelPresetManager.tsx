@@ -941,7 +941,7 @@ export function C2STunnelPresetManager(): React.ReactElement {
                           updateTunnel(index, { displayName: e.target.value })
                         }
                         placeholder={getTunnelDisplayName(tunnel, index)}
-                        className="h-7 text-xs bg-muted/50 border-border rounded-none"
+                        className="h-7 text-xs"
                       />
                     </div>
 
@@ -990,7 +990,7 @@ export function C2STunnelPresetManager(): React.ReactElement {
                             })
                           }
                           placeholder={t("placeholders.defaultPort")}
-                          className="h-7 text-xs bg-muted/50 border-border rounded-none"
+                          className="h-7 text-xs"
                         />
                       </div>
                       <div className="flex flex-col gap-1">
@@ -1006,7 +1006,7 @@ export function C2STunnelPresetManager(): React.ReactElement {
                             })
                           }
                           placeholder={getLocalAddressPlaceholder(mode)}
-                          className="h-7 text-xs bg-muted/50 border-border rounded-none"
+                          className="h-7 text-xs"
                         />
                       </div>
                     </div>
@@ -1052,7 +1052,7 @@ export function C2STunnelPresetManager(): React.ReactElement {
                               })
                             }
                             placeholder={getRemoteAddressPlaceholder(mode)}
-                            className="h-7 text-xs bg-muted/50 border-border rounded-none"
+                            className="h-7 text-xs"
                           />
                         </div>
                         <div className="flex flex-col gap-1">
@@ -1068,7 +1068,7 @@ export function C2STunnelPresetManager(): React.ReactElement {
                               })
                             }
                             placeholder={t("placeholders.defaultEndpointPort")}
-                            className="h-7 text-xs bg-muted/50 border-border rounded-none"
+                            className="h-7 text-xs"
                           />
                         </div>
                       </div>
@@ -1130,7 +1130,7 @@ export function C2STunnelPresetManager(): React.ReactElement {
                             })
                           }
                           placeholder={t("placeholders.maxRetries")}
-                          className="h-7 text-xs bg-muted/50 border-border rounded-none"
+                          className="h-7 text-xs"
                         />
                       </div>
                       <div className="flex flex-col gap-1">
@@ -1146,7 +1146,7 @@ export function C2STunnelPresetManager(): React.ReactElement {
                             })
                           }
                           placeholder={t("placeholders.retryInterval")}
-                          className="h-7 text-xs bg-muted/50 border-border rounded-none"
+                          className="h-7 text-xs"
                         />
                       </div>
                     </div>
@@ -1184,7 +1184,7 @@ export function C2STunnelPresetManager(): React.ReactElement {
       <Button
         variant="outline"
         size="sm"
-        className={`mt-2 w-full h-7 text-[10px] font-bold uppercase tracking-widest rounded-none ${
+        className={`mt-2 w-full h-7 text-[10px] font-bold uppercase tracking-widest ${
           hasUnsavedLocalChanges
             ? "border-accent-brand/40 text-accent-brand hover:bg-accent-brand/10"
             : "border-border text-muted-foreground"
@@ -1210,12 +1210,12 @@ export function C2STunnelPresetManager(): React.ReactElement {
               value={presetName}
               onChange={(e) => setPresetName(e.target.value)}
               placeholder={t("profile.c2sPresetNamePlaceholder")}
-              className="h-7 text-xs bg-muted/50 border-border rounded-none flex-1 min-w-0"
+              className="h-7 min-w-0 flex-1 text-xs"
             />
             <Button
               variant="outline"
               size="sm"
-              className="h-7 shrink-0 text-[10px] font-bold uppercase tracking-widest rounded-none border-accent-brand/40 text-accent-brand hover:bg-accent-brand/10"
+              className="h-7 shrink-0 text-[10px] font-bold uppercase tracking-widest border-accent-brand/40 text-accent-brand hover:bg-accent-brand/10"
               disabled={!presetName.trim()}
               onClick={handleSavePreset}
             >
@@ -1264,7 +1264,7 @@ export function C2STunnelPresetManager(): React.ReactElement {
           <Button
             variant="outline"
             size="sm"
-            className="h-6 px-2 text-[10px] font-bold uppercase tracking-widest rounded-none border-accent-brand/40 text-accent-brand hover:bg-accent-brand/10"
+            className="h-6 px-2 text-[10px] font-bold uppercase tracking-widest border-accent-brand/40 text-accent-brand hover:bg-accent-brand/10"
             disabled={!selectedPreset || selectedMatchesCurrent}
             onClick={handleLoadPreset}
           >
@@ -1274,7 +1274,7 @@ export function C2STunnelPresetManager(): React.ReactElement {
           <Button
             variant="outline"
             size="sm"
-            className="h-6 px-2 text-[10px] font-bold uppercase tracking-widest rounded-none border-border text-muted-foreground hover:text-foreground"
+            className="h-6 px-2 text-[10px] font-bold uppercase tracking-widest border-border text-muted-foreground hover:text-foreground"
             disabled={!selectedPreset || !presetName.trim()}
             onClick={handleRenamePreset}
           >

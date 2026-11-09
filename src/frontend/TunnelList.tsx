@@ -5,7 +5,12 @@ import {
   useTranslation,
   type PluginHostRecord,
 } from "@termix-ssh/plugin-sdk/frontend";
-import { ListRow, ListRowAction, PanelList } from "@termix-ssh/plugin-sdk/ui";
+import {
+  ListRow,
+  ListRowAction,
+  PanelList,
+  LoadingState,
+} from "@termix-ssh/plugin-sdk/ui";
 import {
   connectTunnel,
   disconnectTunnel,
@@ -74,9 +79,7 @@ export function TunnelList({
   };
 
   if (!saved.loaded) {
-    return (
-      <p className="p-2 text-xs text-muted-foreground">{t("common.loading")}</p>
-    );
+    return <LoadingState label={t("common.loading")} />;
   }
 
   return (

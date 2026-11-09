@@ -319,5 +319,32 @@
   "companion": {
     "toggle": "Plošča tunlov",
     "openTab": "Odpri zavihek Tunli"
+  },
+  "operations": {
+    "list": {
+      "title": "Seznam predorov"
+    },
+    "down": {
+      "title": "Predori so izklopljeni"
+    },
+    "connect": {
+      "title": "Poveži predor"
+    },
+    "disconnect": {
+      "title": "Prekini povezavo predora"
+    },
+    "name": "Predor",
+    "tunnel": {
+      "title": "Predori",
+      "reason": "Zadnja napaka"
+    },
+    "events": {
+      "down": "Predor je padel",
+      "up": "Predor je spet na voljo"
+    }
+  },
+  "hostTile": {
+    "title": "Predori",
+    "empty": "Na tem gostitelju ni shranjenih predorov."
   }
 }

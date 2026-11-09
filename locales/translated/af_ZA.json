@@ -317,5 +317,32 @@
   "companion": {
     "toggle": "Tonnels-paneel",
     "openTab": "Open die Tonnels-oortjie"
+  },
+  "operations": {
+    "list": {
+      "title": "Lys tonnels"
+    },
+    "down": {
+      "title": "Tonnels af"
+    },
+    "connect": {
+      "title": "Koppel 'n tonnel"
+    },
+    "disconnect": {
+      "title": "Ontkoppel 'n tonnel"
+    },
+    "name": "Tonnel",
+    "tunnel": {
+      "title": "Tonnels",
+      "reason": "Laaste fout"
+    },
+    "events": {
+      "down": "Tonnel het afgegaan",
+      "up": "Tonnel is terug"
+    }
+  },
+  "hostTile": {
+    "title": "Tonnels",
+    "empty": "Geen opgeslate tonnels op hierdie gasheer nie."
   }
 }

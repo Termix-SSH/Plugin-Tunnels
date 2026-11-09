@@ -316,5 +316,32 @@
   "companion": {
     "toggle": "隧道面板",
     "openTab": "開啟隧道分頁"
+  },
+  "operations": {
+    "list": {
+      "title": "列出隧道"
+    },
+    "down": {
+      "title": "關閉隧道"
+    },
+    "connect": {
+      "title": "連線隧道"
+    },
+    "disconnect": {
+      "title": "中斷隧道連線"
+    },
+    "name": "隧道",
+    "tunnel": {
+      "title": "隧道",
+      "reason": "上次錯誤"
+    },
+    "events": {
+      "down": "隧道已離線",
+      "up": "隧道已恢復"
+    }
+  },
+  "hostTile": {
+    "title": "隧道",
+    "empty": "此主機上沒有已儲存的隧道。"
   }
 }

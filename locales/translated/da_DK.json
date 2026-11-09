@@ -317,5 +317,32 @@
   "companion": {
     "toggle": "Tunnelpanel",
     "openTab": "Åbn fanen Tunneler"
+  },
+  "operations": {
+    "list": {
+      "title": "Liste tunneler"
+    },
+    "down": {
+      "title": "Tunneler ned"
+    },
+    "connect": {
+      "title": "Forbind en tunnel"
+    },
+    "disconnect": {
+      "title": "Afbryd en tunnel"
+    },
+    "name": "Tunnel",
+    "tunnel": {
+      "title": "Tunneler",
+      "reason": "Seneste fejl"
+    },
+    "events": {
+      "down": "Tunnelen gik ned",
+      "up": "Tunnelen er tilbage"
+    }
+  },
+  "hostTile": {
+    "title": "Tunneler",
+    "empty": "Ingen gemte tunneler på denne vært."
   }
 }

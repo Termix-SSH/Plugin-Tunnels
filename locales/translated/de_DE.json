@@ -317,5 +317,32 @@
   "companion": {
     "toggle": "Tunnel-Panel",
     "openTab": "Tunnel-Tab öffnen"
+  },
+  "operations": {
+    "list": {
+      "title": "Tunnel auflisten"
+    },
+    "down": {
+      "title": "Tunnel beenden"
+    },
+    "connect": {
+      "title": "Tunnel verbinden"
+    },
+    "disconnect": {
+      "title": "Tunnel trennen"
+    },
+    "name": "Tunnel",
+    "tunnel": {
+      "title": "Tunnel",
+      "reason": "Letzter Fehler"
+    },
+    "events": {
+      "down": "Tunnel ist ausgefallen",
+      "up": "Tunnel ist wieder verfügbar"
+    }
+  },
+  "hostTile": {
+    "title": "Tunnel",
+    "empty": "Auf diesem Host sind keine Tunnel gespeichert."
   }
 }

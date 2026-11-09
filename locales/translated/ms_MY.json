@@ -316,5 +316,32 @@
   "companion": {
     "toggle": "Panel terowong",
     "openTab": "Buka tab Terowong"
+  },
+  "operations": {
+    "list": {
+      "title": "Senaraikan terowong"
+    },
+    "down": {
+      "title": "Terowong tidak aktif"
+    },
+    "connect": {
+      "title": "Sambungkan terowong"
+    },
+    "disconnect": {
+      "title": "Putuskan sambungan terowong"
+    },
+    "name": "Terowong",
+    "tunnel": {
+      "title": "Terowong",
+      "reason": "Ralat terakhir"
+    },
+    "events": {
+      "down": "Terowong tidak aktif",
+      "up": "Terowong telah kembali"
+    }
+  },
+  "hostTile": {
+    "title": "Terowong",
+    "empty": "Tiada terowong yang disimpan pada hos ini."
   }
 }

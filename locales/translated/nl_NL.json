@@ -317,5 +317,32 @@
   "companion": {
     "toggle": "Tunnels-paneel",
     "openTab": "Tabblad Tunnels openen"
+  },
+  "operations": {
+    "list": {
+      "title": "Tunnels tonen"
+    },
+    "down": {
+      "title": "Tunnels stoppen"
+    },
+    "connect": {
+      "title": "Tunnel verbinden"
+    },
+    "disconnect": {
+      "title": "Tunnel verbreken"
+    },
+    "name": "Tunnel",
+    "tunnel": {
+      "title": "Tunnels",
+      "reason": "Laatste fout"
+    },
+    "events": {
+      "down": "Tunnel is gestopt",
+      "up": "Tunnel is weer actief"
+    }
+  },
+  "hostTile": {
+    "title": "Tunnels",
+    "empty": "Geen opgeslagen tunnels op deze host."
   }
 }
