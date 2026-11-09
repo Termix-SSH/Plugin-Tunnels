@@ -48,8 +48,8 @@ Read `useExtensions("tunnels.containers")` and look for:
 
 ```ts
 entry.pluginId === "tunnels" &&
-entry.id === "tunnels.views" &&
-entry.version === 1
+  entry.id === "tunnels.views" &&
+  entry.version === 1;
 ```
 
 The marker is reactive. Tunnels registers it only while its frontend container
