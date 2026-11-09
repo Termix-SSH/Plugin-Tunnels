@@ -1,6 +1,6 @@
 import type { ComponentType } from "react";
 import { Network } from "lucide-react";
-import type { TabProps, TermixApp } from "@termix-ssh/plugin-sdk/frontend";
+import { getExtension, type TabProps, type TermixApp } from "@termix-ssh/plugin-sdk/frontend";
 import { TunnelAuthPrompts } from "./TunnelAuthPrompts";
 import { TunnelTab } from "./TunnelTab";
 import { hostTunnelsEnabled, hostTunnelsPanelEnabled } from "./host-tunnels";
@@ -11,6 +11,8 @@ import {
   useTunnelsCompanionDefaults,
 } from "./TunnelsCompanion";
 import { TunnelsHome } from "./TunnelsHome";
+import { TunnelViewContainer } from "./TunnelViewContainer";
+import { revealTunnelView, tunnelViews, type TunnelViewRequest } from "./tunnel-views";
 import { HostTunnelsSection } from "./HostTunnelsSection";
 import {
   PortForwardingPanel,
@@ -29,8 +31,10 @@ import { ActiveTunnelsCounter } from "./ActiveTunnelsCounter";
 // Matches the homepage canvas grid.
 const GRID_SIZE = 30;
 
-function TunnelTabView({ host }: TabProps) {
-  return <TunnelsHome host={host} />;
+function TunnelTabView({ host, tab }: TabProps) {
+  return <TunnelsHome host={host} requestedView={
+    typeof tab.data?.tunnelView === "string" ? tab.data.tunnelView : undefined
+  } />;
 }
 
 export function activate(app: TermixApp): void {
@@ -42,7 +46,7 @@ export function activate(app: TermixApp): void {
     actionId: "tunnels.authPrompts",
     titleKey: "tunnels.authTitle",
     kind: "component",
-    component: TunnelAuthPrompts as ComponentType<Record<string, unknown>>,
+    component: () => <><TunnelAuthPrompts /><TunnelViewContainer app={app} /></>,
   });
   // apiFor("remote") hands back app.api itself outside the desktop app.
   const remote = app.apiFor("remote");
@@ -51,6 +55,26 @@ export function activate(app: TermixApp): void {
     remote: remote === app.api ? null : remote,
   });
   app.onDispose(() => setTunnelsApi(null));
+
+  app.registerAction("tunnels.openView", ((input: unknown) => {
+    if (!input || typeof input !== "object") return false;
+    const request = input as Partial<TunnelViewRequest>;
+    if (typeof request.viewId !== "string") return false;
+    const entry = getExtension("tunnels.views", request.viewId);
+    if (!entry || tunnelViews([entry]).length !== 1) return false;
+    const options = { data: { tunnelView: request.viewId } };
+    if (request.hostId !== undefined) {
+      if (typeof request.hostId !== "number" && typeof request.hostId !== "string") return false;
+      const host = app.getHost(request.hostId);
+      if (!host) return false;
+      revealTunnelView({ viewId: request.viewId, hostId: host.id });
+      app.tabs.openTab(host, "tunnel", options);
+    } else {
+      revealTunnelView({ viewId: request.viewId });
+      app.tabs.openSingletonTab("tunnel", options);
+    }
+    return true;
+  }) as never, { permission: "use" });
 
   // Keeps the "tunnel" tab type and ?view=tunnel links from before the
   // conversion, so saved layouts and recent activity still open here.
