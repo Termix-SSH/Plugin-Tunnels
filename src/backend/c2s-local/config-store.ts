@@ -3,7 +3,10 @@ import path from "node:path";
 import { localAddress, remoteAddress, type C2STunnel } from "./addresses.js";
 import { checkLocalPortAvailable } from "./runtime.js";
 
-/** The desktop's own client tunnel list, kept next to the app's other settings. */
+/**
+ * The desktop's own client tunnel list, kept next to the app's other settings.
+ * Desktop only, where plugin processes have no file limits.
+ */
 export function createConfigStore(userDataDir: string) {
   const file = path.join(userDataDir, "c2s-tunnels.json");
 
