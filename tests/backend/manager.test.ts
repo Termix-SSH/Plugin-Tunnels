@@ -47,8 +47,7 @@ afterEach(() => {
 
 function setup(client = new FakeClient()) {
   const mock: MockPluginContext = createMockCtx({
-    // The SDK 2.2.1 mock refuses desktop.local and live asUser results;
-    // turn sandbox on once the lock moves to 2.3.0.
+    sandbox: true,
     pluginId: manifest.id,
     manifest,
     capabilities: manifest.capabilities,
