@@ -1,7 +1,7 @@
 {
   "id": "tunnels",
   "name": "Tunnels",
-  "version": "1.3.0",
+  "version": "1.4.0",
   "description": "SSH port forwarding that reconnects on its own, WireGuard gateways that publish private services, and client tunnels from the desktop app.",
   "author": {
     "name": "Termix"
@@ -23,8 +23,8 @@
     "A tunnels panel beside any SSH terminal and a tunnels dashboard card"
   ],
   "engine": {
-    "termix": ">=26.11.1-0",
-    "api": "^1.15"
+    "termix": ">=26.11.2-0",
+    "api": "^2.0.0"
   },
   "capabilities": [
     "hosts:read",
@@ -38,7 +38,8 @@
     "desktop:local",
     "secrets:own",
     "notify:send",
-    "operations:provide"
+    "operations:provide",
+    "network:sockets"
   ],
   "provides": [
     {

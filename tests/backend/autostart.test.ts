@@ -45,6 +45,7 @@ function fakeStore(
 describe("autostart", () => {
   it("starts only autostart tunnels on enabled hosts, as each host's owner", async () => {
     const mock = createMockCtx({
+      sandbox: true,
       pluginId: manifest.id,
       manifest,
       capabilities: manifest.capabilities,
@@ -80,6 +81,7 @@ describe("autostart", () => {
 
   it("does nothing when the saved tunnels cannot be read", async () => {
     const mock = createMockCtx({
+      sandbox: true,
       pluginId: manifest.id,
       manifest,
       capabilities: manifest.capabilities,

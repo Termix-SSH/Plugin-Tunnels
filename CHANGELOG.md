@@ -1,5 +1,11 @@
 # Changelog
 
+## 1.4.0
+
+### Changed
+
+- Runs in its own process with only the access it needs (plugin API 2, needs Termix 26.11.2)
+
 ## 1.3.0
 
 ### Added

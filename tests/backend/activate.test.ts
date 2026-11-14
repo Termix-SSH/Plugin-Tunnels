@@ -33,6 +33,8 @@ afterEach(async () => {
 async function activateWithout(capability: string, actor?: string) {
   db = await createTestDb(pluginDir);
   mock = createMockCtx({
+    // The SDK 2.2.1 mock refuses desktop.local and live asUser results;
+    // turn sandbox on once the lock moves to 2.3.0.
     pluginId: manifest.id,
     manifest,
     capabilities: manifest.capabilities.filter((c) => c !== capability),
