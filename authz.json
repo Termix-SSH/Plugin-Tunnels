@@ -1,0 +1,439 @@
+{
+  "$schema": "https://raw.githubusercontent.com/Termix-SSH/Termix/main/scripts/authz/authz.schema.json",
+  "seed": [
+    {
+      "as": "owner",
+      "method": "POST",
+      "path": "/plugin-api/tunnels/presets",
+      "body": {
+        "name": "authz-own-preset",
+        "config": [
+          {
+            "scope": "c2s",
+            "mode": "local",
+            "sourcePort": 8080,
+            "endpointPort": 5432,
+            "maxRetries": 3,
+            "retryInterval": 10,
+            "autoStart": false
+          }
+        ],
+        "platform": "linux",
+        "computerName": "authz"
+      },
+      "capture": {
+        "tunnels.presets": "id"
+      }
+    }
+  ],
+  "routes": {
+    "POST /plugin-api/tunnels/c2s-local/auth-answer": {
+      "access": "user",
+      "permission": "tunnels.use",
+      "resource": {
+        "kind": "host",
+        "min": "connect",
+        "key": "hostId"
+      },
+      "unlisted": "Not served on a server (desktop app only)",
+      "skip": "desktop only"
+    },
+    "POST /plugin-api/tunnels/c2s-local/autostart": {
+      "access": "user",
+      "permission": "tunnels.use",
+      "resource": {
+        "kind": "host",
+        "min": "connect",
+        "key": "hostId"
+      },
+      "destructive": true,
+      "unlisted": "Not served on a server (desktop app only)",
+      "skip": "desktop only"
+    },
+    "GET /plugin-api/tunnels/c2s-local/config": {
+      "access": "user",
+      "permission": "tunnels.use",
+      "unlisted": "Not served on a server (desktop app only)",
+      "skip": "desktop only"
+    },
+    "PUT /plugin-api/tunnels/c2s-local/config": {
+      "access": "user",
+      "permission": "tunnels.use",
+      "resource": {
+        "kind": "host",
+        "min": "connect",
+        "key": "hostId"
+      },
+      "unlisted": "Not served on a server (desktop app only)",
+      "skip": "desktop only"
+    },
+    "GET /plugin-api/tunnels/c2s-local/port-available": {
+      "access": "user",
+      "permission": "tunnels.use",
+      "resource": {
+        "kind": "host",
+        "min": "connect",
+        "key": "hostId"
+      },
+      "unlisted": "Not served on a server (desktop app only)",
+      "skip": "desktop only"
+    },
+    "GET /plugin-api/tunnels/c2s-local/preset-default-name": {
+      "access": "user",
+      "permission": "tunnels.use",
+      "unlisted": "Not served on a server (desktop app only)",
+      "skip": "desktop only"
+    },
+    "POST /plugin-api/tunnels/c2s-local/start": {
+      "access": "user",
+      "permission": "tunnels.use",
+      "resource": {
+        "kind": "host",
+        "min": "connect",
+        "key": "hostId"
+      },
+      "destructive": true,
+      "unlisted": "Not served on a server (desktop app only)",
+      "skip": "desktop only"
+    },
+    "GET /plugin-api/tunnels/c2s-local/statuses": {
+      "access": "user",
+      "permission": "tunnels.use",
+      "unlisted": "Not served on a server (desktop app only)",
+      "skip": "desktop only"
+    },
+    "POST /plugin-api/tunnels/c2s-local/stop": {
+      "access": "user",
+      "permission": "tunnels.use",
+      "resource": {
+        "kind": "host",
+        "min": "connect",
+        "key": "hostId"
+      },
+      "destructive": true,
+      "unlisted": "Not served on a server (desktop app only)",
+      "skip": "desktop only"
+    },
+    "POST /plugin-api/tunnels/c2s-local/test": {
+      "access": "user",
+      "permission": "tunnels.use",
+      "resource": {
+        "kind": "host",
+        "min": "connect",
+        "key": "hostId"
+      },
+      "unlisted": "Not served on a server (desktop app only)",
+      "skip": "desktop only"
+    },
+    "POST /plugin-api/tunnels/cancel": {
+      "access": "user",
+      "permission": "tunnels.use",
+      "resource": {
+        "kind": "host",
+        "min": "connect"
+      },
+      "destructive": true,
+      "body": {
+        "tunnelName": "web:{{host}}:authz"
+      },
+      "note": "A reserved name carries its host id, which is checked"
+    },
+    "POST /plugin-api/tunnels/connect": {
+      "access": "user",
+      "permission": "tunnels.use",
+      "resource": {
+        "kind": "host",
+        "min": "connect",
+        "key": "hostId"
+      },
+      "body": {
+        "sourceHostId": "{{host}}",
+        "tunnelIndex": 0
+      },
+      "refuse400": "The tunnel config is read from the host, which the caller cannot see"
+    },
+    "POST /plugin-api/tunnels/disconnect": {
+      "access": "user",
+      "permission": "tunnels.use",
+      "resource": {
+        "kind": "host",
+        "min": "connect"
+      },
+      "destructive": true,
+      "body": {
+        "tunnelName": "web:{{host}}:authz"
+      },
+      "note": "A reserved name carries its host id, which is checked"
+    },
+    "GET /plugin-api/tunnels/gateways": {
+      "access": "user",
+      "permission": "tunnels.use",
+      "resource": {
+        "kind": "host",
+        "min": "connect",
+        "key": "hostId"
+      },
+      "filtered": true,
+      "note": "Lists only what the caller may see"
+    },
+    "POST /plugin-api/tunnels/gateways": {
+      "access": "user",
+      "permission": "tunnels.use",
+      "resource": {
+        "kind": "host",
+        "min": "connect",
+        "key": "hostId"
+      },
+      "body": {
+        "name": "authz-x",
+        "privateHostId": "{{host}}",
+        "publicHostId": "{{host2}}",
+        "endpoint": "203.0.113.5"
+      }
+    },
+    "DELETE /plugin-api/tunnels/gateways/:id": {
+      "access": "user",
+      "permission": "tunnels.use",
+      "resource": {
+        "kind": "own",
+        "fixture": "tunnels.gateways"
+      },
+      "params": {
+        "id": "=authz-none"
+      },
+      "destructive": true,
+      "allowed": "any",
+      "note": "No gateways in the test data (setting one up runs WireGuard on two real hosts); only session, permission and unknown id refusals are checked"
+    },
+    "GET /plugin-api/tunnels/gateways/:id": {
+      "access": "user",
+      "permission": "tunnels.use",
+      "resource": {
+        "kind": "own",
+        "fixture": "tunnels.gateways"
+      },
+      "params": {
+        "id": "=authz-none"
+      },
+      "allowed": "any",
+      "note": "No gateways in the test data (setting one up runs WireGuard on two real hosts); only session, permission and unknown id refusals are checked"
+    },
+    "PATCH /plugin-api/tunnels/gateways/:id": {
+      "access": "user",
+      "permission": "tunnels.use",
+      "resource": {
+        "kind": "own",
+        "fixture": "tunnels.gateways"
+      },
+      "params": {
+        "id": "=authz-none"
+      },
+      "allowed": "any",
+      "note": "No gateways in the test data (setting one up runs WireGuard on two real hosts); only session, permission and unknown id refusals are checked"
+    },
+    "POST /plugin-api/tunnels/gateways/:id/apply": {
+      "access": "user",
+      "permission": "tunnels.use",
+      "resource": {
+        "kind": "own",
+        "fixture": "tunnels.gateways"
+      },
+      "params": {
+        "id": "=authz-none"
+      },
+      "destructive": true,
+      "allowed": "any",
+      "note": "No gateways in the test data (setting one up runs WireGuard on two real hosts); only session, permission and unknown id refusals are checked"
+    },
+    "POST /plugin-api/tunnels/gateways/:id/check": {
+      "access": "user",
+      "permission": "tunnels.use",
+      "resource": {
+        "kind": "own",
+        "fixture": "tunnels.gateways"
+      },
+      "params": {
+        "id": "=authz-none"
+      },
+      "allowed": "any",
+      "note": "No gateways in the test data (setting one up runs WireGuard on two real hosts); only session, permission and unknown id refusals are checked"
+    },
+    "POST /plugin-api/tunnels/gateways/:id/ports": {
+      "access": "user",
+      "permission": "tunnels.use",
+      "resource": {
+        "kind": "own",
+        "fixture": "tunnels.gateways"
+      },
+      "params": {
+        "id": "=authz-none"
+      },
+      "allowed": "any",
+      "note": "No gateways in the test data (setting one up runs WireGuard on two real hosts); only session, permission and unknown id refusals are checked"
+    },
+    "DELETE /plugin-api/tunnels/gateways/:id/ports/:portId": {
+      "access": "user",
+      "permission": "tunnels.use",
+      "resource": {
+        "kind": "own",
+        "fixture": "tunnels.gateways"
+      },
+      "params": {
+        "id": "=999999",
+        "portId": "=999999"
+      },
+      "destructive": true,
+      "allowed": "any",
+      "note": "Needs a live gateway"
+    },
+    "PATCH /plugin-api/tunnels/gateways/:id/ports/:portId": {
+      "access": "user",
+      "permission": "tunnels.use",
+      "resource": {
+        "kind": "own",
+        "fixture": "tunnels.gateways"
+      },
+      "params": {
+        "id": "=999999",
+        "portId": "=999999"
+      },
+      "allowed": "any",
+      "note": "Needs a live gateway"
+    },
+    "POST /plugin-api/tunnels/gateways/:id/scan": {
+      "access": "user",
+      "permission": "tunnels.use",
+      "resource": {
+        "kind": "own",
+        "fixture": "tunnels.gateways"
+      },
+      "params": {
+        "id": "=authz-none"
+      },
+      "allowed": "any",
+      "note": "No gateways in the test data (setting one up runs WireGuard on two real hosts); only session, permission and unknown id refusals are checked"
+    },
+    "POST /plugin-api/tunnels/gateways/install": {
+      "access": "user",
+      "permission": "tunnels.use",
+      "resource": {
+        "kind": "host",
+        "min": "connect",
+        "key": "hostId"
+      },
+      "destructive": true
+    },
+    "POST /plugin-api/tunnels/gateways/preflight": {
+      "access": "user",
+      "permission": "tunnels.use",
+      "resource": {
+        "kind": "host",
+        "min": "connect",
+        "key": "hostId"
+      }
+    },
+    "GET /plugin-api/tunnels/presets": {
+      "access": "user",
+      "permission": "tunnels.use"
+    },
+    "POST /plugin-api/tunnels/presets": {
+      "access": "user",
+      "permission": "tunnels.use",
+      "destructive": true
+    },
+    "DELETE /plugin-api/tunnels/presets/:id": {
+      "access": "user",
+      "permission": "tunnels.use",
+      "resource": {
+        "kind": "own",
+        "fixture": "tunnels.presets"
+      },
+      "params": {
+        "id": "tunnels.presets"
+      },
+      "destructive": true
+    },
+    "PUT /plugin-api/tunnels/presets/:id": {
+      "access": "user",
+      "permission": "tunnels.use",
+      "resource": {
+        "kind": "own",
+        "fixture": "tunnels.presets"
+      },
+      "params": {
+        "id": "tunnels.presets"
+      },
+      "destructive": true
+    },
+    "GET /plugin-api/tunnels/saved": {
+      "access": "user",
+      "permission": "tunnels.use",
+      "resource": {
+        "kind": "host",
+        "min": "connect",
+        "key": "hostId"
+      },
+      "filtered": true,
+      "note": "Lists only what the caller may see"
+    },
+    "PUT /plugin-api/tunnels/saved/:hostId": {
+      "access": "user",
+      "permission": "tunnels.use",
+      "resource": {
+        "kind": "host",
+        "min": "connect"
+      },
+      "body": {
+        "connections": []
+      }
+    },
+    "GET /plugin-api/tunnels/status": {
+      "access": "user",
+      "permission": "tunnels.use",
+      "resource": {
+        "kind": "host",
+        "min": "connect",
+        "key": "hostId"
+      },
+      "filtered": true,
+      "note": "Lists only what the caller may see"
+    },
+    "GET /plugin-api/tunnels/status/:tunnelName": {
+      "access": "user",
+      "permission": "tunnels.use",
+      "note": "No running tunnel in the test data",
+      "allowed": "any"
+    },
+    "GET /plugin-api/tunnels/status/stream": {
+      "access": "user",
+      "permission": "tunnels.use",
+      "resource": {
+        "kind": "host",
+        "min": "connect",
+        "key": "hostId"
+      },
+      "filtered": true,
+      "note": "Lists only what the caller may see"
+    },
+    "WS /plugin-ws/tunnels/c2s/stream": {
+      "access": "user",
+      "permission": "tunnels.use",
+      "resource": {
+        "kind": "host",
+        "min": "connect"
+      },
+      "send": [
+        {
+          "type": "test",
+          "tunnelConfig": {
+            "sourceHostId": "{{host}}",
+            "sourcePort": 1,
+            "remoteAddress": "127.0.0.1"
+          }
+        }
+      ],
+      "refuseReply": "Access denied",
+      "note": "Permission and host access are checked on the first message"
+    }
+  }
+}

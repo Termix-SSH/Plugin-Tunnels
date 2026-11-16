@@ -33,6 +33,7 @@ afterEach(async () => {
 async function activateWithout(capability: string, actor?: string) {
   db = await createTestDb(pluginDir);
   mock = createMockCtx({
+    sandbox: true,
     pluginId: manifest.id,
     manifest,
     capabilities: manifest.capabilities.filter((c) => c !== capability),

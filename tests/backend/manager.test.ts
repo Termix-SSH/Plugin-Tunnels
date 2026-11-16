@@ -47,6 +47,7 @@ afterEach(() => {
 
 function setup(client = new FakeClient()) {
   const mock: MockPluginContext = createMockCtx({
+    sandbox: true,
     pluginId: manifest.id,
     manifest,
     capabilities: manifest.capabilities,

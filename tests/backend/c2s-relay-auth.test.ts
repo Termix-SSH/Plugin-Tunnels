@@ -27,6 +27,7 @@ class Socket extends EventEmitter {
 describe("interactive client relay", () => {
   it("authenticates preflight once and forwards subsequent SOCKS streams on the retained connection", async () => {
     const mock = createMockCtx({
+      sandbox: true,
       pluginId: "tunnels",
       manifest,
       capabilities: manifest.capabilities,
