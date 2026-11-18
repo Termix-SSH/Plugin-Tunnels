@@ -27,6 +27,7 @@ class Socket extends EventEmitter {
 describe("remote client tunnels on one shared connection", () => {
   it("lets each tunnel take only its own port and cleans up its listeners", async () => {
     const mock = createMockCtx({
+      sandbox: true,
       pluginId: "tunnels",
       manifest,
       capabilities: manifest.capabilities,
@@ -86,6 +87,7 @@ describe("remote client tunnels on one shared connection", () => {
 describe("local client tunnel errors", () => {
   it("closes the relay when the target ends its side of the channel", async () => {
     const mock = createMockCtx({
+      sandbox: true,
       pluginId: "tunnels",
       manifest,
       capabilities: manifest.capabilities,
@@ -131,6 +133,7 @@ describe("local client tunnel errors", () => {
 
   it("says which target the endpoint host could not reach", async () => {
     const mock = createMockCtx({
+      sandbox: true,
       pluginId: "tunnels",
       manifest,
       capabilities: manifest.capabilities,

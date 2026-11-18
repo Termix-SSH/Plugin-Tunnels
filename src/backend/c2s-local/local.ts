@@ -36,7 +36,7 @@ export async function registerC2SLocal(
   ctx: PluginContext,
   router: Router,
 ): Promise<{ runtime: C2SRuntime } | null> {
-  if (!ctx.desktop.local.available()) return null;
+  if (!(await ctx.desktop.local.available())) return null;
 
   let info: Awaited<ReturnType<typeof ctx.desktop.local.info>>;
   try {

@@ -77,6 +77,7 @@ describe(`${manifest.id} activate`, () => {
     ]);
     expect(rendered.registered.actions().sort()).toEqual([
       "tunnels.open",
+      "tunnels.openView",
       "tunnels.togglePanel",
     ]);
     expect(rendered.registered.dashboardCards()).toEqual(["tunnels"]);

@@ -1,5 +1,16 @@
 # Changelog
 
+## 1.4.0
+
+### Added
+
+- Other plugins can add their own sections to the Tunnels page, next to SSH and Gateways
+
+### Changed
+
+- Runs in its own process with only the access it needs (plugin API 2, needs Termix 26.11.2)
+- Form fields use the same background as the rest of Termix
+
 ## 1.3.0
 
 ### Added

@@ -960,7 +960,7 @@ export function C2STunnelPresetManager(): React.ReactElement {
                             ),
                           })
                         }
-                        className="px-2 py-1 text-xs bg-background border border-border text-foreground outline-none focus:ring-1 focus:ring-ring w-full h-7"
+                        className="px-2 py-1 text-xs bg-(--field) border border-border text-foreground outline-none focus:ring-1 focus:ring-ring w-full h-7"
                       >
                         <option value="local">{t("tunnels.typeLocal")}</option>
                         <option value="remote">
@@ -1023,7 +1023,7 @@ export function C2STunnelPresetManager(): React.ReactElement {
                         onChange={(e) =>
                           handleEndpointChange(index, e.target.value)
                         }
-                        className="px-2 py-1 text-xs bg-background border border-border text-foreground outline-none focus:ring-1 focus:ring-ring w-full h-7"
+                        className="px-2 py-1 text-xs bg-(--field) border border-border text-foreground outline-none focus:ring-1 focus:ring-ring w-full h-7"
                       >
                         <option value="">
                           {t("tunnels.endpointSshHostPlaceholder")}
@@ -1242,7 +1242,7 @@ export function C2STunnelPresetManager(): React.ReactElement {
               );
               if (preset) setPresetName(preset.name);
             }}
-            className="px-2 py-1 text-xs bg-background border border-border text-foreground outline-none focus:ring-1 focus:ring-ring w-full h-7 disabled:opacity-50 disabled:cursor-not-allowed"
+            className="px-2 py-1 text-xs bg-(--field) border border-border text-foreground outline-none focus:ring-1 focus:ring-ring w-full h-7 disabled:opacity-50 disabled:cursor-not-allowed"
           >
             <option value="">
               {hasPresets
