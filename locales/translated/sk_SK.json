@@ -218,6 +218,13 @@
         "label": "Tlačidlo okraja panela tunelov",
         "description": "Zobraziť malé tlačidlo na okraji terminálu na otvorenie panela."
       }
+    },
+    "admin": {
+      "x11Display": {
+        "label": "X server pre X11 programy",
+        "description": "Kde sa zobrazia okná programov spustených z X11 aplikácií, napríklad localhost:0. Termix server sa k nemu pripája, takže to slúži najmä pre desktopovú aplikáciu s VcXsrv, XQuartz alebo Xwayland na tomto počítači. Ak chcete vypnúť X11 aplikácie, nechajte prázdne.",
+        "placeholder": "localhost:0"
+      }
     }
   },
   "common": {
@@ -346,5 +353,25 @@
   "hostTile": {
     "title": "Tunely",
     "empty": "Na tomto hostiteľovi nie sú žiadne uložené tunely."
+  },
+  "x11": {
+    "title": "X11 aplikácie",
+    "loading": "Načítava sa...",
+    "loadFailed": "Nepodarilo sa načítať X11 programy.",
+    "startFailed": "Nepodarilo sa spustiť program.",
+    "stopFailed": "Nepodarilo sa zastaviť program.",
+    "notConfigured": "Nie je nastavený žiadny X server",
+    "notConfiguredHint": "Správca nastaví X server pre X11 programy v Nastaveniach, Tunely, napríklad localhost:0 s bežiacim VcXsrv alebo XQuartz vedľa desktopovej aplikácie.",
+    "host": "Hostiteľ",
+    "pickHost": "Vyberte hostiteľa",
+    "commandPlaceholder": "Program, napríklad xclock alebo virt-manager",
+    "start": "Spustiť",
+    "stop": "Zastaviť",
+    "remove": "Odstrániť",
+    "hint": "Program sa spúšťa na hostiteľovi cez SSH s X11 forwardovaním a jeho okná sa otvárajú na vašom X serveri. Uzavretie posledného okna ho ukončí.",
+    "empty": "Zatiaľ neboli spustené žiadne programy",
+    "programs": "Programy",
+    "running": "Beží",
+    "exited": "Ukončený ({{code}})"
   }
 }

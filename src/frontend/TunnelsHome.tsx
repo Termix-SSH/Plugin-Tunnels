@@ -7,6 +7,7 @@ import {
 import { TabStrip } from "@termix-ssh/plugin-sdk/ui";
 import { TunnelTab } from "./TunnelTab";
 import { GatewaysView } from "./GatewaysView";
+import { X11AppsView } from "./X11AppsView";
 import { onTunnelViewRequest, tunnelViews } from "./tunnel-views";
 
 const STORAGE_KEY = "tunnels.view";
@@ -33,7 +34,11 @@ export function TunnelsHome({
   const extension = extensions.find((entry) => entry.id === selected);
   // Keep the desired id while plugins load, but never render an absent provider.
   const view =
-    selected === "gateways" ? "gateways" : extension ? extension.id : "ssh";
+    selected === "gateways" || selected === "x11"
+      ? selected
+      : extension
+        ? extension.id
+        : "ssh";
 
   const change = useCallback((next: string) => {
     setSelected(next);
@@ -64,6 +69,7 @@ export function TunnelsHome({
       tabs={[
         { id: "ssh", label: t("tunnels.sshTunnels") },
         { id: "gateways", label: t("gateways.title") },
+        { id: "x11", label: t("x11.title") },
         ...extensions.map((entry) => ({ id: entry.id, label: entry.title })),
       ]}
       activeTab={view}
@@ -72,6 +78,7 @@ export function TunnelsHome({
   );
 
   if (view === "gateways") return <GatewaysView switcher={switcher} />;
+  if (view === "x11") return <X11AppsView host={host} switcher={switcher} />;
   if (extension && view === extension.id) {
     const View = extension.components.view;
     return (

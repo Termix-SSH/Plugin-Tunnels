@@ -1,3 +1,4 @@
+import { AsyncResource } from "node:async_hooks";
 import { randomUUID } from "node:crypto";
 import net from "node:net";
 import type { Socket } from "node:net";
@@ -126,6 +127,9 @@ export function keepSocketAlive(ws: WebSocket, intervalMs = PING_MS): void {
 }
 
 export function createC2SRuntime(deps: C2SRuntimeDeps) {
+  // A listener outlives the request that started it, and that request's
+  // token stops working 30 s after it ends. Its connections run here.
+  const background = new AsyncResource("c2s-listeners");
   const runtimes = new Map<string, Runtime>();
   const netImpl = deps.netImpl ?? net;
   const log = deps.log;
@@ -864,16 +868,18 @@ export function createC2SRuntime(deps: C2SRuntimeDeps) {
 
     const sockets = new Set<Socket>();
     const connection: C2STunnel = { ...tunnelConfig, name, mode };
-    const server = netImpl.createServer((socket) => {
-      if (!runtimes.get(name)?.status.connected) {
-        socket.destroy();
-        return;
-      }
-      sockets.add(socket);
-      socket.on("close", () => sockets.delete(socket));
-      if (mode === "dynamic") handleDynamicConnection(connection, socket);
-      else handleLocalConnection(connection, socket);
-    });
+    const server = netImpl.createServer(
+      background.bind((socket: Socket) => {
+        if (!runtimes.get(name)?.status.connected) {
+          socket.destroy();
+          return;
+        }
+        sockets.add(socket);
+        socket.on("close", () => sockets.delete(socket));
+        if (mode === "dynamic") handleDynamicConnection(connection, socket);
+        else handleLocalConnection(connection, socket);
+      }),
+    );
 
     runtimes.set(name, {
       server,

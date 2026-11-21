@@ -217,6 +217,13 @@
         "label": "Gumb na rubu za panel tunela",
         "description": "Prikaži mali gumb na rubu terminala za otvaranje panela."
       }
+    },
+    "admin": {
+      "x11Display": {
+        "label": "X poslužitelj za X11 programe",
+        "description": "Gdje se pojavljuju prozori programa pokrenutih iz X11 aplikacija, npr. localhost:0. Termix poslužitelj se povezuje na njega, pa je ovo prvenstveno za desktop aplikaciju s VcXsrv, XQuartz ili Xwaylandom na ovom računalu. Ostavite prazno za isključivanje X11 aplikacija.",
+        "placeholder": "localhost:0"
+      }
     }
   },
   "common": {
@@ -345,5 +352,25 @@
   "hostTile": {
     "title": "Tuneli",
     "empty": "Na ovom hostu nema spremljenih tunela."
+  },
+  "x11": {
+    "title": "X11 aplikacije",
+    "loading": "Učitavanje...",
+    "loadFailed": "Nije moguće učitati X11 programe.",
+    "startFailed": "Nije moguće pokrenuti program.",
+    "stopFailed": "Nije moguće zaustaviti program.",
+    "notConfigured": "Nije postavljen X poslužitelj",
+    "notConfiguredHint": "Administrator postavlja X poslužitelj za X11 programe u Postavkama, Tuneli, poput localhost:0 s VcXsrv ili XQuartzom koji se pokreće uz desktop aplikaciju.",
+    "host": "Stroj",
+    "pickHost": "Odaberite stroj",
+    "commandPlaceholder": "Program, poput xclock ili virt-manager",
+    "start": "Pokreni",
+    "stop": "Zaustavi",
+    "remove": "Ukloni",
+    "hint": "Program se izvršava na stroju putem SSH-a s X11 preusmjeravanjem, a njegovi prozori otvaraju se na vašem X poslužitelju. Zatvaranjem posljednjeg prozora program se prekida.",
+    "empty": "Još nema pokrenutih programa",
+    "programs": "Programi",
+    "running": "Pokrenuto",
+    "exited": "Završeno ({{code}})"
   }
 }

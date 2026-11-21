@@ -1,3 +1,4 @@
+import { AsyncResource } from "node:async_hooks";
 import { createServer, Socket, type Server } from "node:net";
 import type { Client, ClientChannel } from "ssh2";
 import type {
@@ -63,6 +64,9 @@ export type TunnelManager = ReturnType<typeof createTunnelManager>;
  */
 export function createTunnelManager(ctx: PluginContext) {
   const log = ctx.log;
+  // A tunnel outlives the request that started it, and that request's token
+  // stops working 30 s after it ends. New connections and retries run here.
+  const background = new AsyncResource("tunnels-background");
 
   const configs = new Map<string, TunnelConfig>();
   const statuses = new Map<string, TunnelStatus>();
@@ -306,30 +310,32 @@ export function createTunnelManager(ctx: PluginContext) {
 
     // Local and dynamic: listen here, forward through the source.
     const sockets = new Set<Socket>();
-    const server: Server = createServer((socket) => {
-      sockets.add(socket);
-      socket.on("close", () => sockets.delete(socket));
-      socket.on("error", () => {
-        sockets.delete(socket);
-        socket.destroy();
-      });
+    const server: Server = createServer(
+      background.bind((socket: Socket) => {
+        sockets.add(socket);
+        socket.on("close", () => sockets.delete(socket));
+        socket.on("error", () => {
+          sockets.delete(socket);
+          socket.destroy();
+        });
 
-      if (mode === "dynamic") {
-        handleSocks5Connect(
-          socket,
-          (host, port) => forwardOut(sourceClient, host, port),
-          name,
-          log,
-        );
-        return;
-      }
+        if (mode === "dynamic") {
+          handleSocks5Connect(
+            socket,
+            (host, port) => forwardOut(sourceClient, host, port),
+            name,
+            log,
+          );
+          return;
+        }
 
-      forwardOut(sourceClient, targetHost, targetPort)
-        .then((outbound) =>
-          pipeTunnelStreams(socket, Promise.resolve(outbound), name, log),
-        )
-        .catch(() => socket.destroy());
-    });
+        forwardOut(sourceClient, targetHost, targetPort)
+          .then((outbound) =>
+            pipeTunnelStreams(socket, Promise.resolve(outbound), name, log),
+          )
+          .catch(() => socket.destroy());
+      }),
+    );
 
     const boundPort = await new Promise<number>((resolve, reject) => {
       server.once("error", reject);
@@ -355,7 +361,7 @@ export function createTunnelManager(ctx: PluginContext) {
       const idleTimeoutMs = config.idleTimeoutMs;
       let idleSince: number | null = Date.now();
       idleTimer = setInterval(
-        () => {
+        background.bind(() => {
           if (sockets.size > 0) {
             idleSince = null;
             return;
@@ -369,7 +375,7 @@ export function createTunnelManager(ctx: PluginContext) {
           if (runtimes.get(name)?.sourceClient !== sourceClient) return;
           log.info(`Closing idle tunnel ${name}`);
           void cleanup(name, true);
-        },
+        }),
         Math.min(30_000, idleTimeoutMs),
       );
       idleTimer.unref();
@@ -637,12 +643,15 @@ export function createTunnelManager(ctx: PluginContext) {
 
     retryTimers.set(
       name,
-      setTimeout(() => {
-        clearRetryTimers(name);
-        if (!manualDisconnects.has(name)) {
-          void connect(config, retryCount);
-        }
-      }, retryInterval),
+      setTimeout(
+        background.bind(() => {
+          clearRetryTimers(name);
+          if (!manualDisconnects.has(name)) {
+            void connect(config, retryCount);
+          }
+        }),
+        retryInterval,
+      ),
     );
   }
 

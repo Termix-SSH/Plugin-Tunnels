@@ -215,6 +215,13 @@
         "label": "Nút mép bảng điều khiển đường hầm",
         "description": "Hiển thị một nút nhỏ trên mép terminal để mở bảng điều khiển."
       }
+    },
+    "admin": {
+      "x11Display": {
+        "label": "Máy chủ X cho các chương trình X11",
+        "description": "Nơi hiển thị cửa sổ của các chương trình được khởi động từ ứng dụng X11, ví dụ: localhost:0. Máy chủ Termix sẽ kết nối đến đây, vì vậy mục này chủ yếu dành cho ứng dụng desktop với VcXsrv, XQuartz hoặc Xwayland đang chạy trên máy tính này. Để trống để tắt ứng dụng X11.",
+        "placeholder": "localhost:0"
+      }
     }
   },
   "common": {
@@ -343,5 +350,25 @@
   "hostTile": {
     "title": "Đường hầm",
     "empty": "Không có đường hầm nào được lưu trên máy chủ này."
+  },
+  "x11": {
+    "title": "Ứng dụng X11",
+    "loading": "Đang tải...",
+    "loadFailed": "Không thể tải các chương trình X11.",
+    "startFailed": "Không thể khởi động chương trình.",
+    "stopFailed": "Không thể dừng chương trình.",
+    "notConfigured": "Chưa cấu hình máy chủ X",
+    "notConfiguredHint": "Quản trị viên cần thiết lập máy chủ X cho các chương trình X11 trong Cài đặt, phần Đường hầm (Tunnels), ví dụ: localhost:0 với VcXsrv hoặc XQuartz đang chạy cùng ứng dụng desktop.",
+    "host": "Máy chủ",
+    "pickHost": "Chọn một máy chủ",
+    "commandPlaceholder": "Một chương trình, ví dụ: xclock hoặc virt-manager",
+    "start": "Khởi động",
+    "stop": "Dừng",
+    "remove": "Xóa",
+    "hint": "Chương trình sẽ chạy trên máy chủ qua SSH với tính năng chuyển tiếp X11, và các cửa sổ của nó sẽ mở trên máy chủ X của bạn. Đóng cửa sổ cuối cùng sẽ kết thúc chương trình.",
+    "empty": "Chưa khởi động chương trình nào",
+    "programs": "Chương trình",
+    "running": "Đang chạy",
+    "exited": "Đã thoát ({{code}})"
   }
 }

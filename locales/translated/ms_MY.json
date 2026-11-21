@@ -215,6 +215,13 @@
         "label": "Butang tepi panel terowong",
         "description": "Paparkan butang kecil di tepi terminal untuk membuka panel."
       }
+    },
+    "admin": {
+      "x11Display": {
+        "label": "Pelayan X untuk program X11",
+        "description": "Di mana tetingkap program yang dimulakan daripada aplikasi X11 akan muncul, seperti localhost:0. Pelayan Termix akan menyambung ke pelayan ini, jadi ini kebanyakannya untuk aplikasi desktop dengan VcXsrv, XQuartz atau Xwayland pada komputer ini. Kosongkan untuk mematikan aplikasi X11.",
+        "placeholder": "localhost:0"
+      }
     }
   },
   "common": {
@@ -343,5 +350,25 @@
   "hostTile": {
     "title": "Terowong",
     "empty": "Tiada terowong yang disimpan pada hos ini."
+  },
+  "x11": {
+    "title": "Aplikasi X11",
+    "loading": "Memuatkan...",
+    "loadFailed": "Tidak dapat memuatkan program X11.",
+    "startFailed": "Tidak dapat memulakan program.",
+    "stopFailed": "Tidak dapat menghentikan program.",
+    "notConfigured": "Tiada pelayan X ditetapkan",
+    "notConfiguredHint": "Admin menetapkan pelayan X untuk program X11 dalam Tetapan, Terowong, seperti localhost:0 dengan VcXsrv atau XQuartz yang berjalan bersebelahan dengan aplikasi desktop.",
+    "host": "Hos",
+    "pickHost": "Pilih hos",
+    "commandPlaceholder": "Sebuah program, seperti xclock atau virt-manager",
+    "start": "Mula",
+    "stop": "Hentikan",
+    "remove": "Buang",
+    "hint": "Program ini berjalan pada hos melalui SSH dengan terusan X11, dan tetingkapnya dibuka pada pelayan X anda. Menutup tetingkap terakhirnya akan mengakhirinya.",
+    "empty": "Tiada program dimulakan lagi",
+    "programs": "Program",
+    "running": "Berjalan",
+    "exited": "Keluar ({{code}})"
   }
 }

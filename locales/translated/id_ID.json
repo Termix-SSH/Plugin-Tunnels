@@ -215,6 +215,13 @@
         "label": "Tombol tepi panel terowongan",
         "description": "Tampilkan tombol kecil di tepi terminal untuk membuka panel."
       }
+    },
+    "admin": {
+      "x11Display": {
+        "label": "Server X untuk program X11",
+        "description": "Di mana jendela program yang dimulai dari aplikasi X11 muncul, seperti localhost:0. Server Termix terhubung ke sana, jadi ini terutama untuk aplikasi desktop dengan VcXsrv, XQuartz, atau Xwayland di komputer ini. Kosongkan untuk menonaktifkan aplikasi X11.",
+        "placeholder": "localhost:0"
+      }
     }
   },
   "common": {
@@ -343,5 +350,25 @@
   "hostTile": {
     "title": "Terowongan",
     "empty": "Tidak ada terowongan tersimpan di host ini."
+  },
+  "x11": {
+    "title": "Aplikasi X11",
+    "loading": "Memuat...",
+    "loadFailed": "Tidak dapat memuat program X11.",
+    "startFailed": "Tidak dapat memulai program.",
+    "stopFailed": "Tidak dapat menghentikan program.",
+    "notConfigured": "Server X tidak diatur",
+    "notConfiguredHint": "Admin mengatur server X untuk program X11 di Pengaturan, Terowongan, seperti localhost:0 dengan VcXsrv atau XQuartz yang berjalan di samping aplikasi desktop.",
+    "host": "Host",
+    "pickHost": "Pilih host",
+    "commandPlaceholder": "Program, seperti xclock atau virt-manager",
+    "start": "Mulai",
+    "stop": "Hentikan",
+    "remove": "Hapus",
+    "hint": "Program berjalan di host melalui SSH dengan forwarding X11, dan jendelanya terbuka di server X Anda. Menutup jendela terakhirnya akan mengakhirinya.",
+    "empty": "Belum ada program yang dimulai",
+    "programs": "Program",
+    "running": "Berjalan",
+    "exited": "Berakhir ({{code}})"
   }
 }

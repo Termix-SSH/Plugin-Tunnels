@@ -215,6 +215,13 @@
         "label": "トンネルパネルのエッジボタン",
         "description": "パネルを開くための小さなボタンをターミナルの端に表示します。"
       }
+    },
+    "admin": {
+      "x11Display": {
+        "label": "X11 プログラム用の X サーバー",
+        "description": "X11 アプリから起動されたプログラムのウィンドウが表示される場所（例：localhost:0）。Termix サーバーがこれに接続するため、主にこのコンピューターで VcXsrv、XQuartz、または Xwayland を実行しているデスクトップアプリ向けです。X11 アプリを無効にするには空のままにしてください。",
+        "placeholder": "localhost:0"
+      }
     }
   },
   "common": {
@@ -343,5 +350,25 @@
   "hostTile": {
     "title": "トンネル",
     "empty": "このホストに保存されたトンネルはありません。"
+  },
+  "x11": {
+    "title": "X11 アプリ",
+    "loading": "読み込み中...",
+    "loadFailed": "X11 プログラムを読み込めませんでした。",
+    "startFailed": "プログラムを起動できませんでした。",
+    "stopFailed": "プログラムを停止できませんでした。",
+    "notConfigured": "X サーバーが設定されていません",
+    "notConfiguredHint": "管理者は、設定の「トンネル」で X11 プログラム用の X サーバーを設定します（例：デスクトップアプリと同じコンピューターで VcXsrv や XQuartz を実行している場合の localhost:0）。",
+    "host": "ホスト",
+    "pickHost": "ホストを選択",
+    "commandPlaceholder": "プログラム（例：xclock や virt-manager）",
+    "start": "起動",
+    "stop": "停止",
+    "remove": "削除",
+    "hint": "プログラムは SSH 経由で X11 フォワーディングを使用してホスト上で実行され、そのウィンドウはあなたの X サーバー上に表示されます。最後のウィンドウを閉じるとプログラムが終了します。",
+    "empty": "まだプログラムが起動されていません",
+    "programs": "プログラム",
+    "running": "実行中",
+    "exited": "終了済み（{{code}}）"
   }
 }

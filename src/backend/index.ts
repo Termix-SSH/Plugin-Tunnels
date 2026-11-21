@@ -20,6 +20,7 @@ import { createTunnelsService } from "./service.js";
 import { registerOperations } from "./operations.js";
 import { startAutoStartTunnels } from "./autostart.js";
 import { registerC2SLocal } from "./c2s-local/local.js";
+import { createX11Apps, registerX11Routes } from "./x11-apps.js";
 
 export type {
   TunnelsAccess,
@@ -47,6 +48,10 @@ export async function activate(ctx: PluginContext) {
   const router = ctx.http.router<Router>();
   registerTunnelRoutes(router, ctx, manager, repository);
   registerSavedTunnelRoutes(router, ctx, store);
+
+  const x11 = createX11Apps(ctx);
+  ctx.disposables.add(() => x11.dispose());
+  registerX11Routes(router, ctx, x11);
 
   const gatewayService = createGatewayService(
     ctx,

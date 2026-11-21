@@ -216,6 +216,13 @@
         "label": "Tonnels-paneel randknoppie",
         "description": "Wys 'n klein knoppie op die terminaalrand om die paneel oop te maak."
       }
+    },
+    "admin": {
+      "x11Display": {
+        "label": "X-bediener vir X11-programme",
+        "description": "Waar die vensters van programme wat vanaf X11-programme gestart word, verskyn, soos localhost:0. Die Termix-bediener maak verbinding daarmee, so dit is hoofsaaklik vir die lessenaarprogram met VcXsrv, XQuartz of Xwayland op hierdie rekenaar. Laat leeg om X11-programme af te skakel.",
+        "placeholder": "localhost:0"
+      }
     }
   },
   "common": {
@@ -344,5 +351,25 @@
   "hostTile": {
     "title": "Tonnels",
     "empty": "Geen opgeslate tonnels op hierdie gasheer nie."
+  },
+  "x11": {
+    "title": "X11-programme",
+    "loading": "Laai tans...",
+    "loadFailed": "Kon nie X11-programme laai nie.",
+    "startFailed": "Kon nie die program begin nie.",
+    "stopFailed": "Kon nie die program stop nie.",
+    "notConfigured": "Geen X-bediener is ingestel nie",
+    "notConfiguredHint": "'n Admin stel die X-bediener vir X11-programme in Instellings, Tonnels, soos localhost:0 met VcXsrv of XQuartz wat langs die lessenaarprogram loop.",
+    "host": "Gasheer",
+    "pickHost": "Kies 'n gasheer",
+    "commandPlaceholder": "'n Program, soos xclock of virt-manager",
+    "start": "Begin",
+    "stop": "Stop",
+    "remove": "Verwyder",
+    "hint": "Die program word op die gasheer oor SSH met X11-doorgif uitgevoer, en sy vensters open op jou X-bedienaar. Die sluit van sy laaste venster beëindig dit.",
+    "empty": "Nog geen programme begin nie",
+    "programs": "Programme",
+    "running": "Besig om uit te voer",
+    "exited": "Beëindig ({{code}})"
   }
 }

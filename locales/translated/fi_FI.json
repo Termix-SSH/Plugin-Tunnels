@@ -216,6 +216,13 @@
         "label": "Tunnelipaneelin reunapainike",
         "description": "Näytä pieni painike terminaalin reunassa paneelin avaamiseksi."
       }
+    },
+    "admin": {
+      "x11Display": {
+        "label": "X-palvelin X11-ohjelmille",
+        "description": "Sijainti, johon X11-ohjelmien ikkunat piirretään, esimerkiksi localhost:0. Termix-palvelin yhdistää tähän, joten tämä on pääasiassa työpöytäsovellusta varten, jossa tämässä tietokoneessa on käynnissä VcXsrv, XQuartz tai Xwayland. Jätä tyhjäksi, jos haluat poistaa X11-ohjelmat käytöstä.",
+        "placeholder": "localhost:0"
+      }
     }
   },
   "common": {
@@ -344,5 +351,25 @@
   "hostTile": {
     "title": "Tunnelit",
     "empty": "Tällä palvelimella ei ole tallennettuja tunnelia."
+  },
+  "x11": {
+    "title": "X11-ohjelmat",
+    "loading": "Ladataan...",
+    "loadFailed": "X11-ohjelmien lataaminen epäonnistui.",
+    "startFailed": "Ohjelman käynnistäminen epäonnistui.",
+    "stopFailed": "Ohjelman pysäyttäminen epäonnistui.",
+    "notConfigured": "X-palvelinta ei ole määritetty",
+    "notConfiguredHint": "Ylläpitäjän on määritettävä X-palvelin X11-ohjelmille Asetukset → Tunnelit -kohdassa, esimerkiksi localhost:0, kun VcXsrv tai XQuartz on käynnissä työpöytäsovelluksen vieressä.",
+    "host": "Isäntä",
+    "pickHost": "Valitse isäntä",
+    "commandPlaceholder": "Ohjelma, kuten xclock tai virt-manager",
+    "start": "Käynnistä",
+    "stop": "Pysäytä",
+    "remove": "Poista",
+    "hint": "Ohjelma ajetaan isännällä SSH-yhteyden kautta X11-etunäytöllä, ja sen ikkunat avautuvat X-palvelimellasi. Viimeisen ikkunan sulkeminen lopettaa ohjelman.",
+    "empty": "Ohjelmia ei ole vielä käynnistetty",
+    "programs": "Ohjelmat",
+    "running": "Käynnissä",
+    "exited": "Lopetettu ({{code}})"
   }
 }

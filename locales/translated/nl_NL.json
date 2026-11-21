@@ -216,6 +216,13 @@
         "label": "Knop aan de rand voor tunnels-paneel",
         "description": "Toon een kleine knop aan de rand van de terminal om het paneel te openen."
       }
+    },
+    "admin": {
+      "x11Display": {
+        "label": "X-server voor X11-programma's",
+        "description": "Waar de vensters van programma's die vanuit X11-apps worden gestart, verschijnen, zoals localhost:0. De Termix-server maakt verbinding met deze server, dus dit is voornamelijk bedoeld voor de desktop-app met VcXsrv, XQuartz of Xwayland op deze computer. Laat leeg om X11-apps uit te schakelen.",
+        "placeholder": "localhost:0"
+      }
     }
   },
   "common": {
@@ -344,5 +351,25 @@
   "hostTile": {
     "title": "Tunnels",
     "empty": "Geen opgeslagen tunnels op deze host."
+  },
+  "x11": {
+    "title": "X11-apps",
+    "loading": "Laden...",
+    "loadFailed": "Kan X11-programma's niet laden.",
+    "startFailed": "Kan het programma niet starten.",
+    "stopFailed": "Kan het programma niet stoppen.",
+    "notConfigured": "Geen X-server ingesteld",
+    "notConfiguredHint": "Een beheerder stelt de X-server voor X11-programma's in via Instellingen > Tunnels, bijvoorbeeld localhost:0 met VcXsrv of XQuartz die naast de desktop-app draait.",
+    "host": "Host",
+    "pickHost": "Kies een host",
+    "commandPlaceholder": "Een programma, zoals xclock of virt-manager",
+    "start": "Starten",
+    "stop": "Stoppen",
+    "remove": "Verwijderen",
+    "hint": "Het programma wordt via SSH met X11-forwarding op de host uitgevoerd en de vensters openen zich op uw X-server. Als u het laatste venster sluit, wordt het programma beëindigd.",
+    "empty": "Nog geen programma's gestart",
+    "programs": "Programma's",
+    "running": "Actief",
+    "exited": "Afgesloten ({{code}})"
   }
 }

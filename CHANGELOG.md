@@ -1,5 +1,15 @@
 # Changelog
 
+## 1.5.0
+
+### Added
+
+- X11 apps: start a graphical program on a host, like xclock or virt-manager, and its windows open on an X server the admin sets, such as VcXsrv or XQuartz next to the desktop app
+
+### Fixed
+
+- Local and dynamic tunnels keep forwarding new connections instead of stopping about 30 seconds after they start
+
 ## 1.4.0
 
 ### Added

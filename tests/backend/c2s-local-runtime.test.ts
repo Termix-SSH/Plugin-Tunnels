@@ -1,3 +1,4 @@
+import { AsyncLocalStorage } from "node:async_hooks";
 import { EventEmitter } from "node:events";
 import { PassThrough } from "node:stream";
 import { describe, expect, it, vi } from "vitest";
@@ -359,6 +360,48 @@ describe("client tunnel runtime", () => {
     expect(
       JSON.parse(sockets[0].send.mock.calls[0][0]).tunnelConfig.sourceHostId,
     ).toBe(9);
+  });
+});
+
+describe("client tunnel connections and the request that started it", () => {
+  it("handles a new connection outside the starting request", async () => {
+    // Stands in for the plugin process, which keeps a request's token in
+    // async context and refuses it 30 s after the request ends.
+    const request = new AsyncLocalStorage<string>();
+    const { runtime, sockets, getLink, incoming } = setup();
+    const seen: Array<string | undefined> = [];
+    getLink.mockImplementation(async () => {
+      seen.push(request.getStore());
+      return defaultLink as never;
+    });
+    const tunnel = {
+      name: "outlives-request",
+      mode: "local",
+      sourceHostId: 7,
+      sourcePort: 1080,
+      endpointPort: 8080,
+    };
+    const local = Object.assign(new EventEmitter(), {
+      destroy: vi.fn(),
+      write: vi.fn(),
+      pause: vi.fn(),
+      resume: vi.fn(),
+    });
+    try {
+      await request.run("start request", async () => {
+        await runtime.start(tunnel, 0);
+        await vi.waitFor(() => expect(sockets[0]?.send).toHaveBeenCalled());
+        sockets[0].ready();
+        await vi.waitFor(() =>
+          expect(runtime.statuses()[tunnel.name]?.connected).toBe(true),
+        );
+        incoming()(local);
+      });
+      await vi.waitFor(() => expect(seen).toHaveLength(2));
+      expect(seen).toEqual(["start request", undefined]);
+    } finally {
+      await runtime.stop(tunnel.name);
+    }
   });
 });
 

@@ -217,6 +217,13 @@
         "label": "Botón lateral del panel de túneles",
         "description": "Muestra un pequeño botón en el borde del terminal para abrir el panel."
       }
+    },
+    "admin": {
+      "x11Display": {
+        "label": "Servidor X para programas X11",
+        "description": "Dónde aparecen las ventanas de los programas iniciados desde aplicaciones X11, como localhost:0. El servidor de Termix se conecta a él, por lo que esto es principalmente para la aplicación de escritorio con VcXsrv, XQuartz o Xwayland en este equipo. Déjalo vacío para desactivar las aplicaciones X11.",
+        "placeholder": "localhost:0"
+      }
     }
   },
   "common": {
@@ -345,5 +352,25 @@
   "hostTile": {
     "title": "Túneles",
     "empty": "No hay túneles guardados en este host."
+  },
+  "x11": {
+    "title": "Aplicaciones X11",
+    "loading": "Cargando...",
+    "loadFailed": "No se han podido cargar los programas X11.",
+    "startFailed": "No se ha podido iniciar el programa.",
+    "stopFailed": "No se ha podido detener el programa.",
+    "notConfigured": "No se ha configurado ningún servidor X",
+    "notConfiguredHint": "Un administrador configura el servidor X para programas X11 en Configuración, Túneles, como localhost:0 con VcXsrv o XQuartz ejecutándose junto a la aplicación de escritorio.",
+    "host": "Host",
+    "pickHost": "Selecciona un host",
+    "commandPlaceholder": "Un programa, como xclock o virt-manager",
+    "start": "Iniciar",
+    "stop": "Detener",
+    "remove": "Eliminar",
+    "hint": "El programa se ejecuta en el host a través de SSH con reenvío X11, y sus ventanas se abren en tu servidor X. Cerrar su última ventana lo finaliza.",
+    "empty": "Aún no se han iniciado programas",
+    "programs": "Programas",
+    "running": "En ejecución",
+    "exited": "Finalizado ({{code}})"
   }
 }

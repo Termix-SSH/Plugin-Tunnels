@@ -217,6 +217,13 @@
         "label": "Bouton latéral du panneau de tunnels",
         "description": "Afficher un petit bouton sur le bord du terminal pour ouvrir le panneau."
       }
+    },
+    "admin": {
+      "x11Display": {
+        "label": "Serveur X pour les programmes X11",
+        "description": "L'endroit où apparaissent les fenêtres des programmes lancés depuis les applications X11, comme localhost:0. Le serveur Termix s'y connecte, donc cela concerne principalement l'application de bureau avec VcXsrv, XQuartz ou Xwayland sur cet ordinateur. Laissez vide pour désactiver les applications X11.",
+        "placeholder": "localhost:0"
+      }
     }
   },
   "common": {
@@ -345,5 +352,25 @@
   "hostTile": {
     "title": "Tunnels",
     "empty": "Aucun tunnel enregistré sur cet hôte."
+  },
+  "x11": {
+    "title": "Applications X11",
+    "loading": "Chargement...",
+    "loadFailed": "Impossible de charger les programmes X11.",
+    "startFailed": "Impossible de démarrer le programme.",
+    "stopFailed": "Impossible d'arrêter le programme.",
+    "notConfigured": "Aucun serveur X n'est configuré",
+    "notConfiguredHint": "Un administrateur configure le serveur X pour les programmes X11 dans Paramètres, Tunnels, comme localhost:0 avec VcXsrv ou XQuartz en cours d'exécution à côté de l'application de bureau.",
+    "host": "Hôte",
+    "pickHost": "Choisir un hôte",
+    "commandPlaceholder": "Un programme, comme xclock ou virt-manager",
+    "start": "Démarrer",
+    "stop": "Arrêter",
+    "remove": "Supprimer",
+    "hint": "Le programme s'exécute sur l'hôte via SSH avec transfert X11, et ses fenêtres s'ouvrent sur votre serveur X. Fermer sa dernière fenêtre le termine.",
+    "empty": "Aucun programme démarré pour le moment",
+    "programs": "Programmes",
+    "running": "En cours d'exécution",
+    "exited": "Terminé ({{code}})"
   }
 }

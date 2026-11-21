@@ -216,6 +216,13 @@
         "label": "Tunnelide paneeli servanupp",
         "description": "Kuva terminali serval väike nupp paneeli avamiseks."
       }
+    },
+    "admin": {
+      "x11Display": {
+        "label": "X-teenur X11-programmide jaoks",
+        "description": "Kuhu kuvatakse X11-programmidest käivitatud programmide aknad, näiteks localhost:0. Termixi server ühendub sellega, seega on see peamiselt ette nähtud lauaarvuti rakenduse jaoks, kus käib VcXsrv, XQuartz või Xwayland selles arvutis. Jäta tühjaks, et X11-programmid välja lülitada.",
+        "placeholder": "localhost:0"
+      }
     }
   },
   "common": {
@@ -344,5 +351,25 @@
   "hostTile": {
     "title": "Tunnelid",
     "empty": "Sellel hostil pole salvestatud tunnelit."
+  },
+  "x11": {
+    "title": "X11-programmid",
+    "loading": "Laadimine...",
+    "loadFailed": "X11-programme ei õnnestunud laadida.",
+    "startFailed": "Programmi ei õnnestunud käivitada.",
+    "stopFailed": "Programmi ei õnnestunud peatada.",
+    "notConfigured": "X-teenur pole määratud",
+    "notConfiguredHint": "Haldaja määrab X11-programmide X-teenuri seadetes jaotises Tunnelid, näiteks localhost:0, kui lauaarvuti rakenduse kõrval käib VcXsrv või XQuartz.",
+    "host": "Host",
+    "pickHost": "Vali host",
+    "commandPlaceholder": "Programm, näiteks xclock või virt-manager",
+    "start": "Käivita",
+    "stop": "Peata",
+    "remove": "Eemalda",
+    "hint": "Programm töötab hostil SSH kaudu X11 edastusega ja selle aknad avanevad teie X-serveril. Viimase akna sulgemine lõpetab programmi.",
+    "empty": "Ühtegi programmi pole veel käivitatud",
+    "programs": "Programmid",
+    "running": "Töötamas",
+    "exited": "Lõpetatud ({{code}})"
   }
 }

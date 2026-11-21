@@ -216,6 +216,13 @@
         "label": "Alagutak panel szélgombja",
         "description": "Egy kis gomb megjelenítése a terminál szélén a panel megnyitásához."
       }
+    },
+    "admin": {
+      "x11Display": {
+        "label": "X11-programokhoz használt X-szerver",
+        "description": "Ahol az X11-es alkalmazásokból indított programok ablakai megjelennek, például localhost:0. A Termix szerver csatlakozik hozzá, így ez főleg az asztali alkalmazáshoz való, ha a gépen fut a VcXsrv, XQuartz vagy Xwayland. Hagyd üresen, ha ki szeretnéd kapcsolni az X11-es alkalmazásokat.",
+        "placeholder": "localhost:0"
+      }
     }
   },
   "common": {
@@ -344,5 +351,25 @@
   "hostTile": {
     "title": "Alagutak",
     "empty": "Nincsenek mentett alagutak ezen a hoszton."
+  },
+  "x11": {
+    "title": "X11-es alkalmazások",
+    "loading": "Betöltés...",
+    "loadFailed": "Az X11-es programok betöltése sikertelen.",
+    "startFailed": "A program indítása sikertelen.",
+    "stopFailed": "A program leállítása sikertelen.",
+    "notConfigured": "Nincs beállítva X-szerver",
+    "notConfiguredHint": "Egy rendszergazda állítja be az X11-programokhoz használt X-szervert a Beállítások > Alagutak menüpontban, például localhost:0 formátumban, ha a VcXsrv vagy XQuartz fut az asztali alkalmazás mellett.",
+    "host": "Gazdagép",
+    "pickHost": "Válassz egy gazdagépet",
+    "commandPlaceholder": "Egy program, például xclock vagy virt-manager",
+    "start": "Indítás",
+    "stop": "Leállítás",
+    "remove": "Eltávolítás",
+    "hint": "A program a gazdagépen fut SSH-n keresztül X11-es továbbítással, az ablakai pedig a saját X-szervereden nyílnak meg. Az utolsó ablak bezárása leállítja a programot.",
+    "empty": "Még nem indult el egyetlen program sem",
+    "programs": "Programok",
+    "running": "Fut",
+    "exited": "Kilépett ({{code}})"
   }
 }

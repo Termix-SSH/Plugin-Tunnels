@@ -218,6 +218,13 @@
         "label": "Gumb na robu plošče tunlov",
         "description": "Prikaži majhen gumb na robu terminala za odpiranje plošče."
       }
+    },
+    "admin": {
+      "x11Display": {
+        "label": "X strežnik za X11 programe",
+        "description": "Kje se prikažejo okna programov, zagnanih iz X11 aplikacij, na primer localhost:0. Strežnik Termix se poveže nanj, zato je to večinoma namenjeno namizni aplikaciji z VcXsrv, XQuartz ali Xwayland na tem računalniku. Pustite prazno, da onemogočite X11 programe.",
+        "placeholder": "localhost:0"
+      }
     }
   },
   "common": {
@@ -346,5 +353,25 @@
   "hostTile": {
     "title": "Predori",
     "empty": "Na tem gostitelju ni shranjenih predorov."
+  },
+  "x11": {
+    "title": "X11 aplikacije",
+    "loading": "Nalaganje...",
+    "loadFailed": "X11 programov ni bilo mogoče naložiti.",
+    "startFailed": "Programa ni bilo mogoče zagnati.",
+    "stopFailed": "Programa ni bilo mogoče ustaviti.",
+    "notConfigured": "X strežnik ni nastavljen",
+    "notConfiguredHint": "Upravitelj nastavi X strežnik za X11 programe v Nastavitvah, Predorih, na primer localhost:0 z VcXsrv ali XQuartz, ki tečeta ob namizni aplikaciji.",
+    "host": "Gostitelj",
+    "pickHost": "Izberite gostitelja",
+    "commandPlaceholder": "Program, na primer xclock ali virt-manager",
+    "start": "Zaženi",
+    "stop": "Ustavi",
+    "remove": "Odstrani",
+    "hint": "Program teče na gostitelju prek SSH z posredovanjem X11, njegova okna pa se odprejo na vašem X strežniku. Zapiranje zadnjega okna ga konča.",
+    "empty": "Še noben program ni zagnan",
+    "programs": "Programi",
+    "running": "V teku",
+    "exited": "Končan ({{code}})"
   }
 }

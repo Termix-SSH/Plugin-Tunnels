@@ -217,6 +217,13 @@
         "label": "Botó lateral del panell de túnels",
         "description": "Mostra un botó petit al costat del terminal per obrir el panell."
       }
+    },
+    "admin": {
+      "x11Display": {
+        "label": "Servidor X per a programes X11",
+        "description": "On s'obren les finestres dels programes iniciats des d'aplicacions X11, com ara localhost:0. El servidor Termix s'hi connecta, així que això és principalment per a l'aplicació d'escriptori amb VcXsrv, XQuartz o Xwayland en aquest ordinador. Deixa-ho buit per desactivar les aplicacions X11.",
+        "placeholder": "localhost:0"
+      }
     }
   },
   "common": {
@@ -345,5 +352,25 @@
   "hostTile": {
     "title": "Túnels",
     "empty": "No hi ha túnels desats en aquest amfitrió."
+  },
+  "x11": {
+    "title": "Aplicacions X11",
+    "loading": "S'està carregant...",
+    "loadFailed": "No s'han pogut carregar els programes X11.",
+    "startFailed": "No s'ha pogut iniciar el programa.",
+    "stopFailed": "No s'ha pogut aturar el programa.",
+    "notConfigured": "No s'ha configurat cap servidor X",
+    "notConfiguredHint": "Un administrador configura el servidor X per a programes X11 a Configuració, Tunnels, com ara localhost:0 amb VcXsrv o XQuartz executant-se al costat de l'aplicació d'escriptori.",
+    "host": "Amfitrió",
+    "pickHost": "Tria un amfitrió",
+    "commandPlaceholder": "Un programa, com xclock o virt-manager",
+    "start": "Inicia",
+    "stop": "Atura",
+    "remove": "Elimina",
+    "hint": "El programa s'executa a l'amfitrió a través d'SSH amb reenviament X11, i les seves finestres s'obren al vostre servidor X. Tancar l'última finestra el finalitza.",
+    "empty": "Encara no s'ha iniciat cap programa",
+    "programs": "Programes",
+    "running": "S'està executant",
+    "exited": "S'ha sortit ({{code}})"
   }
 }

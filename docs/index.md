@@ -69,6 +69,18 @@ Each gateway has its own WireGuard interface (`wgtx` and the gateway number), it
 
 Termix checks every gateway about every 30 seconds. If the tunnel or the rules are gone, for example after a reboot, it applies them again.
 
+## X11 apps
+
+X11 apps runs a graphical program on a host over SSH with X11 forwarding, and shows its windows on your computer.
+
+1. Run an X server on your computer: VcXsrv on Windows (start it with Disable access control), XQuartz on macOS (allow connections from network clients and run `xhost +localhost`), or Xwayland on Linux.
+2. In Settings, Tunnels, an admin sets X server for X11 programs, like `localhost:0`. The Termix server connects to it, so this is mostly for the desktop app.
+3. Open Tunnels, X11 apps, pick a host, type a program and press Start.
+
+The host needs `X11Forwarding yes` in its sshd config and `xauth` installed. The program stays listed while it runs. Stop ends it, and closing its last window ends it too. Tailscale SSH does not support X11 forwarding.
+
+SSH Terminal can also forward X11 for programs you start in a terminal. Turn on X11 forwarding for the host there.
+
 ## What the host needs
 
 The SSH server has to allow forwarding. In `/etc/ssh/sshd_config`:

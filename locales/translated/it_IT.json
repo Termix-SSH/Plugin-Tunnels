@@ -217,6 +217,13 @@
         "label": "Pulsante laterale del pannello dei tunnel",
         "description": "Mostra un piccolo pulsante sul bordo del terminale per aprire il pannello."
       }
+    },
+    "admin": {
+      "x11Display": {
+        "label": "Server X per programmi X11",
+        "description": "Dove appaiono le finestre dei programmi avviati dalle app X11, ad esempio localhost:0. Il server Termix si connette ad esso, quindi è principalmente destinato all'app desktop con VcXsrv, XQuartz o Xwayland su questo computer. Lascia vuoto per disabilitare le app X11.",
+        "placeholder": "localhost:0"
+      }
     }
   },
   "common": {
@@ -345,5 +352,25 @@
   "hostTile": {
     "title": "Tunnel",
     "empty": "Nessun tunnel salvato su questo host."
+  },
+  "x11": {
+    "title": "App X11",
+    "loading": "Caricamento...",
+    "loadFailed": "Impossibile caricare i programmi X11.",
+    "startFailed": "Impossibile avviare il programma.",
+    "stopFailed": "Impossibile arrestare il programma.",
+    "notConfigured": "Nessun server X impostato",
+    "notConfiguredHint": "Un amministratore imposta il server X per i programmi X11 nelle Impostazioni, Tunnel, ad esempio localhost:0 con VcXsrv o XQuartz in esecuzione accanto all'app desktop.",
+    "host": "Host",
+    "pickHost": "Scegli un host",
+    "commandPlaceholder": "Un programma, come xclock o virt-manager",
+    "start": "Avvia",
+    "stop": "Arresta",
+    "remove": "Rimuovi",
+    "hint": "Il programma viene eseguito sull'host tramite SSH con inoltramento X11 e le sue finestre si aprono sul tuo server X. Chiudere l'ultima finestra lo termina.",
+    "empty": "Nessun programma avviato",
+    "programs": "Programmi",
+    "running": "In esecuzione",
+    "exited": "Terminato ({{code}})"
   }
 }

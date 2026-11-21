@@ -216,6 +216,13 @@
         "label": "Tünel paneli kenar düğmesi",
         "description": "Paneli açmak için terminal kenarında küçük bir düğme göster."
       }
+    },
+    "admin": {
+      "x11Display": {
+        "label": "X11 programları için X sunucusu",
+        "description": "X11 uygulamalarından başlatılan programların pencerelerinin göründüğü yer, örneğin localhost:0. Termix sunucusu buna bağlanır, bu nedenle bu ayar çoğunlukla bu bilgisayarda masaüstü uygulaması ile birlikte çalışan VcXsrv, XQuartz veya Xwayland içindir. X11 uygulamalarını kapatmak için boş bırakın.",
+        "placeholder": "localhost:0"
+      }
     }
   },
   "common": {
@@ -344,5 +351,25 @@
   "hostTile": {
     "title": "Tüneller",
     "empty": "Bu ana bilgisayarda kayıtlı tünel yok."
+  },
+  "x11": {
+    "title": "X11 uygulamaları",
+    "loading": "Yükleniyor...",
+    "loadFailed": "X11 programları yüklenemedi.",
+    "startFailed": "Program başlatılamadı.",
+    "stopFailed": "Program durdurulamadı.",
+    "notConfigured": "X sunucusu ayarlanmamış",
+    "notConfiguredHint": "Bir yönetici, X11 programları için X sunucusunu Ayarlar > Tüneller bölümünde, masaüstü uygulaması yanında çalışan VcXsrv veya XQuartz ile localhost:0 gibi bir şekilde ayarlar.",
+    "host": "Sunucu",
+    "pickHost": "Bir sunucu seçin",
+    "commandPlaceholder": "xclock veya virt-manager gibi bir program",
+    "start": "Başlat",
+    "stop": "Durdur",
+    "remove": "Kaldır",
+    "hint": "Program, X11 yönlendirmesi ile SSH üzerinden sunucuda çalışır ve pencereleri X sunucunuzda açılır. Son penceresini kapatmak programı sonlandırır.",
+    "empty": "Henüz program başlatılmadı",
+    "programs": "Programlar",
+    "running": "Çalışıyor",
+    "exited": "Çıktı ({{code}})"
   }
 }

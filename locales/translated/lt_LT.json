@@ -218,6 +218,13 @@
         "label": "Tunelių skydelio krašto mygtukas",
         "description": "Rodyti mažą mygtuką terminalo krašte, skirtą atidaryti skydelį."
       }
+    },
+    "admin": {
+      "x11Display": {
+        "label": "X serveris X11 programoms",
+        "description": "Kur atsiranda iš X11 programų paleistų programų langai, pvz., localhost:0. Termix serveris prisijungia prie jo, todėl tai daugiausia skirta darbalaukio programai su VcXsrv, XQuartz arba Xwayland šioje kompiuterio sistemoje. Palikite tuščią, kad išjungtumėte X11 programas.",
+        "placeholder": "localhost:0"
+      }
     }
   },
   "common": {
@@ -346,5 +353,25 @@
   "hostTile": {
     "title": "Tuneliai",
     "empty": "Šiame serveryje nėra išsaugotų tunelių."
+  },
+  "x11": {
+    "title": "X11 programos",
+    "loading": "Įkeliama...",
+    "loadFailed": "Nepavyko įkelti X11 programų.",
+    "startFailed": "Nepavyko paleisti programos.",
+    "stopFailed": "Nepavyko sustabdyti programos.",
+    "notConfigured": "X serveris nenustatytas",
+    "notConfiguredHint": "Administratorius nustato X serverį X11 programoms „Nustatymuose“, „Tuneliuose“, pvz., localhost:0, kai šalia darbalaukio programos veikia VcXsrv arba XQuartz.",
+    "host": "Serveris",
+    "pickHost": "Pasirinkite serverį",
+    "commandPlaceholder": "Programa, pvz., xclock arba virt-manager",
+    "start": "Paleisti",
+    "stop": "Sustabdyti",
+    "remove": "Pašalinti",
+    "hint": "Programa veikia serveryje per SSH su X11 perdavimu, o jos langai atsidaro jūsų X serveryje. Uždarius paskutinį langą, ji baigia darbą.",
+    "empty": "Dar nepaleista jokių programų",
+    "programs": "Programos",
+    "running": "Veikia",
+    "exited": "Baigė darbą ({{code}})"
   }
 }

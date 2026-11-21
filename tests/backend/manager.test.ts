@@ -1,3 +1,4 @@
+import { AsyncLocalStorage } from "node:async_hooks";
 import net from "node:net";
 import { EventEmitter } from "node:events";
 import { PassThrough } from "node:stream";
@@ -159,6 +160,32 @@ describe("local listeners", () => {
       socket.once("error", reject);
     });
     expect(manager!.statuses.get(config().name)?.status).toBe("connected");
+  });
+
+  it("forwards a new connection outside the request that started it", async () => {
+    // Stands in for the plugin process, which keeps a request's token in
+    // async context and refuses it 30 s after the request ends.
+    const request = new AsyncLocalStorage<string>();
+    const { client } = setup();
+    const seen: Array<string | undefined> = [];
+    const forward = client.forwardOut.getMockImplementation()!;
+    client.forwardOut.mockImplementation((...args) => {
+      seen.push(request.getStore());
+      return forward(...args);
+    });
+    const runtime = await request.run("start request", () =>
+      manager!.connect(config(), 0, { throwOnError: true }),
+    );
+
+    await new Promise<void>((resolve, reject) => {
+      const socket = net.connect(runtime!.bindPort, "127.0.0.1", () => {
+        socket.destroy();
+        resolve();
+      });
+      socket.once("error", reject);
+    });
+    await vi.waitFor(() => expect(seen).toHaveLength(1));
+    expect(seen).toEqual([undefined]);
   });
 
   it("honours a fixed source port", async () => {

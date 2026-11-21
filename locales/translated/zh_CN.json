@@ -215,6 +215,13 @@
         "label": "隧道面板边缘按钮",
         "description": "在终端边缘显示一个小按钮，用于打开面板。"
       }
+    },
+    "admin": {
+      "x11Display": {
+        "label": "X11 程序的 X 服务器",
+        "description": "从 X11 应用程序启动的程序窗口显示的位置，例如 localhost:0。Termix 服务器将连接到该地址，因此这主要适用于在本机运行 VcXsrv、XQuartz 或 Xwayland 的桌面应用程序。留空以禁用 X11 应用程序。",
+        "placeholder": "localhost:0"
+      }
     }
   },
   "common": {
@@ -343,5 +350,25 @@
   "hostTile": {
     "title": "隧道",
     "empty": "此主机上没有已保存的隧道。"
+  },
+  "x11": {
+    "title": "X11 应用程序",
+    "loading": "加载中...",
+    "loadFailed": "无法加载 X11 程序。",
+    "startFailed": "无法启动程序。",
+    "stopFailed": "无法停止程序。",
+    "notConfigured": "未设置 X 服务器",
+    "notConfiguredHint": "管理员需在“设置”>“隧道”中为 X11 程序设置 X 服务器，例如在桌面应用程序旁运行 VcXsrv 或 XQuartz 时设置为 localhost:0。",
+    "host": "主机",
+    "pickHost": "选择一台主机",
+    "commandPlaceholder": "一个程序，例如 xclock 或 virt-manager",
+    "start": "启动",
+    "stop": "停止",
+    "remove": "移除",
+    "hint": "该程序通过 SSH 和 X11 转发在主机上运行，其窗口将在您的 X 服务器上打开。关闭最后一个窗口将结束该程序。",
+    "empty": "尚未启动任何程序",
+    "programs": "程序",
+    "running": "运行中",
+    "exited": "已退出 ({{code}})"
   }
 }

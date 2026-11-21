@@ -434,6 +434,22 @@
       ],
       "refuseReply": "Access denied",
       "note": "Permission and host access are checked on the first message"
+    },
+    "GET /plugin-api/tunnels/x11/apps": {
+      "access": "user",
+      "permission": "tunnels.use",
+      "note": "Keyed by the caller; no X server is set in the test data"
+    },
+    "POST /plugin-api/tunnels/x11/apps": {
+      "access": "user",
+      "permission": "tunnels.use",
+      "note": "Keyed by the caller; no X server is set in the test data"
+    },
+    "DELETE /plugin-api/tunnels/x11/apps/:id": {
+      "access": "user",
+      "permission": "tunnels.use",
+      "destructive": true,
+      "note": "Keyed by the caller; no X server is set in the test data"
     }
   }
 }

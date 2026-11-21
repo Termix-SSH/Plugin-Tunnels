@@ -409,3 +409,33 @@ export async function deleteGatewayPort(
 ): Promise<void> {
   await api().delete(`/gateways/${id}/ports/${portId}`);
 }
+
+export interface X11App {
+  id: string;
+  hostId: number;
+  hostName: string;
+  command: string;
+  startedAt: string;
+  running: boolean;
+  exitCode: number | null;
+  output: string;
+}
+
+export async function listX11Apps(): Promise<{
+  configured: boolean;
+  apps: X11App[];
+}> {
+  return (await api().get<{ configured: boolean; apps: X11App[] }>("/x11/apps"))
+    .data;
+}
+
+export async function startX11App(
+  hostId: number,
+  command: string,
+): Promise<X11App> {
+  return (await api().post<X11App>("/x11/apps", { hostId, command })).data;
+}
+
+export async function stopX11App(id: string): Promise<void> {
+  await api().delete(`/x11/apps/${encodeURIComponent(id)}`);
+}

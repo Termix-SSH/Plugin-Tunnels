@@ -217,6 +217,13 @@
         "label": "Butonul de margine al panoului de tuneluri",
         "description": "Afișează un buton mic pe marginea terminalului pentru a deschide panoul."
       }
+    },
+    "admin": {
+      "x11Display": {
+        "label": "Server X pentru programele X11",
+        "description": "Unde apar ferestrele programelor pornite din aplicațiile X11, de exemplu localhost:0. Serverul Termix se conectează la acesta, așa că este folosit în principal pentru aplicația desktop cu VcXsrv, XQuartz sau Xwayland pe acest calculator. Lăsați gol pentru a dezactiva aplicațiile X11.",
+        "placeholder": "localhost:0"
+      }
     }
   },
   "common": {
@@ -345,5 +352,25 @@
   "hostTile": {
     "title": "Tuneluri",
     "empty": "Nu există tuneluri salvate pe acest gazdă."
+  },
+  "x11": {
+    "title": "Aplicații X11",
+    "loading": "Se încarcă...",
+    "loadFailed": "Nu s-au putut încărca programele X11.",
+    "startFailed": "Nu s-a putut porni programul.",
+    "stopFailed": "Nu s-a putut opri programul.",
+    "notConfigured": "Niciun server X nu este configurat",
+    "notConfiguredHint": "Un administrator configurează serverul X pentru programele X11 în Setări, Tuneluri, de exemplu localhost:0 cu VcXsrv sau XQuartz rulând lângă aplicația desktop.",
+    "host": "Gazdă",
+    "pickHost": "Alegeți o gazdă",
+    "commandPlaceholder": "Un program, de exemplu xclock sau virt-manager",
+    "start": "Pornește",
+    "stop": "Oprește",
+    "remove": "Elimină",
+    "hint": "Programul rulează pe gazdă prin SSH cu redirecționare X11, iar ferestrele sale se deschid pe serverul X. Închiderea ultimei ferestre îl termină.",
+    "empty": "Niciun program nu a fost pornit încă",
+    "programs": "Programe",
+    "running": "Rulează",
+    "exited": "S-a încheiat ({{code}})"
   }
 }

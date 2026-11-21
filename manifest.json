@@ -1,7 +1,7 @@
 {
   "id": "tunnels",
   "name": "Tunnels",
-  "version": "1.4.0",
+  "version": "1.5.0",
   "description": "SSH port forwarding that reconnects on its own, WireGuard gateways that publish private services, and client tunnels from the desktop app.",
   "author": {
     "name": "Termix"
@@ -20,7 +20,8 @@
     "WireGuard gateways that forward public ports to services on a private host",
     "Finds listening ports on its own, with a switch for each one",
     "Client tunnels on your own computer from the desktop app, with presets you can save to the server",
-    "A tunnels panel beside any SSH terminal and a tunnels dashboard card"
+    "A tunnels panel beside any SSH terminal and a tunnels dashboard card",
+    "Run graphical programs on a host with X11 forwarding and see their windows on your computer"
   ],
   "engine": {
     "termix": ">=26.11.2-0",
@@ -155,6 +156,15 @@
           "labelKey": "settings.user.companionEdgeButton.label",
           "descriptionKey": "settings.user.companionEdgeButton.description",
           "default": true
+        }
+      ],
+      "admin": [
+        {
+          "key": "x11Display",
+          "type": "string",
+          "labelKey": "settings.admin.x11Display.label",
+          "descriptionKey": "settings.admin.x11Display.description",
+          "placeholderKey": "settings.admin.x11Display.placeholder"
         }
       ]
     },

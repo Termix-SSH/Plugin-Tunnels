@@ -216,6 +216,13 @@
         "label": "Kantknapp for tunnelpanelet",
         "description": "Vis en liten knapp på kanten av terminalen for å åpne panelet."
       }
+    },
+    "admin": {
+      "x11Display": {
+        "label": "X-server for X11-programmer",
+        "description": "Hvor vinduer for programmer startet fra X11-apps vises, som localhost:0. Termix-serveren kobler til den, så dette er hovedsakelig for skrivebordsappen med VcXsrv, XQuartz eller Xwayland på denne datamaskinen. La stå tomt for å slå av X11-apps.",
+        "placeholder": "localhost:0"
+      }
     }
   },
   "common": {
@@ -344,5 +351,25 @@
   "hostTile": {
     "title": "Tunneler",
     "empty": "Ingen lagrede tunneler på denne verten."
+  },
+  "x11": {
+    "title": "X11-apps",
+    "loading": "Laster inn...",
+    "loadFailed": "Kunne ikke laste inn X11-programmer.",
+    "startFailed": "Kunne ikke starte programmet.",
+    "stopFailed": "Kunne ikke stoppe programmet.",
+    "notConfigured": "Ingen X-server er angitt",
+    "notConfiguredHint": "En administrator angir X-serveren for X11-programmer i Innstillinger, Tuneller, som localhost:0 med VcXsrv eller XQuartz som kjører ved siden av skrivebordsappen.",
+    "host": "Vert",
+    "pickHost": "Velg en vert",
+    "commandPlaceholder": "Et program, som xclock eller virt-manager",
+    "start": "Start",
+    "stop": "Stopp",
+    "remove": "Fjern",
+    "hint": "Programmet kjører på verten over SSH med X11-videresending, og vinduene åpnes på X-serveren din. Å lukke det siste vinduet avslutter det.",
+    "empty": "Ingen programmer startet ennå",
+    "programs": "Programmer",
+    "running": "Kjører",
+    "exited": "Avsluttet ({{code}})"
   }
 }

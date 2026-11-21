@@ -217,6 +217,13 @@
         "label": "Tunelu paneļa malas poga",
         "description": "Rādīt mazu pogu termināļa malā, lai atvērtu paneli."
       }
+    },
+    "admin": {
+      "x11Display": {
+        "label": "X serveris X11 programmām",
+        "description": "Kur parādās no X11 programmām palaisto programmu logi, piemēram, localhost:0. Termix serveris pieslēdzas šim serverim, tāpēc tas galvenokārt ir paredzēts darbvirsmas lietotnei, izmantojot VcXsrv, XQuartz vai Xwayland šajā datorā. Atstājiet tukšu, lai atspējotu X11 programmas.",
+        "placeholder": "localhost:0"
+      }
     }
   },
   "common": {
@@ -345,5 +352,25 @@
   "hostTile": {
     "title": "Tuneli",
     "empty": "Šajā resursdatorā nav saglabātu tunelu."
+  },
+  "x11": {
+    "title": "X11 programmas",
+    "loading": "Ielādē...",
+    "loadFailed": "Neizdevās ielādēt X11 programmas.",
+    "startFailed": "Neizdevās palaist programmu.",
+    "stopFailed": "Neizdevās apturēt programmu.",
+    "notConfigured": "X serveris nav iestatīts",
+    "notConfiguredHint": "Administrators iestata X serveri X11 programmām Iestatījumos > Tunelis, piemēram, localhost:0, izmantojot VcXsrv vai XQuartz, kas darbojas blakus darbvirsmas lietotnei.",
+    "host": "Resursdators",
+    "pickHost": "Izvēlieties resursdatoru",
+    "commandPlaceholder": "Programma, piemēram, xclock vai virt-manager",
+    "start": "Sākt",
+    "stop": "Apturēt",
+    "remove": "Noņemt",
+    "hint": "Programma darbojas resursdatorā caur SSH ar X11 pārvirzīšanu, un tās logi atveras jūsu X serverī. Aizverot pēdējo logu, programma tiek pabeigta.",
+    "empty": "Vēl nav palaiestas programmas",
+    "programs": "Programmas",
+    "running": "Darbojas",
+    "exited": "Izbeigts ({{code}})"
   }
 }

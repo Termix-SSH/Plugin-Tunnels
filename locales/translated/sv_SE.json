@@ -216,6 +216,13 @@
         "label": "Knapp för panelen för tunnlar vid kanten",
         "description": "Visa en liten knapp vid terminalens kant för att öppna panelen."
       }
+    },
+    "admin": {
+      "x11Display": {
+        "label": "X-server för X11-program",
+        "description": "Var fönster för program startade från X11-appar visas, till exempel localhost:0. Termix-servern ansluter till den, så detta är främst avsett för skrivbordsappen med VcXsrv, XQuartz eller Xwayland på denna dator. Lämna tomt för att stänga av X11-program.",
+        "placeholder": "localhost:0"
+      }
     }
   },
   "common": {
@@ -344,5 +351,25 @@
   "hostTile": {
     "title": "Tunnlar",
     "empty": "Inga sparade tunnlar på denna värd."
+  },
+  "x11": {
+    "title": "X11-program",
+    "loading": "Laddar...",
+    "loadFailed": "Kunde inte ladda X11-program.",
+    "startFailed": "Kunde inte starta programmet.",
+    "stopFailed": "Kunde inte stoppa programmet.",
+    "notConfigured": "Ingen X-server är inställd",
+    "notConfiguredHint": "En administratör ställer in X-servern för X11-program i Inställningar, Tunnel, till exempel localhost:0 med VcXsrv eller XQuartz som körs bredvid skrivbordsappen.",
+    "host": "Värd",
+    "pickHost": "Välj en värd",
+    "commandPlaceholder": "Ett program, till exempel xclock eller virt-manager",
+    "start": "Starta",
+    "stop": "Stoppa",
+    "remove": "Ta bort",
+    "hint": "Programmet körs på värden via SSH med X11-forwarding, och dess fönster öppnas på din X-server. Att stänga det sista fönstret avslutar det.",
+    "empty": "Inga program har startats ännu",
+    "programs": "Program",
+    "running": "Kör",
+    "exited": "Avslutat ({{code}})"
   }
 }

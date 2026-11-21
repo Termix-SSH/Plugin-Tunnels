@@ -216,6 +216,13 @@
         "label": "Kantenschaltfläche für Tunnel-Panel",
         "description": "Zeigt eine kleine Schaltfläche am Terminalrand an, um das Panel zu öffnen."
       }
+    },
+    "admin": {
+      "x11Display": {
+        "label": "X-Server für X11-Programme",
+        "description": "Wo die Fenster von Programmen angezeigt werden, die über X11-Apps gestartet wurden, z. B. localhost:0. Der Termix-Server verbindet sich damit, daher ist dies hauptsächlich für die Desktop-App mit VcXsrv, XQuartz oder Xwayland auf diesem Computer gedacht. Leer lassen, um X11-Apps zu deaktivieren.",
+        "placeholder": "localhost:0"
+      }
     }
   },
   "common": {
@@ -344,5 +351,25 @@
   "hostTile": {
     "title": "Tunnel",
     "empty": "Auf diesem Host sind keine Tunnel gespeichert."
+  },
+  "x11": {
+    "title": "X11-Apps",
+    "loading": "Wird geladen...",
+    "loadFailed": "X11-Programme konnten nicht geladen werden.",
+    "startFailed": "Das Programm konnte nicht gestartet werden.",
+    "stopFailed": "Das Programm konnte nicht gestoppt werden.",
+    "notConfigured": "Kein X-Server konfiguriert",
+    "notConfiguredHint": "Ein Administrator konfiguriert den X-Server für X11-Programme in den Einstellungen unter Tunneln, z. B. localhost:0, wobei VcXsrv oder XQuartz neben der Desktop-App ausgeführt wird.",
+    "host": "Host",
+    "pickHost": "Host auswählen",
+    "commandPlaceholder": "Ein Programm, z. B. xclock oder virt-manager",
+    "start": "Starten",
+    "stop": "Stoppen",
+    "remove": "Entfernen",
+    "hint": "Das Programm wird über SSH mit X11-Forwarding auf dem Host ausgeführt, und seine Fenster öffnen sich auf Ihrem X-Server. Das Schließen des letzten Fensters beendet es.",
+    "empty": "Noch keine Programme gestartet",
+    "programs": "Programme",
+    "running": "Läuft",
+    "exited": "Beendet ({{code}})"
   }
 }

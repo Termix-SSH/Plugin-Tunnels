@@ -216,6 +216,13 @@
         "label": "Tunnels panel edge button",
         "description": "Show a small button on the terminal edge to open the panel."
       }
+    },
+    "admin": {
+      "x11Display": {
+        "label": "X server for X11 programs",
+        "description": "Where windows of programs started from X11 apps show up, like localhost:0. The Termix server connects to it, so this is mostly for the desktop app with VcXsrv, XQuartz or Xwayland on this computer. Leave empty to turn X11 apps off.",
+        "placeholder": "localhost:0"
+      }
     }
   },
   "common": {
@@ -344,5 +351,25 @@
   "hostTile": {
     "title": "Tunnels",
     "empty": "No saved tunnels on this host."
+  },
+  "x11": {
+    "title": "X11 apps",
+    "loading": "Loading...",
+    "loadFailed": "Could not load X11 programs.",
+    "startFailed": "Could not start the program.",
+    "stopFailed": "Could not stop the program.",
+    "notConfigured": "No X server is set",
+    "notConfiguredHint": "An admin sets the X server for X11 programs in Settings, Tunnels, like localhost:0 with VcXsrv or XQuartz running next to the desktop app.",
+    "host": "Host",
+    "pickHost": "Pick a host",
+    "commandPlaceholder": "A program, like xclock or virt-manager",
+    "start": "Start",
+    "stop": "Stop",
+    "remove": "Remove",
+    "hint": "The program runs on the host over SSH with X11 forwarding, and its windows open on your X server. Closing its last window ends it.",
+    "empty": "No programs started yet",
+    "programs": "Programs",
+    "running": "Running",
+    "exited": "Exited ({{code}})"
   }
 }
